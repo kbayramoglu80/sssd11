@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxen Group - VIP Transfer Services</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#D4AF37',secondary:'#000000'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link rel="stylesheet" href="style.css">
+<!-- AOS Animate On Scroll CSS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+<style>
+@media (max-width: 768px) {
+  #language-switcher {
+    margin-left: 0.5rem;
+  }
+  #lang-toggle {
+    padding: 4px 12px;
+    font-size: 14px;
+  }
+  #lang-dropdown {
+    right: -10px;
+    min-width: 80px;
+  }
+}
+@media (max-width: 900px) {
+  #vehicle-modal-content {
+    width: 98vw !important;
+    padding: 0.7rem 0.2rem 0.2rem 0.2rem !important;
+  }
+  .modal-img {
+    height: 30vh !important;
+    min-height: 160px !important;
+  }
+}
+  #admin-login-btn-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 18px 0 0 18px;
+    background: linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%);
+    color: #181818;
+    font-weight: 600;
+    border-radius: 8px;
+    font-size: 0.98rem;
+    box-shadow: 0 2px 8px #D4AF3722;
+    letter-spacing: 0.5px;
+    padding: 7px 18px;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+  }
+  @media (max-width: 700px) {
+    #admin-login-btn-footer { margin: 10px 0 0 10px; font-size:0.92rem; padding:6px 12px; }
+  }
+.fade-in {
+  animation: fadeInUp 0.8s cubic-bezier(.23,1.01,.32,1) both;
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+.slide-in {
+  animation: slideInLeft 0.7s cubic-bezier(.23,1.01,.32,1) both;
+}
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(60px);}
+  100% { opacity: 1; transform: translateX(0);}
+}
+</style>
+<!-- Google Fonts Montserrat -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<!-- Google Fonts Gigbi -->
+<link href="https://fonts.googleapis.com/css2?family=Gidugu&display=swap" rel="stylesheet">
+<!-- Google Fonts Cinzel -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+<!-- Header -->
+<header class="fixed w-full z-50 transition-all duration-300" id="navbar">
+<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+<div class="w-48">
+<img src="resimler/81feb1cc127c3e9f24d9528cd47cac76-removebg-preview.png" alt="Luxen Group Logo" class="h-24 object-contain">
+</div>
+<!-- Navbar (masaüstü) -->
+<nav class="hidden lg:flex items-center space-x-8">
+  <a href="#anasayfa" class="text-white hover:text-primary transition-colors font-medium">Ana Sayfa</a>
+  <a href="#hakkimizda" class="text-white hover:text-primary transition-colors font-medium">Hakkımızda</a>
+  <a href="#hizmetler" class="text-white hover:text-primary transition-colors font-medium">Hizmetler</a>
+  <a href="#rotalar" class="text-white hover:text-primary transition-colors font-medium">Rotalar</a>
+  <a href="#saglik-turizmi" class="text-white hover:text-primary transition-colors font-medium">Sağlık Turizmi</a>
+  <a href="#rezervasyon" class="text-white hover:text-primary transition-colors font-medium">Rezervasyon</a>
+  <a href="#iletisim" class="text-white hover:text-primary transition-colors font-medium">İletişim</a>
+</nav>
+<div class="flex items-center space-x-4">
+<a href="tel:+905433518943" class="flex items-center justify-center w-10 h-10 rounded-full border border-primary text-white hover:bg-primary transition-colors">
+<i class="ri-phone-line"></i>
+</a>
+<a href="https://wa.me/905433518943" class="flex items-center justify-center w-10 h-10 rounded-full border border-primary text-white hover:bg-primary transition-colors">
+<i class="ri-whatsapp-line"></i>
+</a>
+<div id="language-switcher" class="relative ml-2">
+  <button id="lang-toggle" class="flex items-center px-3 py-2 rounded-lg border border-primary text-white hover:bg-primary transition-colors">
+    <span id="current-lang">EN</span> <i class="ri-arrow-down-s-line ml-1"></i>
+  </button>
+  <div id="lang-dropdown" class="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg z-50 hidden">
+    <button class="block w-full text-left px-4 py-2 hover:bg-primary hover:text-black transition-colors" onclick="window.setLanguage('en')">English</button>
+    <button class="block w-full text-left px-4 py-2 hover:bg-primary hover:text-black transition-colors" onclick="window.setLanguage('tr')">Türkçe</button>
+  </div>
+</div>
+<button class="lg:hidden flex items-center justify-center w-10 h-10 text-white" id="mobile-menu-button">
+<i class="ri-menu-line text-2xl"></i>
+</button>
+</div>
+</div>
+<!-- Mobile Menü -->
+<div class="lg:hidden hidden bg-black bg-opacity-95 w-full absolute top-full left-0 p-4" id="mobile-menu">
+  <nav class="flex flex-col space-y-4">
+    <a href="#anasayfa" class="text-white hover:text-primary py-2 border-b border-gray-800">Ana Sayfa</a>
+    <a href="#hakkimizda" class="text-white hover:text-primary py-2 border-b border-gray-800">Hakkımızda</a>
+    <a href="#hizmetler" class="text-white hover:text-primary py-2 border-b border-gray-800">Hizmetler</a>
+    <a href="#rotalar" class="text-white hover:text-primary py-2 border-b border-gray-800">Rotalar</a>
+    <a href="#saglik-turizmi" class="text-white hover:text-primary py-2 border-b border-gray-800">Sağlık Turizmi</a>
+    <a href="#rezervasyon" class="text-white hover:text-primary py-2 border-b border-gray-800">Rezervasyon</a>
+    <a href="#iletisim" class="text-white hover:text-primary py-2">İletişim</a>
+  </nav>
+</div>
+</header>
+<div class="gold-underline-effect"></div>
+<!-- Hero Slider -->
+<section id="anasayfa" class="relative">
+  <div class="hero-slider">
+    <!-- Slide 1: Kullanıcının kendi resmi -->
+    <div class="hero-slide active" style="background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://readdy.ai/api/search-image?query=luxury%20black%20mercedes%20vip%20van%20and%20s%20class%20lineup%20in%20front%20of%20a%20grand%20hotel%20entrance%20at%20blue%20hour%2C%20professional%20automotive%20photography%2C%20dramatic%20lighting%2C%20architectural%20elements%2C%208k%20ultra%20high%20resolution%2C%20cinematic%20wide%20composition&width=1920&height=1080&seq=12&orientation=landscape');">
+      <div class="slide-content">
+        <div class="container mx-auto px-4">
+          <div class="slide-text">
+            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; font-size:3.2rem; letter-spacing:0.5px; line-height:1.1; text-shadow:none;">Luxen Group - VIP Transfer Services</h1>
+            <p class="slide-description">Mercedes Vito filomuz ile konfor, prestij ve güveni bir arada yaşayın. Şehir içi ve şehirler arası transferde ayrıcalıklı hizmet.</p>
+            <div class="slide-buttons">
+              <a href="#rezervasyon" class="slide-btn primary">Hemen Rezervasyon Yap</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('mercedesvipvito/IMG-20250705-WA0009.jpg');">
+      <div class="slide-content">
+        <div class="container mx-auto px-4">
+          <div class="slide-text">
+            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; font-size:3.2rem; letter-spacing:0.5px; line-height:1.1; text-shadow:none;">VIP Mercedes Vito Konforu</h1>
+            <p class="slide-description">Geniş iç hacim ve lüks detaylarla yolculuğunuz ayrıcalıklı geçsin.</p>
+            <div class="slide-buttons">
+              <a href="#rezervasyon" class="slide-btn secondary">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('mercedesvipvito/IMG-20250705-WA0008.jpg');">
+      <div class="slide-content">
+        <div class="container mx-auto px-4">
+          <div class="slide-text">
+            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; font-size:3.2rem; letter-spacing:0.5px; line-height:1.1; text-shadow:none;">Lüks Detaylar</h1>
+            <p class="slide-description">Her ayrıntıda kalite ve konforu hissedin.</p>
+            <div class="slide-buttons">
+              <a href="#rezervasyon" class="slide-btn primary">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 4 -->
+    <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('mercedesvipvito/IMG-20250705-WA0007.jpg');">
+      <div class="slide-content">
+        <div class="container mx-auto px-4">
+          <div class="slide-text">
+            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; font-size:3.2rem; letter-spacing:0.5px; line-height:1.1; text-shadow:none;">Modern ve Şık Tasarım</h1>
+            <p class="slide-description">Mercedes Vito ile yolculuklarınızda fark yaratın.</p>
+            <div class="slide-buttons">
+              <a href="#rezervasyon" class="slide-btn primary">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 5 -->
+    <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('mercedesvipvito/IMG-20250705-WA0006.jpg');">
+      <div class="slide-content">
+        <div class="container mx-auto px-4">
+          <div class="slide-text">
+            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; font-size:3.2rem; letter-spacing:0.5px; line-height:1.1; text-shadow:none;">Şoförlü VIP Transfer</h1>
+            <p class="slide-description">Profesyonel şoförlerimizle güvenli ve konforlu ulaşım.</p>
+            <div class="slide-buttons">
+              <a href="#rezervasyon" class="slide-btn primary">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Navigation Dots (Özel) -->
+    <div class="slider-dots custom-dots">
+      <span class="dot active" onclick="currentSlide(1)"><span class="dot-inner"></span></span>
+      <span class="dot" onclick="currentSlide(2)"><span class="dot-inner"></span></span>
+      <span class="dot" onclick="currentSlide(3)"><span class="dot-inner"></span></span>
+      <span class="dot" onclick="currentSlide(4)"><span class="dot-inner"></span></span>
+      <span class="dot" onclick="currentSlide(5)"><span class="dot-inner"></span></span>
+    </div>
+  </div>
+</section>
+<!-- Rezervasyon Bölümü -->
+<section id="rezervasyon" class="reservation-vzn-outer">
+  <div class="reservation-vzn-box">
+    <div class="reservation-vzn-tabs">
+      <button class="reservation-vzn-tab active" data-tab="transfer">TRANSFER</button>
+      <button class="reservation-vzn-tab" data-tab="chauffeur">ŞOFÖRLÜ ARAÇ KİRALAMA</button>
+      <button class="reservation-vzn-tab" data-tab="intercity">ŞEHİRLER ARASI TRANSFER</button>
+    </div>
+    <form class="reservation-vzn-form" data-content="transfer" style="display: grid;">
+      <input type="hidden" name="rezervasyonTipi" id="rezervasyonTipi" value="TRANSFER">
+      <div>
+        <label>İSİM <span class="tab-help">?</span></label>
+        <input type="text" placeholder="Adınız" name="isim" required>
+      </div>
+      <div>
+        <label>SOYAD <span class="tab-help">?</span></label>
+        <input type="text" placeholder="Soyadınız" name="soyad" required>
+      </div>
+      <div>
+        <label>YOLCU SAYISI <span class="tab-help">?</span></label>
+        <input type="number" placeholder="Kaç kişi?" name="yolcu" min="1" max="20" required id="yolcu-input">
+        <div id="yolcu-uyari" style="display:none; color:#c00; font-weight:600; margin-top:6px; font-size:1em;">8 ve üzeri yolcularda Vito araçlar desteklenmemektedir, lütfen Sprinter seçiniz.</div>
+      </div>
+      <div>
+        <label>TELEFON <span class="tab-help">?</span></label>
+        <input type="tel" placeholder="Telefon numaranız" name="telefon" required>
+      </div>
+      <div>
+        <label>TARİH <span class="tab-help">?</span></label>
+        <input type="date" placeholder="Tarih" name="tarih" required>
+      </div>
+      <div>
+        <label>SAAT <span class="tab-help">?</span></label>
+        <input type="time" placeholder="Saat" name="saat" required>
+      </div>
+      <div>
+        <label>Başlangıç Adresi <span class="tab-help">?</span></label>
+        <input id="google-start-address" type="text" placeholder="Başlangıç adresinizi yazın..." required>
+      </div>
+      <div>
+        <label>Varış Adresi <span class="tab-help">?</span></label>
+        <input id="google-end-address" type="text" placeholder="Varış adresinizi yazın..." required>
+      </div>
+      <div class="reservation-vzn-btn-col">
+        <button type="submit" class="reservation-vzn-btn">REZERVASYON</button>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- About Section -->
+<section id="hakkimizda" class="py-20 scroll-mt-32" style="background:#181818;" data-aos="fade-up">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2">
+        <img src="https://readdy.ai/api/search-image?query=luxury%20fleet%20of%20black%20Mercedes%20vans%20and%20luxury%20cars%20parked%20in%20front%20of%20a%20scenic%20Turkish%20landscape%2C%20professional%20photography%2C%20high-end%20transportation%20service&width=600&height=400&seq=3&orientation=landscape" alt="Luxen Group Fleet" class="rounded-lg shadow-xl w-full">
+      </div>
+      <div class="md:w-1/2">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color:#fff;">
+          <span style="color:#fff;">About </span>
+          <span class="gold-gradient">Luxen Group</span>
+        </h2>
+        <p class="mb-6" style="color:#eee;">
+          Founded with a vision to redefine luxury travel in Turkey, Luxen Group specializes in premium transportation and tourism services. Our fleet of high-end Mercedes Vito vehicles and professional drivers ensure that your journey through Turkey's most beautiful destinations is as memorable as the destinations themselves.
+        </p>
+        <p class="mb-8" style="color:#eee;">
+          Whether you're exploring the coastal beauty of Bodrum, the historical wonders of Istanbul, the natural landscapes of Trabzon, or the magical terrain of Cappadocia, our VIP transfer services guarantee comfort, safety, and style throughout your journey.
+        </p>
+        <div class="flex flex-wrap gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center">
+              <i class="ri-shield-check-line text-primary text-xl"></i>
+            </div>
+            <span class="font-medium" style="color:#fff;">Professional Service</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center">
+              <i class="ri-timer-line text-primary text-xl"></i>
+            </div>
+            <span class="font-medium" style="color:#fff;">Punctuality</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-primary bg-opacity-10 flex items-center justify-center">
+              <i class="ri-star-line text-primary text-xl"></i>
+            </div>
+            <span class="font-medium" style="color:#fff;">Premium Experience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Services Section -->
+<section id="hizmetler" class="py-20 bg-gradient-to-b from-black via-gray-900 to-black scroll-mt-32" data-aos="fade-up">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 id="services-title" class="text-3xl md:text-4xl font-bold mb-4">
+  Hizmetlerimiz Premium Hizmetler
+</h2>
+<p class="text-gray-300 max-w-2xl mx-auto" id="services-desc">
+Discover our range of exclusive services designed to make your travel experience in Turkey unforgettable
+</p>
+</div>
+    <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <!-- Kartlar JS ile eklenecek -->
+</div>
+</div>
+</section>
+<script>
+function renderServices(lang) {
+  const data = translations[lang].newServices;
+  const grid = document.getElementById('services-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  data.forEach(service => {
+    const card = document.createElement('div');
+    card.className = 'group bg-gradient-to-br from-gray-900 via-black to-gray-800 rounded-2xl shadow-2xl p-8 flex flex-col items-center text-center border-2 border-transparent hover:border-primary transition-all duration-300 relative overflow-hidden';
+    card.innerHTML = `
+      <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-tr from-primary/30 to-yellow-100/10 mb-6 shadow-lg">
+        <i class="${service.icon} text-4xl text-primary group-hover:scale-110 transition-transform"></i>
+      </div>
+      <h3 class="text-xl font-bold mb-3 text-white tracking-wide">${service.title}</h3>
+      <p class="text-gray-300 mb-6">${service.desc}</p>
+      <a href="#iletisim" class="inline-block px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-primary to-yellow-200 text-black shadow-lg hover:from-yellow-200 hover:to-primary hover:text-white transition-all duration-300">${service.btn}</a>
+      <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background: radial-gradient(circle at 70% 30%, #D4AF37cc 0%, transparent 70%);"></div>
+    `;
+    grid.appendChild(card);
+  });
+  // Başlık ve açıklama çevirisi
+  var goldGradient = document.querySelector('#services h2 .gold-gradient');
+  if (goldGradient) {
+    goldGradient.textContent = lang === 'tr' ? 'Hizmetler' : 'Services';
+  }
+  var servicesDesc = document.getElementById('services-desc');
+  if (servicesDesc) {
+    servicesDesc.textContent = lang === 'tr'
+      ? 'Türkiye\'deki seyahatinizi unutulmaz kılacak özel hizmetlerimizi keşfedin'
+      : 'Discover our range of exclusive services designed to make your travel experience in Turkey unforgettable';
+  }
+}
+// Sayfa yüklenince ve dil değişince çağır:
+document.addEventListener('DOMContentLoaded', function() {
+  const lang = localStorage.getItem('site_lang') || 'en';
+  renderServices(lang);
+});
+window.renderServices = renderServices;
+// updateLanguage fonksiyonunun sonuna ekle:
+// renderServices(lang);
+</script>
+<!-- Fleet Section -->
+<section id="fleet" class="py-20 bg-gradient-to-b from-black via-gray-900 to-black" data-aos="fade-up">
+<div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-gradient" id="fleet-title">
+        Lüks Araç Filomuz
+</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto" id="fleet-desc">
+        Premium araç filomuzla konforun ve şıklığın zirvesini yaşayın
+</p>
+</div>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+      <div class="md:w-1/2 flex justify-center">
+        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-primary bg-black/60 w-full">
+          <img src="mercedesvipvito/IMG-20250705-WA0009.jpg" alt="Mercedes-Benz Vito VIP" class="w-full h-[32rem] md:h-[36rem] object-cover object-center" />
+</div>
+</div>
+      <div class="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left mt-0">
+        <h3 class="text-2xl font-bold mb-4 text-white" id="fleet-vehicle-name">Mercedes-Benz Vito VIP</h3>
+        <p class="text-gray-300 mb-6" id="fleet-vehicle-desc">
+          Amiral gemimiz Mercedes-Benz Vito araçlarımız, en üst düzey VIP deneyimi için özel olarak tasarlanmıştır. Geniş iç hacim, lüks deri koltuklar, iklim kontrolü ve ambiyans aydınlatması ile her yolculuk lüks bir deneyime dönüşür.
+        </p>
+        <a href="#contact" id="fleet-vehicle-btn" class="inline-block px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-primary to-yellow-200 text-black shadow-lg hover:from-yellow-200 hover:to-primary hover:text-white transition-all duration-300">
+          Premium Transfer Rezervasyonu Yap
+</a>
+</div>
+</div>
+</div>
+</section>
+<script>
+function updateFleetSection(lang) {
+  const t = translations[lang].fleetSection;
+  document.getElementById('fleet-title').textContent = t.title;
+  document.getElementById('fleet-desc').textContent = t.desc;
+  document.getElementById('fleet-vehicle-name').textContent = t.vehicle.name;
+  document.getElementById('fleet-vehicle-desc').textContent = t.vehicle.desc;
+  document.getElementById('fleet-vehicle-btn').textContent = t.vehicle.btn;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const lang = localStorage.getItem('site_lang') || 'tr';
+  updateFleetSection(lang);
+});
+window.updateFleetSection = updateFleetSection;
+// updateLanguage fonksiyonunun sonuna ekle:
+// updateFleetSection(lang);
+</script>
+<!-- Destinations Section -->
+<section id="rotalar" class="py-20 bg-gray-50" data-aos="fade-up">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+<h2 id="destinations-title" class="text-3xl md:text-4xl font-bold mb-4">
+<span class="text-black">Explore </span>
+<span class="gold-gradient">Turkey's Finest Destinations</span>
+</h2>
+<p id="destinations-desc" class="text-gray-600 max-w-2xl mx-auto">
+Discover the beauty and diversity of Turkey with our premium transfer services
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Istanbul -->
+<div class="destination-card rounded-lg overflow-hidden relative group" style="background-image: url('https://readdy.ai/api/search-image?query=Istanbul%20skyline%20with%20Hagia%20Sophia%20and%20Blue%20Mosque%20at%20sunset%2C%20beautiful%20cityscape%2C%20professional%20photography%2C%20luxury%20travel%20destination&width=400&height=300&seq=5&orientation=landscape')">
+<div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6">
+<h3 class="text-white text-xl font-bold mb-2">Istanbul</h3>
+<p class="text-white text-sm mb-4">
+Experience the magic where East meets West
+</p>
+<a href="turlar.html" class="text-primary bg-white bg-opacity-90 px-4 py-2 rounded-button text-sm font-medium hover:bg-opacity-100 transition-all inline-block whitespace-nowrap">
+Explore Tours
+</a>
+</div>
+</div>
+<!-- Bodrum -->
+<div class="destination-card rounded-lg overflow-hidden relative group" style="background-image: url('https://readdy.ai/api/search-image?query=Bodrum%20marina%20with%20luxury%20yachts%20and%20traditional%20white%20houses%20on%20hillside%2C%20turquoise%20sea%2C%20sunny%20day%2C%20professional%20photography&width=400&height=300&seq=6&orientation=landscape')">
+<div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6">
+<h3 class="text-white text-xl font-bold mb-2">Bodrum</h3>
+<p class="text-white text-sm mb-4">
+Discover the pearl of the Aegean coast
+</p>
+<a href="turlar.html" class="text-primary bg-white bg-opacity-90 px-4 py-2 rounded-button text-sm font-medium hover:bg-opacity-100 transition-all inline-block whitespace-nowrap">
+Explore Tours
+</a>
+</div>
+</div>
+<!-- Cappadocia -->
+<div class="destination-card rounded-lg overflow-hidden relative group" style="background-image: url('https://readdy.ai/api/search-image?query=Cappadocia%20hot%20air%20balloons%20flying%20over%20unique%20rock%20formations%20at%20sunrise%2C%20magical%20landscape%2C%20professional%20photography%2C%20luxury%20travel&width=400&height=300&seq=7&orientation=landscape')">
+<div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6">
+<h3 class="text-white text-xl font-bold mb-2">Cappadocia</h3>
+<p class="text-white text-sm mb-4">
+Journey through a magical fairy-tale landscape
+</p>
+<a href="turlar.html" class="text-primary bg-white bg-opacity-90 px-4 py-2 rounded-button text-sm font-medium hover:bg-opacity-100 transition-all inline-block whitespace-nowrap">
+Explore Tours
+</a>
+</div>
+</div>
+<!-- Trabzon -->
+<div class="destination-card rounded-lg overflow-hidden relative group" style="background-image: url('https://readdy.ai/api/search-image?query=Trabzon%20Sumela%20Monastery%20on%20mountain%20cliff%20with%20lush%20green%20forest%2C%20misty%20atmosphere%2C%20professional%20photography%2C%20luxury%20travel%20destination&width=400&height=300&seq=8&orientation=landscape')">
+<div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-30 transition-all"></div>
+<div class="absolute bottom-0 left-0 right-0 p-6">
+<h3 class="text-white text-xl font-bold mb-2">Trabzon</h3>
+<p class="text-white text-sm mb-4">
+Explore the natural beauty of the Black Sea region
+</p>
+<a href="turlar.html" class="text-primary bg-white bg-opacity-90 px-4 py-2 rounded-button text-sm font-medium hover:bg-opacity-100 transition-all inline-block whitespace-nowrap">
+Explore Tours
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Health Tourism Section -->
+<section id="saglik-turizmi" class="py-20 bg-white" data-aos="fade-up">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2">
+<h2 class="text-3xl md:text-4xl font-bold mb-6">
+<span class="text-black">Specialized </span>
+<span class="gold-gradient">Health Tourism Services</span>
+</h2>
+<p class="text-gray-700 mb-6">
+Turkey has become a global leader in health tourism, offering world-class medical procedures at competitive prices. At Luxen Group, we provide specialized transportation and support services for medical tourists seeking various treatments, including hair transplantation and other cosmetic procedures.
+</p>
+<p class="text-gray-700 mb-8">
+Our comprehensive health tourism packages include:
+</p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
+<i class="ri-check-line text-primary text-sm"></i>
+</div>
+<span class="text-gray-700">Airport pickup and drop-off in luxury vehicles</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
+<i class="ri-check-line text-primary text-sm"></i>
+</div>
+<span class="text-gray-700">Transportation to and from medical facilities</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
+<i class="ri-check-line text-primary text-sm"></i>
+</div>
+<span class="text-gray-700">Accommodation arrangements at premium hotels</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
+<i class="ri-check-line text-primary text-sm"></i>
+</div>
+<span class="text-gray-700">Multilingual assistance throughout your stay</span>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
+<i class="ri-check-line text-primary text-sm"></i>
+</div>
+<span class="text-gray-700">Post-procedure sightseeing and relaxation tours</span>
+</li>
+</ul>
+<a href="#iletisim" class="bg-primary text-black px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition-all inline-block whitespace-nowrap">
+İletişim İçin Bize Ulaşın
+</a>
+</div>
+<div class="md:w-1/2">
+<img src="https://readdy.ai/api/search-image?query=modern%20luxury%20medical%20clinic%20interior%20in%20Turkey%2C%20state-of-the-art%20equipment%2C%20clean%20and%20professional%20environment%2C%20health%20tourism%2C%20professional%20photography&width=600&height=400&seq=9&orientation=landscape" alt="Health Tourism Facilities" class="rounded-lg shadow-xl w-full">
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-20 bg-gray-50" data-aos="fade-up" style="background:#fff;">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16">
+      <h2 id="testimonials-title" class="text-3xl md:text-4xl font-bold mb-4">
+<span class="text-black">What Our </span>
+<span class="gold-gradient">Clients Say</span>
+</h2>
+      <p id="testimonials-desc" class="text-gray-600 max-w-2xl mx-auto">
+Hear from our satisfied customers about their experience with Luxen Group
+</p>
+</div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Testimonial 1 -->
+      <div class="testimonial-card relative bg-white/80 backdrop-blur-lg border border-primary/30 rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300">
+        <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-primary/10 border-2 border-primary shadow-lg">
+          <i class="ri-double-quotes-l text-3xl text-primary"></i>
+        </div>
+        <div class="flex items-center gap-2 mb-4 mt-8">
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+</div>
+        <p class="testimonial-text text-gray-800 italic font-serif text-lg mb-8">"Our family trip to Cappadocia was made exceptional by Luxen Group's VIP transfer service. The Mercedes Vito was immaculate, and our driver was professional and knowledgeable about the region. Highly recommended!"</p>
+        <div class="flex items-center gap-4 mt-auto">
+          <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center border-2 border-primary">
+            <i class="ri-user-line text-primary text-2xl"></i>
+</div>
+          <div class="text-left">
+            <h4 class="testimonial-name font-semibold text-black">Michael Anderson</h4>
+            <p class="testimonial-country text-sm text-gray-500">United Kingdom</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+      <div class="testimonial-card relative bg-white/80 backdrop-blur-lg border border-primary/30 rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300">
+        <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-primary/10 border-2 border-primary shadow-lg">
+          <i class="ri-double-quotes-l text-3xl text-primary"></i>
+        </div>
+        <div class="flex items-center gap-2 mb-4 mt-8">
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+</div>
+        <p class="testimonial-text text-gray-800 italic font-serif text-lg mb-8">"I came to Istanbul for a hair transplant procedure and used Luxen Group for all my transportation needs. Their health tourism service was outstanding - punctual, comfortable, and the driver was very attentive to my post-procedure needs."</p>
+        <div class="flex items-center gap-4 mt-auto">
+          <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center border-2 border-primary">
+            <i class="ri-user-line text-primary text-2xl"></i>
+</div>
+          <div class="text-left">
+            <h4 class="testimonial-name font-semibold text-black">Ahmed Al-Farsi</h4>
+            <p class="testimonial-country text-sm text-gray-500">United Arab Emirates</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+      <div class="testimonial-card relative bg-white/80 backdrop-blur-lg border border-primary/30 rounded-3xl shadow-xl p-10 flex flex-col items-center text-center transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300">
+        <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-primary/10 border-2 border-primary shadow-lg">
+          <i class="ri-double-quotes-l text-3xl text-primary"></i>
+        </div>
+        <div class="flex items-center gap-2 mb-4 mt-8">
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+<i class="ri-star-fill text-primary"></i>
+</div>
+        <p class="testimonial-text text-gray-800 italic font-serif text-lg mb-8">"Our Bodrum to Trabzon tour with Luxen Group was simply perfect. The luxury vehicle made the long journey comfortable, and the driver's local knowledge enhanced our experience. The attention to detail was impressive!"</p>
+        <div class="flex items-center gap-4 mt-auto">
+          <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center border-2 border-primary">
+            <i class="ri-user-line text-primary text-2xl"></i>
+</div>
+          <div class="text-left">
+            <h4 class="testimonial-name font-semibold text-black">Elena Petrova</h4>
+            <p class="testimonial-country text-sm text-gray-500">Russia</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-black text-white py-16">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<div>
+<img src="https://static.readdy.ai/image/21030f1405b02270d2468858dc23f73e/81feb1cc127c3e9f24d9528cd47cac76.jpeg" alt="Luxen Group Logo" class="h-16 mb-6 object-contain">
+<p class="text-gray-400 mb-6">
+Experience the pinnacle of luxury travel with Luxen Group's premium VIP transfer services throughout Turkey.
+</p>
+<!-- Sosyal medya linkleri kaldırıldı -->
+<!-- <div class="flex gap-4" style="margin-bottom: 18px;">
+<a href="#" class="text-gray-400 hover:text-primary transition-colors">
+<i class="ri-instagram-line text-xl"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-primary transition-colors">
+<i class="ri-facebook-line text-xl"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-primary transition-colors">
+<i class="ri-twitter-x-line text-xl"></i>
+</a>
+<a href="#" class="text-gray-400 hover:text-primary transition-colors">
+<i class="ri-youtube-line text-xl"></i>
+</a>
+</div> -->
+<button id="admin-login-btn-footer" onclick="window.location.href='server/admin-login.html'" style="background:linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%); color:#181818; font-weight:600; border-radius:8px; font-size:0.98rem; box-shadow:0 2px 8px #D4AF3722; letter-spacing:0.5px; padding:7px 18px; border:none; cursor:pointer; margin-bottom:18px;">Admin Giriş</button>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">Home</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
+<li><a href="#services" class="text-gray-400 hover:text-primary transition-colors">Services</a></li>
+<li><a href="#destinations" class="text-gray-400 hover:text-primary transition-colors">Destinations</a></li>
+<li><a href="#health-tourism" class="text-gray-400 hover:text-primary transition-colors">Health Tourism</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Services</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">VIP Transfers</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Custom Tours</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Airport Transfers</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Health Tourism</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Corporate Services</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Event Transportation</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-6">Newsletter</h3>
+<p class="text-gray-400 mb-4">
+Subscribe to our newsletter for exclusive offers and updates
+</p>
+<form class="space-y-4">
+<input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-lg bg-gray-800 border-none text-white focus:outline-none focus:ring-1 focus:ring-primary">
+<button type="submit" class="bg-primary text-black px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition-all w-full whitespace-nowrap">
+Subscribe
+</button>
+</form>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 mb-4 md:mb-0">
+© 2025 Luxen Group. All rights reserved.
+</p>
+<div class="flex gap-6">
+<a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Privacy Policy</a>
+<a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Terms of Service</a>
+<a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Cookies Policy</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- AI Chat Widget -->
+<div id="ai-chat-widget" class="fixed bottom-24 right-6 z-50">
+<button id="chat-toggle" class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-colors">
+<i class="ri-customer-service-2-line text-black text-2xl"></i>
+</button>
+<div id="chat-container" class="hidden absolute bottom-20 right-0 w-[360px] bg-white rounded-lg shadow-2xl overflow-hidden">
+<div class="bg-primary p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+<i class="ri-robot-line text-black text-xl"></i>
+</div>
+<div>
+<h3 class="font-bold text-black">Luxen AI Assistant</h3>
+<p class="text-sm text-black text-opacity-80">Online 24/7</p>
+</div>
+</div>
+</div>
+<div id="chat-messages" class="h-[400px] overflow-y-auto p-4 space-y-4"></div>
+<div class="p-4 border-t">
+<form id="chat-form" class="flex gap-2">
+<input type="text" id="chat-input" class="flex-1 px-4 py-2 rounded-full border border-gray-200 focus:outline-none focus:border-primary" placeholder="Type your message...">
+<button type="submit" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+<i class="ri-send-plane-line text-black"></i>
+</button>
+</form>
+</div>
+</div>
+</div>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/905433518943" class="whatsapp-button w-16 h-16 rounded-full bg-green-500 flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors">
+<i class="ri-whatsapp-line text-white text-2xl"></i>
+</a>
+<script id="navbar-script">
+document.addEventListener('DOMContentLoaded', function() {
+const navbar = document.getElementById('navbar');
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+// Handle navbar background on scroll
+window.addEventListener('scroll', function() {
+if (window.scrollY > 50) {
+navbar.classList.add('bg-black');
+navbar.classList.remove('bg-transparent');
+} else {
+navbar.classList.remove('bg-black');
+navbar.classList.add('bg-transparent');
+}
+});
+// Initial check for navbar background
+if (window.scrollY > 50) {
+navbar.classList.add('bg-black');
+navbar.classList.remove('bg-transparent');
+} else {
+navbar.classList.add('bg-transparent');
+}
+// Mobile menu toggle
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+});
+// Close mobile menu when clicking on a link
+const mobileLinks = mobileMenu.querySelectorAll('a');
+mobileLinks.forEach(link => {
+link.addEventListener('click', function() {
+mobileMenu.classList.add('hidden');
+});
+});
+});
+</script>
+<script id="smooth-scroll-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80, // Adjust for navbar height
+behavior: 'smooth'
+});
+}
+});
+});
+});
+</script>
+<script id="language-switcher-script">
+document.addEventListener('DOMContentLoaded', function() {
+  // Dil butonu ve dropdown
+  const langToggle = document.getElementById('lang-toggle');
+  const langDropdown = document.getElementById('lang-dropdown');
+  const currentLang = document.getElementById('current-lang');
+  langToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    langDropdown.classList.toggle('hidden');
+  });
+  document.addEventListener('click', function(e) {
+    if (!langDropdown.classList.contains('hidden')) {
+      langDropdown.classList.add('hidden');
+    }
+  });
+  window.setLanguage = function(lang) {
+    localStorage.setItem('site_lang', lang);
+    currentLang.textContent = lang === 'tr' ? 'TR' : 'EN';
+    updateLanguage(lang);
+    langDropdown.classList.add('hidden');
+  };
+  // Sayfa yüklenince localStorage'dan dil seçimini uygula
+  const savedLang = localStorage.getItem('site_lang') || 'en';
+  window.setLanguage(savedLang);
+});
+</script>
+<script id="ai-chat-script">
+document.addEventListener('DOMContentLoaded', function() {
+const chatToggle = document.getElementById('chat-toggle');
+const chatContainer = document.getElementById('chat-container');
+const chatMessages = document.getElementById('chat-messages');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+// Initial welcome message
+addMessage('bot', 'Hello! I\'m your Luxen AI assistant. How can I help you today? I can help you with:\n- VIP transfer bookings\n- Custom tour planning\n- Airport transfers\n- Health tourism services\n- General inquiries');
+// Toggle chat widget
+chatToggle.addEventListener('click', () => {
+chatContainer.classList.toggle('hidden');
+if (!chatContainer.classList.contains('hidden')) {
+chatInput.focus();
+}
+});
+// Handle chat form submission
+chatForm.addEventListener('submit', (e) => {
+e.preventDefault();
+const message = chatInput.value.trim();
+if (!message) return;
+// Add user message
+addMessage('user', message);
+chatInput.value = '';
+// Simulate AI response
+setTimeout(() => {
+const response = generateAIResponse(message);
+addMessage('bot', response);
+}, 1000);
+});
+// Add message to chat
+function addMessage(type, text) {
+const messageDiv = document.createElement('div');
+messageDiv.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'}`;
+const messageContent = document.createElement('div');
+messageContent.className = `max-w-[80%] p-3 rounded-lg ${type === 'user' ? 'bg-primary text-black' : 'bg-gray-100 text-gray-800'}`;
+messageContent.textContent = text;
+messageDiv.appendChild(messageContent);
+chatMessages.appendChild(messageDiv);
+chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+// Simple AI response generation
+function generateAIResponse(message) {
+message = message.toLowerCase();
+if (message.includes('transfer') || message.includes('book')) {
+return 'I can help you book a transfer! Please provide your desired date, time, and location, or call us at +90 543 351 89 43 for immediate assistance.';
+}
+if (message.includes('price') || message.includes('cost')) {
+return 'Our prices vary based on the service and destination. For a detailed quote, please provide your specific requirements or contact our team directly.';
+}
+if (message.includes('health') || message.includes('medical')) {
+return 'We offer comprehensive health tourism services including transportation and accommodation arrangements. Would you like to learn more about our medical tourism packages?';
+}
+if (message.includes('tour') || message.includes('destination')) {
+return 'We offer custom tours to popular destinations like Istanbul, Bodrum, Cappadocia, and Trabzon. Which destination interests you?';
+}
+return 'Thank you for your message. How can I assist you with our VIP transfer or tourism services today?';
+}
+});
+</script>
+<script id="form-validation-script">
+document.addEventListener('DOMContentLoaded', function() {
+const contactForm = document.querySelector('#contact form');
+const reservationForm = document.querySelector('.reservation-vzn-form');
+if (reservationForm) {
+reservationForm.addEventListener('submit', async function(e) {
+e.preventDefault();
+// Form verilerini al
+const isim = document.querySelector('input[name="isim"]')?.value || '';
+const soyad = document.querySelector('input[name="soyad"]')?.value || '';
+const yolcu = document.querySelector('input[name="yolcu"]')?.value || '';
+const telefon = document.querySelector('input[name="telefon"]')?.value || '';
+const tarih = document.querySelector('input[name="tarih"]')?.value || '';
+const saat = document.querySelector('input[name="saat"]')?.value || '';
+const from = document.getElementById('google-start-address')?.value || '';
+const to = document.getElementById('google-end-address')?.value || '';
+const rezervasyonTipi = document.getElementById('rezervasyonTipi')?.value || 'TRANSFER';
+// Form validasyonu
+if (!isim || !soyad || !yolcu || !telefon || !tarih || !saat || !from || !to) {
+  alert('Lütfen tüm alanları doldurun!');
+  return;
+}
+if (isNaN(parseInt(yolcu)) || parseInt(yolcu) < 1 || parseInt(yolcu) > 20) {
+  alert('Yolcu sayısı 1 ile 20 arasında olmalıdır!');
+  return;
+}
+// Google Directions API ile mesafe hesapla
+try {
+  const response = await fetch(`/api/directions?origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}`);
+  const directions = await response.json();
+  let distance = 0;
+  if (directions.routes && directions.routes[0] && directions.routes[0].legs && directions.routes[0].legs[0]) {
+    distance = directions.routes[0].legs[0].distance.value / 1000; // metre -> km
+  }
+  if (!distance || isNaN(distance)) {
+    alert('Mesafe hesaplanamadı. Lütfen adresleri kontrol edin.');
+    return;
+  }
+  // Bilgileri URL parametresiyle arac-sec.html'e aktar
+  const params = new URLSearchParams({ isim, soyad, yolcu, telefon, tarih, saat, from, to, distance, rezervasyonTipi });
+  window.location.href = '/arac-sec.html?' + params.toString();
+} catch (err) {
+  alert('Mesafe hesaplanırken veya rezervasyon kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.');
+}
+});
+}
+if (contactForm) {
+contactForm.addEventListener('submit', function(e) {
+e.preventDefault();
+// Basic form validation
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const phone = document.getElementById('phone').value;
+const service = document.getElementById('service').value;
+const message = document.getElementById('message').value;
+let isValid = true;
+let errorMessage = '';
+if (!name) {
+isValid = false;
+errorMessage += 'Please enter your name.\n';
+}
+if (!email) {
+isValid = false;
+errorMessage += 'Please enter your email.\n';
+} else if (!isValidEmail(email)) {
+isValid = false;
+errorMessage += 'Please enter a valid email address.\n';
+}
+if (!phone) {
+isValid = false;
+errorMessage += 'Please enter your phone number.\n';
+}
+if (!service) {
+isValid = false;
+errorMessage += 'Please select a service.\n';
+}
+if (!message) {
+isValid = false;
+errorMessage += 'Please enter your message.\n';
+}
+if (isValid) {
+// Form is valid, you would normally submit it here
+alert('Thank you for your message! We will contact you shortly.');
+contactForm.reset();
+} else {
+alert(errorMessage);
+}
+});
+}
+// Email validation helper function
+function isValidEmail(email) {
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return emailRegex.test(email);
+}
+});
+</script>
+
+  
+<!-- Location Picker Modal -->
+<div id="location-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:18px; max-width:98vw; width:900px; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#222; display:flex; flex-direction:column; align-items:center;">
+    <button id="close-location-modal" style="position:absolute; right:1rem; top:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+    <h3 style="margin-bottom:0.5rem; font-size:1.2rem; font-weight:bold; text-align:center;">Haritadan Konum Seç</h3>
+    <p style="margin-bottom:1rem; font-size:0.98rem; color:#444; text-align:center;">Lütfen haritadan bir nokta seçin ve aşağıdaki butona tıklayın.</p>
+    <div id="map" style="width:100%; height:300px; border-radius:8px; background:#eee;"></div>
+    <button id="select-location-btn" class="bg-primary text-black px-4 py-2 rounded font-semibold hover:bg-opacity-90 transition-all mt-4 w-full">Konumu Seç</button>
+  </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHiTkeb7PrDvaJF8ng_Pj8bA7oBfSEjCo&libraries=places"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Google Places Autocomplete başlat
+  if (window.google && google.maps && google.maps.places) {
+    var startInput = document.getElementById('google-start-address');
+    var endInput = document.getElementById('google-end-address');
+    if (startInput) {
+      new google.maps.places.Autocomplete(startInput); // No restrictions
+    }
+    if (endInput) {
+      new google.maps.places.Autocomplete(endInput); // No restrictions
+    }
+  }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  let slideIndex = 1;
+  let slideInterval;
+  showSlide(slideIndex);
+
+  function getSliderTexts() {
+    const lang = localStorage.getItem('site_lang') || 'tr';
+    return translations[lang].sliderTexts;
+  }
+
+  function showSlide(n) {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dots .dot');
+    const sliderTexts = getSliderTexts();
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      if (i === slideIndex - 1) slide.classList.add('active');
+      // Her slide'ın başlık ve açıklamasını güncelle
+      const title = slide.querySelector('.slide-title');
+      const desc = slide.querySelector('.slide-description');
+      if (title && desc && sliderTexts[i]) {
+        title.textContent = sliderTexts[i].title;
+        desc.textContent = sliderTexts[i].desc;
+        title.classList.remove('slide-in');
+        desc.classList.remove('slide-in');
+        void title.offsetWidth;
+        void desc.offsetWidth;
+        title.classList.add('slide-in');
+        desc.classList.add('slide-in');
+      }
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.remove('active');
+      if (i === slideIndex - 1) dot.classList.add('active');
+    });
+  }
+
+  window.currentSlide = function(n) {
+    slideIndex = n;
+    showSlide(slideIndex);
+    resetInterval();
+  };
+
+  function nextSlide() {
+    slideIndex++;
+    showSlide(slideIndex);
+  }
+
+  function resetInterval() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 4000);
+  }
+
+  // Başlat
+  slideInterval = setInterval(nextSlide, 4000);
+
+  // Dil değiştiğinde slider metinlerini de güncelle
+  window.updateSliderTexts = function() {
+    showSlide(slideIndex);
+  };
+});
+</script>
+<script>
+const translations = {
+  en: {
+    menu: ["Home", "About Us", "Services", "Destinations", "Health Tourism", "Reservation", "Contact"],
+    hero: {
+      title: "Luxury and Safe VIP Transfer",
+      desc: "Experience comfort, prestige, and safety with our Mercedes Vito fleet. Exclusive service for city and intercity transfers.",
+      btn: "Book Now"
+    },
+    reservation: {
+      title: "Quick Reservation",
+      isim: "First Name",
+      soyad: "Last Name",
+      email: "Passenger Count",
+      telefon: "Phone",
+      tarih: "Date",
+      saat: "Time",
+      from: "Start Address",
+      to: "Destination Address",
+      btn: "RESERVE"
+    },
+    about: {
+      title: "About Luxen Group",
+      p1: "Founded with a vision to redefine luxury travel in Turkey, Luxen Group specializes in premium transportation and tourism services. Our fleet of high-end Mercedes Vito vehicles and professional drivers ensure that your journey through Turkey's most beautiful destinations is as memorable as the destinations themselves.",
+      p2: "Whether you're exploring the coastal beauty of Bodrum, the historical wonders of Istanbul, the natural landscapes of Trabzon, or the magical terrain of Cappadocia, our VIP transfer services guarantee comfort, safety, and style throughout your journey.",
+      features: ["Professional Service", "Punctuality", "Premium Experience"]
+    },
+    services: {
+      title: "Our Premium Services",
+      desc: "Discover our range of exclusive services designed to make your travel experience in Turkey unforgettable",
+      vip: { title: "VIP Transfer", desc: "Travel in style with our luxury Mercedes Vito vehicles, offering comfort and elegance for your journey throughout Turkey.", btn: "Learn More" },
+      tour: { title: "Custom Tours", desc: "Tailor-made tours to Turkey's most beautiful destinations including Bodrum, Istanbul, Trabzon, and Cappadocia.", btn: "Learn More" },
+      airport: { title: "Airport Transfers", desc: "Seamless airport pickup and drop-off services with professional drivers and comfortable vehicles.", btn: "Learn More" },
+      health: { title: "Health Tourism", desc: "Specialized transportation and support services for medical tourists seeking hair transplantation and other procedures.", btn: "Learn More" }
+    },
+    destinations: {
+      title: "Explore Turkey's Finest Destinations",
+      desc: "Discover the beauty and diversity of Turkey with our premium transfer services",
+      istanbul: { title: "Istanbul", desc: "Experience the magic where East meets West", btn: "Explore Tours" },
+      bodrum: { title: "Bodrum", desc: "Discover the pearl of the Aegean coast", btn: "Explore Tours" },
+      cappadocia: { title: "Cappadocia", desc: "Journey through a magical fairy-tale landscape", btn: "Explore Tours" },
+      trabzon: { title: "Trabzon", desc: "Explore the natural beauty of the Black Sea region", btn: "Explore Tours" }
+    },
+    health: {
+      title: "Specialized Health Tourism Services",
+      p1: "Turkey has become a global leader in health tourism, offering world-class medical procedures at competitive prices. At Luxen Group, we provide specialized transportation and support services for medical tourists seeking various treatments, including hair transplantation and other cosmetic procedures.",
+      p2: "Our comprehensive health tourism packages include:",
+      list: [
+        "Airport pickup and drop-off in luxury vehicles",
+        "Transportation to and from medical facilities",
+        "Accommodation arrangements at premium hotels",
+        "Multilingual assistance throughout your stay",
+        "Post-procedure sightseeing and relaxation tours"
+      ],
+      btn: "Inquire About Health Tourism"
+    },
+    contact: {
+      title: "Get in Touch",
+      desc: "Contact us to book your luxury transfer or inquire about our services. Our team is ready to assist you in planning your perfect journey through Turkey.",
+      form: {
+        name: "Full Name",
+        email: "Email Address",
+        phone: "Phone Number",
+        service: "Service Interested In",
+        select: "Select a service",
+        vip: "VIP Transfer",
+        tour: "Custom Tour",
+        airport: "Airport Transfer",
+        health: "Health Tourism",
+        message: "Your Message",
+        placeholder: "Tell us about your requirements",
+        btn: "Send Message"
+      },
+      info: {
+        phone: "Phone",
+        email: "Email"
+      }
+    },
+    footer: {
+      about: "Experience the pinnacle of luxury travel with Luxen Group's premium VIP transfer services throughout Turkey.",
+      quick: ["Home", "About Us", "Services", "Destinations", "Health Tourism", "Contact"],
+      services: ["VIP Transfers", "Custom Tours", "Airport Transfers", "Health Tourism", "Corporate Services", "Event Transportation"],
+      newsletter: { title: "Newsletter", desc: "Subscribe to our newsletter for exclusive offers and updates", btn: "Subscribe" },
+      copyright: "© 2025 Luxen Group. All rights reserved.",
+      privacy: "Privacy Policy", terms: "Terms of Service", cookies: "Cookies Policy"
+    },
+    fleet: {
+      title: "Our Luxury Vehicle Fleet",
+      desc: "Experience the pinnacle of comfort and style with our premium fleet of vehicles"
+    },
+    testimonials: {
+      title: "What Our Clients Say",
+      desc: "Hear from our satisfied customers about their experience with Luxen Group",
+      items: [
+        {
+          text: "Our family trip to Cappadocia was made exceptional by Luxen Group's VIP transfer service. The Mercedes Vito was immaculate, and our driver was professional and knowledgeable about the region. Highly recommended!",
+          name: "Michael Anderson",
+          country: "United Kingdom"
+        },
+        {
+          text: "I came to Istanbul for a hair transplant procedure and used Luxen Group for all my transportation needs. Their health tourism service was outstanding - punctual, comfortable, and the driver was very attentive to my post-procedure needs.",
+          name: "Ahmed Al-Farsi",
+          country: "United Arab Emirates"
+        },
+        {
+          text: "Our Bodrum to Trabzon tour with Luxen Group was simply perfect. The luxury vehicle made the long journey comfortable, and the driver's local knowledge enhanced our experience. The attention to detail was impressive!",
+          name: "Elena Petrova",
+          country: "Russia"
+        }
+      ]
+    },
+    newServices: [
+      {
+        icon: 'ri-vip-crown-line',
+        title: 'VIP Transfer',
+        desc: 'Travel in style and comfort with our luxury Mercedes Vito fleet and professional drivers.',
+        btn: 'Learn More',
+        link: '#contact'
+      },
+      {
+        icon: 'ri-route-line',
+        title: 'Custom Tours',
+        desc: 'Tailor-made tours to Turkey\'s most beautiful destinations including Bodrum, Istanbul, Trabzon, and Cappadocia.',
+        btn: 'Learn More',
+        link: '#contact'
+      },
+      {
+        icon: 'ri-flight-takeoff-line',
+        title: 'Airport Transfers',
+        desc: 'Seamless airport pickup and drop-off with professional drivers and premium vehicles.',
+        btn: 'Learn More',
+        link: '#contact'
+      },
+      {
+        icon: 'ri-heart-pulse-line',
+        title: 'Health Tourism',
+        desc: 'Specialized transportation and support for medical tourists seeking hair transplantation and more.',
+        btn: 'Learn More',
+        link: '#health-tourism'
+      }
+    ],
+    fleetSection: {
+      title: 'Our Luxury Vehicle Fleet',
+      desc: 'Experience the pinnacle of comfort and style with our premium fleet of vehicles',
+      vehicle: {
+        name: 'Mercedes-Benz Vito VIP',
+        desc: 'Our flagship Mercedes-Benz Vito vehicles are specially customized to provide the ultimate VIP experience. With spacious interiors, premium leather seating, climate control, and ambient lighting, every journey becomes a luxurious experience.',
+        btn: 'Book Your Premium Transfer'
+      }
+    },
+    sliderTexts: [
+      { title: "Luxury and Safe VIP Transfer", desc: "Experience comfort, prestige, and safety with our Mercedes Vito fleet. Exclusive service for city and intercity transfers." },
+      { title: "VIP Mercedes Vito Comfort", desc: "Enjoy a privileged journey with spacious interiors and luxury details." },
+      { title: "Luxury Details", desc: "Feel quality and comfort in every detail." },
+      { title: "Modern and Stylish Design", desc: "Make a difference in your travels with Mercedes Vito." },
+      { title: "Chauffeured VIP Transfer", desc: "Safe and comfortable transportation with our professional drivers." }
+    ]
+  },
+  tr: {
+    menu: ["Ana Sayfa", "Hakkımızda", "Hizmetler", "Rotalar", "Sağlık Turizmi", "Rezervasyon", "İletişim"],
+    hero: {
+      title: "Lüks ve Güvenli VIP Transfer",
+      desc: "Mercedes Vito filomuz ile konfor, prestij ve güveni bir arada yaşayın. Şehir içi ve şehirler arası transferde ayrıcalıklı hizmet.",
+      btn: "Hemen Rezervasyon Yap"
+    },
+    reservation: {
+      title: "Hızlı Rezervasyon",
+      isim: "İsim",
+      soyad: "Soyad",
+      email: "Kişi Sayısı",
+      telefon: "Telefon",
+      tarih: "Tarih",
+      saat: "Saat",
+      from: "Başlangıç Adresi",
+      to: "Varış Adresi",
+      btn: "REZERVASYON"
+    },
+    about: {
+      title: "Hakkımızda Luxen Group",
+      p1: "Türkiye'de lüks seyahati yeniden tanımlama vizyonuyla kurulan Luxen Group, premium ulaşım ve turizm hizmetlerinde uzmanlaşmıştır. Üst düzey Mercedes Vito filomuz ve profesyonel şoförlerimiz, Türkiye'nin en güzel destinasyonlarında yolculuğunuzun unutulmaz olmasını sağlar.",
+      p2: "Bodrum'un kıyı güzelliklerinden İstanbul'un tarihi zenginliklerine, Trabzon'un doğal manzaralarından Kapadokya'nın büyülü coğrafyasına kadar VIP transfer hizmetlerimizle yolculuğunuz boyunca konfor, güvenlik ve şıklık garanti.",
+      features: ["Profesyonel Hizmet", "Dakiklik", "Üst Düzey Deneyim"]
+    },
+    services: {
+      title: "Hizmetlerimiz Premium Hizmetler",
+      desc: "Türkiye'deki seyahatinizi unutulmaz kılacak özel hizmetlerimizi keşfedin",
+      vip: { title: "VIP Transfer", desc: "Lüks Mercedes Vito araçlarımızla Türkiye'nin her yerinde konfor ve şıklıkla seyahat edin.", btn: "Detaylı Bilgi" },
+      tour: { title: "Özel Turlar", desc: "Bodrum, İstanbul, Trabzon ve Kapadokya gibi en güzel destinasyonlara özel turlar.", btn: "Detaylı Bilgi" },
+      airport: { title: "Havalimanı Transferleri", desc: "Profesyonel şoförler ve konforlu araçlarla sorunsuz havalimanı karşılama ve bırakma.", btn: "Detaylı Bilgi" },
+      health: { title: "Sağlık Turizmi", desc: "Saç ekimi ve diğer işlemler için medikal turistlere özel ulaşım ve destek hizmetleri.", btn: "Detaylı Bilgi" }
+    },
+    destinations: {
+      title: "Türkiye'nin En Güzel Rotaları",
+      desc: "VIP transfer hizmetlerimizle Türkiye'nin güzelliklerini ve çeşitliliğini keşfedin",
+      istanbul: { title: "İstanbul", desc: "Doğu ile Batı'nın buluştuğu büyülü şehir", btn: "Turları Keşfet" },
+      bodrum: { title: "Bodrum", desc: "Ege'nin incisini keşfedin", btn: "Turları Keşfet" },
+      cappadocia: { title: "Kapadokya", desc: "Masalsı bir coğrafyada yolculuk", btn: "Turları Keşfet" },
+      trabzon: { title: "Trabzon", desc: "Karadeniz'in doğal güzelliklerini keşfedin", btn: "Turları Keşfet" }
+    },
+    health: {
+      title: "Özel Sağlık Turizmi Hizmetleri",
+      p1: "Türkiye, rekabetçi fiyatlarla dünya standartlarında medikal işlemler sunarak sağlık turizminde lider konuma gelmiştir. Luxen Group olarak saç ekimi ve diğer estetik işlemler dahil olmak üzere medikal turistlere özel ulaşım ve destek hizmetleri sunuyoruz.",
+      p2: "Kapsamlı sağlık turizmi paketlerimiz şunları içerir:",
+      list: [
+        "Lüks araçlarla havalimanı karşılama ve bırakma",
+        "Medikal tesislere ulaşım",
+        "Premium otellerde konaklama ayarlamaları",
+        "Konaklama süresince çok dilli asistanlık",
+        "İşlem sonrası gezi ve dinlenme turları"
+      ],
+      btn: "Sağlık Turizmi Bilgisi Al"
+    },
+    contact: {
+      title: "İletişime Geçin",
+      desc: "Lüks transferinizi rezerve etmek veya hizmetlerimiz hakkında bilgi almak için bize ulaşın. Ekibimiz, Türkiye'deki mükemmel yolculuğunuzu planlamanızda size yardımcı olmaya hazır.",
+      form: {
+        name: "Ad Soyad",
+        email: "E-posta Adresi",
+        phone: "Telefon Numarası",
+        service: "İlgilendiğiniz Hizmet",
+        select: "Hizmet seçin",
+        vip: "VIP Transfer",
+        tour: "Özel Tur",
+        airport: "Havalimanı Transferi",
+        health: "Sağlık Turizmi",
+        message: "Mesajınız",
+        placeholder: "Taleplerinizi yazın",
+        btn: "Mesaj Gönder"
+      },
+      info: {
+        phone: "Telefon",
+        email: "E-posta"
+      }
+    },
+    footer: {
+      about: "Luxen Group'un Türkiye genelindeki premium VIP transfer hizmetleriyle lüks seyahatin zirvesini yaşayın.",
+      quick: ["Ana Sayfa", "Hakkımızda", "Hizmetler", "Rotalar", "Sağlık Turizmi", "İletişim"],
+      services: ["VIP Transferler", "Özel Turlar", "Havalimanı Transferleri", "Sağlık Turizmi", "Kurumsal Hizmetler", "Etkinlik Ulaşımı"],
+      newsletter: { title: "Bülten", desc: "Özel fırsatlar ve güncellemeler için bültenimize abone olun", btn: "Abone Ol" },
+      copyright: "© 2025 Luxen Group. Tüm hakları saklıdır.",
+      privacy: "Gizlilik Politikası", terms: "Kullanım Şartları", cookies: "Çerez Politikası"
+    },
+    fleet: {
+      title: "Lüks Araç Filomuz",
+      desc: "Premium araç filomuzla konforun ve şıklığın zirvesini yaşayın"
+    },
+    testimonials: {
+      title: "Müşterilerimizin Yorumları",
+      desc: "Luxen Group ile yaşadıkları deneyimi müşterilerimizden dinleyin",
+      items: [
+        {
+          text: "Ailemizin Kapadokya gezisi Luxen Group'un VIP transfer hizmetiyle harika geçti. Mercedes Vito tertemizdi, şoförümüz ise bölgeyi çok iyi biliyordu. Kesinlikle tavsiye ederim!",
+          name: "Michael Anderson",
+          country: "İngiltere"
+        },
+        {
+          text: "İstanbul'a saç ekimi için geldim ve tüm ulaşımımı Luxen Group ile sağladım. Sağlık turizmi hizmetleri mükemmeldi - dakik, konforlu ve şoför işlem sonrası ihtiyaçlarıma çok özen gösterdi.",
+          name: "Ahmed Al-Farsi",
+          country: "Birleşik Arap Emirlikleri"
+        },
+        {
+          text: "Bodrum'dan Trabzon'a yaptığımız turda Luxen Group sayesinde yolculuğumuz çok konforlu geçti. Lüks araç uzun yol için harikaydı, şoförün yerel bilgisi de deneyimimizi zenginleştirdi. Detaylara gösterilen özen etkileyiciydi!",
+          name: "Elena Petrova",
+          country: "Rusya"
+        }
+      ]
+    },
+    newServices: [
+      {
+        icon: 'ri-vip-crown-line',
+        title: 'VIP Transfer',
+        desc: 'Lüks Mercedes Vito filomuz ve profesyonel şoförlerimizle konforlu ve şık yolculuklar.',
+        btn: 'Detaylı Bilgi',
+        link: '#contact'
+      },
+      {
+        icon: 'ri-route-line',
+        title: 'Özel Turlar',
+        desc: 'Bodrum, İstanbul, Trabzon ve Kapadokya gibi en güzel destinasyonlara özel turlar.',
+        btn: 'Detaylı Bilgi',
+        link: '#contact'
+      },
+      {
+        icon: 'ri-flight-takeoff-line',
+        title: 'Havalimanı Transferleri',
+        desc: 'Profesyonel şoförler ve premium araçlarla sorunsuz havalimanı karşılama ve bırakma.',
+        btn: 'Detaylı Bilgi',
+        link: '#contact'
+      },
+      {
+        icon: 'ri-heart-pulse-line',
+        title: 'Sağlık Turizmi',
+        desc: 'Saç ekimi ve diğer işlemler için medikal turistlere özel ulaşım ve destek.',
+        btn: 'Detaylı Bilgi',
+        link: '#health-tourism'
+      }
+    ],
+    fleetSection: {
+      title: 'Lüks Araç Filomuz',
+      desc: 'Premium araç filomuzla konforun ve şıklığın zirvesini yaşayın',
+      vehicle: {
+        name: 'Mercedes-Benz Vito VIP',
+        desc: 'Amiral gemimiz Mercedes-Benz Vito araçlarımız, en üst düzey VIP deneyimi için özel olarak tasarlanmıştır. Geniş iç hacim, lüks deri koltuklar, iklim kontrolü ve ambiyans aydınlatması ile her yolculuk lüks bir deneyime dönüşür.',
+        btn: 'Premium Transfer Rezervasyonu Yap'
+      }
+    },
+    sliderTexts: [
+      { title: "Lüks ve Güvenli VIP Transfer", desc: "Mercedes Vito filomuz ile konfor, prestij ve güveni bir arada yaşayın. Şehir içi ve şehirler arası transferde ayrıcalıklı hizmet." },
+      { title: "VIP Mercedes Vito Konforu", desc: "Geniş iç hacim ve lüks detaylarla yolculuğunuz ayrıcalıklı geçsin." },
+      { title: "Lüks Detaylar", desc: "Her ayrıntıda kalite ve konforu hissedin." },
+      { title: "Modern ve Şık Tasarım", desc: "Mercedes Vito ile yolculuklarınızda fark yaratın." },
+      { title: "Şoförlü VIP Transfer", desc: "Profesyonel şoförlerimizle güvenli ve konforlu ulaşım." }
+    ]
+  }
+};
+
+function updateLanguage(lang) {
+  // Menü
+  const menuLinks = document.querySelectorAll('nav.lg\\:flex a');
+  if (translations && translations[lang] && translations[lang].menu) {
+    translations[lang].menu.forEach((text, i) => { if(menuLinks[i]) menuLinks[i].textContent = text; });
+  }
+  // Mobil Menü
+  const mobileMenuLinks = document.querySelectorAll('#mobile-menu nav a');
+  if (translations[lang].menu) {
+    translations[lang].menu.forEach((text, i) => { if(mobileMenuLinks[i]) mobileMenuLinks[i].textContent = text; });
+  }
+  // Hero
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  heroSlides.forEach((slide, i) => {
+    const title = slide.querySelector('.slide-title');
+    const desc = slide.querySelector('.slide-description');
+    const btn = slide.querySelector('.slide-btn.primary');
+    if (title && translations[lang].hero.title) title.textContent = translations[lang].hero.title;
+    if (desc && translations[lang].hero.desc) desc.textContent = translations[lang].hero.desc;
+    if (btn && translations[lang].hero.btn) btn.textContent = translations[lang].hero.btn;
+  });
+  // Rezervasyon
+  const resTabs = document.querySelectorAll('.reservation-vzn-tab');
+  if (resTabs.length === 3) {
+    resTabs[0].textContent = lang === 'tr' ? 'TRANSFER' : 'TRANSFER';
+    resTabs[1].textContent = lang === 'tr' ? 'ŞOFÖRLÜ ARAÇ KİRALAMA' : 'CHAUFFEUR DRIVEN';
+    resTabs[2].textContent = lang === 'tr' ? 'ŞEHİRLER ARASI TRANSFER' : 'INTERCITY TRANSFER';
+  }
+  const resTitle = document.querySelector('#quick-reservation .reservation-vzn-tabs');
+  if(resTitle && resTitle.parentElement.previousElementSibling) resTitle.parentElement.previousElementSibling.textContent = translations[lang].reservation.title;
+  // Label çevirileri
+  const resLabels = document.querySelectorAll('.reservation-vzn-form label');
+  if(resLabels.length >= 8) {
+    resLabels[0].childNodes[0].nodeValue = translations[lang].reservation.isim + ' ';
+    resLabels[1].childNodes[0].nodeValue = translations[lang].reservation.soyad + ' ';
+    resLabels[2].childNodes[0].nodeValue = translations[lang].reservation.email + ' ';
+    resLabels[3].childNodes[0].nodeValue = translations[lang].reservation.telefon + ' ';
+    resLabels[4].childNodes[0].nodeValue = translations[lang].reservation.tarih + ' ';
+    resLabels[5].childNodes[0].nodeValue = translations[lang].reservation.saat + ' ';
+    resLabels[6].childNodes[0].nodeValue = translations[lang].reservation.from + ' ';
+    resLabels[7].childNodes[0].nodeValue = translations[lang].reservation.to + ' ';
+  }
+  const isimInput = document.querySelector('input[name="isim"]');
+  if(isimInput) isimInput.placeholder = translations[lang].reservation.isim;
+  const soyadInput = document.querySelector('input[name="soyad"]');
+  if(soyadInput) soyadInput.placeholder = translations[lang].reservation.soyad;
+  const emailInput = document.querySelector('input[name="email"]');
+  if(emailInput) emailInput.placeholder = translations[lang].reservation.email;
+  const telefonInput = document.querySelector('input[name="telefon"]');
+  if(telefonInput) telefonInput.placeholder = translations[lang].reservation.telefon;
+  const tarihInput = document.querySelector('input[name="tarih"]');
+  if(tarihInput) tarihInput.placeholder = translations[lang].reservation.tarih;
+  const saatInput = document.querySelector('input[name="saat"]');
+  if(saatInput) saatInput.placeholder = translations[lang].reservation.saat;
+  const fromInput = document.getElementById('google-start-address');
+  if(fromInput) fromInput.placeholder = translations[lang].reservation.from;
+  const toInput = document.getElementById('google-end-address');
+  if(toInput) toInput.placeholder = translations[lang].reservation.to;
+  const resBtn = document.querySelector('.reservation-vzn-btn');
+  if(resBtn) resBtn.textContent = translations[lang].reservation.btn;
+  // About
+  const aboutSection = document.getElementById('hakkimizda');
+  if (aboutSection) {
+    const aboutTitle = aboutSection.querySelector('h2');
+    if (aboutTitle) aboutTitle.innerHTML = translations[lang].about.title;
+    const aboutPs = aboutSection.querySelectorAll('p');
+    if (aboutPs[0]) aboutPs[0].textContent = translations[lang].about.p1;
+    if (aboutPs[1]) aboutPs[1].textContent = translations[lang].about.p2;
+    const aboutFeatures = aboutSection.querySelectorAll('.flex.flex-wrap .font-medium');
+    translations[lang].about.features.forEach((text, i) => { if(aboutFeatures[i]) aboutFeatures[i].textContent = text; });
+  }
+  // Services
+  const servicesTitle = document.getElementById('services-title');
+  if(servicesTitle) servicesTitle.textContent = translations[lang].services.title;
+  const servicesDesc = document.getElementById('services-desc');
+  if(servicesDesc) servicesDesc.textContent = translations[lang].services.desc;
+  const serviceCards = document.querySelectorAll('.service-card');
+  if(serviceCards.length >= 4) {
+    serviceCards[0].querySelector('h3').textContent = translations[lang].services.vip.title;
+    serviceCards[0].querySelector('p').textContent = translations[lang].services.vip.desc;
+    serviceCards[0].querySelector('a').textContent = translations[lang].services.vip.btn;
+    serviceCards[1].querySelector('h3').textContent = translations[lang].services.tour.title;
+    serviceCards[1].querySelector('p').textContent = translations[lang].services.tour.desc;
+    serviceCards[1].querySelector('a').textContent = translations[lang].services.tour.btn;
+    serviceCards[2].querySelector('h3').textContent = translations[lang].services.airport.title;
+    serviceCards[2].querySelector('p').textContent = translations[lang].services.airport.desc;
+    serviceCards[2].querySelector('a').textContent = translations[lang].services.airport.btn;
+    serviceCards[3].querySelector('h3').textContent = translations[lang].services.health.title;
+    serviceCards[3].querySelector('p').textContent = translations[lang].services.health.desc;
+    serviceCards[3].querySelector('a').textContent = translations[lang].services.health.btn;
+  }
+  // Destinations
+  const destTitle = document.getElementById('destinations-title');
+  if(destTitle) {
+    destTitle.innerHTML = `<span class=\"text-black\">${translations[lang].destinations.title.split(' ')[0]} </span><span class=\"gold-gradient\">${translations[lang].destinations.title.split(' ').slice(1).join(' ')}</span>`;
+  }
+  const destDesc = document.getElementById('destinations-desc');
+  if(destDesc) {
+    destDesc.textContent = translations[lang].destinations.desc;
+  }
+  const destCards = document.querySelectorAll('.destination-card');
+  if(destCards.length >= 4) {
+    destCards[0].querySelector('h3').textContent = translations[lang].destinations.istanbul.title;
+    destCards[0].querySelector('p').textContent = translations[lang].destinations.istanbul.desc;
+    destCards[0].querySelector('a').textContent = translations[lang].destinations.istanbul.btn;
+    destCards[1].querySelector('h3').textContent = translations[lang].destinations.bodrum.title;
+    destCards[1].querySelector('p').textContent = translations[lang].destinations.bodrum.desc;
+    destCards[1].querySelector('a').textContent = translations[lang].destinations.bodrum.btn;
+    destCards[2].querySelector('h3').textContent = translations[lang].destinations.cappadocia.title;
+    destCards[2].querySelector('p').textContent = translations[lang].destinations.cappadocia.desc;
+    destCards[2].querySelector('a').textContent = translations[lang].destinations.cappadocia.btn;
+    destCards[3].querySelector('h3').textContent = translations[lang].destinations.trabzon.title;
+    destCards[3].querySelector('p').textContent = translations[lang].destinations.trabzon.desc;
+    destCards[3].querySelector('a').textContent = translations[lang].destinations.trabzon.btn;
+  }
+  // Health Tourism
+  const healthSection = document.getElementById('saglik-turizmi');
+  if (healthSection) {
+    const healthTitle = healthSection.querySelector('h2');
+    if (healthTitle) healthTitle.innerHTML = `<span class="text-black">${translations[lang].health.title.split(' ')[0]} </span><span class="gold-gradient">${translations[lang].health.title.split(' ').slice(1).join(' ')}</span>`;
+    const healthPs = healthSection.querySelectorAll('p');
+    if (healthPs[0]) healthPs[0].textContent = translations[lang].health.p1;
+    if (healthPs[1]) healthPs[1].textContent = translations[lang].health.p2;
+    const healthList = healthSection.querySelectorAll('ul li .text-gray-700');
+    translations[lang].health.list.forEach((text, i) => { if(healthList[i]) healthList[i].textContent = text; });
+    const healthBtn = healthSection.querySelector('a.bg-primary');
+    if (healthBtn) healthBtn.textContent = translations[lang].health.btn;
+  }
+  // Contact
+  const contactTitle = document.querySelector('#contact h2');
+  if(contactTitle) contactTitle.innerHTML = `<span class="text-black">${lang==='tr'?'İletişime':'Get in '} </span><span class="gold-gradient">${lang==='tr'?'Geçin':'Touch'}</span>`;
+  const contactDesc = document.querySelector('#contact p.text-gray-700');
+  if(contactDesc) contactDesc.textContent = translations[lang].contact.desc;
+  const contactForm = document.querySelector('#contact form');
+  if(contactForm) {
+    const formLabels = contactForm.querySelectorAll('label');
+    if(formLabels[0]) formLabels[0].textContent = translations[lang].contact.form.name;
+    if(formLabels[1]) formLabels[1].textContent = translations[lang].contact.form.email;
+    if(formLabels[2]) formLabels[2].textContent = translations[lang].contact.form.phone;
+    if(formLabels[3]) formLabels[3].textContent = translations[lang].contact.form.service;
+    if(formLabels[4]) formLabels[4].textContent = translations[lang].contact.form.message;
+    const selects = contactForm.querySelectorAll('select');
+    if(selects[0]) {
+      selects[0].options[0].textContent = translations[lang].contact.form.select;
+      selects[0].options[1].textContent = translations[lang].contact.form.vip;
+      selects[0].options[2].textContent = translations[lang].contact.form.tour;
+      selects[0].options[3].textContent = translations[lang].contact.form.airport;
+      selects[0].options[4].textContent = translations[lang].contact.form.health;
+    }
+    const textarea = contactForm.querySelector('textarea');
+    if(textarea) textarea.placeholder = translations[lang].contact.form.placeholder;
+    const formBtn = contactForm.querySelector('button[type="submit"]');
+    if(formBtn) formBtn.textContent = translations[lang].contact.form.btn;
+  }
+  // Footer
+  const footerAbout = document.querySelector('footer p.text-gray-400');
+  if(footerAbout) footerAbout.textContent = translations[lang].footer.about;
+  const quickLinks = document.querySelectorAll('footer ul.space-y-3 li a');
+  translations[lang].footer.quick.forEach((text, i) => { if(quickLinks[i]) quickLinks[i].textContent = text; });
+  const serviceLinks = document.querySelectorAll('footer ul.space-y-3:nth-of-type(2) li a');
+  translations[lang].footer.services.forEach((text, i) => { if(serviceLinks[i]) serviceLinks[i].textContent = text; });
+  const newsletterTitle = document.querySelector('footer h3.text-xl.font-bold.mb-6 + p');
+  if(newsletterTitle) newsletterTitle.textContent = translations[lang].footer.newsletter.desc;
+  const newsletterBtn = document.querySelector('footer button[type="submit"]');
+  if(newsletterBtn) newsletterBtn.textContent = translations[lang].footer.newsletter.btn;
+  const copyright = document.querySelector('footer p.text-gray-400.mb-4');
+  if(copyright) copyright.textContent = translations[lang].footer.copyright;
+  const privacyLinks = document.querySelectorAll('footer .flex.gap-6 a');
+  if(privacyLinks[0]) privacyLinks[0].textContent = translations[lang].footer.privacy;
+  if(privacyLinks[1]) privacyLinks[1].textContent = translations[lang].footer.terms;
+  if(privacyLinks[2]) privacyLinks[2].textContent = translations[lang].footer.cookies;
+  // Araç Filosu (Fleet)
+  const fleetTitle = document.querySelector('section.bg-black h2');
+  if(fleetTitle) fleetTitle.innerHTML = `<span class="text-white">${translations[lang].fleet.title.split(' ')[0]} </span><span class="gold-gradient">${translations[lang].fleet.title.split(' ').slice(1).join(' ')}</span>`;
+  const fleetDesc = document.querySelector('section.bg-black p.text-gray-300');
+  if(fleetDesc) fleetDesc.textContent = translations[lang].fleet.desc;
+  // Yorumlar (Testimonials)
+  const testiTitle = document.getElementById('testimonials-title');
+  if (testiTitle) {
+    testiTitle.innerHTML = `<span class="text-black">${translations[lang].testimonials.title.split(' ')[0]} </span><span class="gold-gradient">${translations[lang].testimonials.title.split(' ').slice(1).join(' ')}</span>`;
+  }
+  const testiDesc = document.getElementById('testimonials-desc');
+  if (testiDesc) {
+    testiDesc.textContent = translations[lang].testimonials.desc;
+  }
+  const testiCards = document.querySelectorAll('.testimonial-card');
+  translations[lang].testimonials.items.forEach((item, i) => {
+    if (testiCards[i]) {
+      const p = testiCards[i].querySelector('.testimonial-text');
+      const name = testiCards[i].querySelector('.testimonial-name');
+      const country = testiCards[i].querySelector('.testimonial-country');
+      if (p) p.textContent = item.text;
+      if (name) name.textContent = item.name;
+      if (country) country.textContent = item.country;
+    }
+  });
+  // Fleet Section
+  const fleetSectionTitle = document.querySelector('#fleet h2');
+  if(fleetSectionTitle) fleetSectionTitle.textContent = translations[lang].fleetSection.title;
+  const fleetSectionDesc = document.querySelector('#fleet p.text-gray-300');
+  if(fleetSectionDesc) fleetSectionDesc.textContent = translations[lang].fleetSection.desc;
+  const fleetVehicleName = document.querySelector('#fleet h3');
+  if(fleetVehicleName) fleetVehicleName.textContent = translations[lang].fleetSection.vehicle.name;
+  const fleetVehicleDesc = document.querySelector('#fleet p.text-gray-300');
+  if(fleetVehicleDesc) fleetVehicleDesc.textContent = translations[lang].fleetSection.vehicle.desc;
+  const fleetVehicleBtn = document.querySelector('#fleet button');
+  if(fleetVehicleBtn) fleetVehicleBtn.textContent = translations[lang].fleetSection.vehicle.btn;
+  updateFleetSection(lang);
+  // Slider başlık ve açıklama çevirileri
+  const slides = document.querySelectorAll('.hero-slide');
+  const sliderTexts = translations[lang].sliderTexts;
+  slides.forEach((slide, i) => {
+    const title = slide.querySelector('.slide-title');
+    const desc = slide.querySelector('.slide-description');
+    if (title && desc && sliderTexts[i]) {
+      title.textContent = sliderTexts[i].title;
+      desc.textContent = sliderTexts[i].desc;
+    }
+  });
+  if(window.updateSliderTexts) window.updateSliderTexts();
+  renderServices(lang); // Ensure services section is always updated on language change
+  // Contact (Iletisim) section
+  const iletisimSection = document.getElementById('iletisim');
+  if (iletisimSection) {
+    const title = iletisimSection.querySelector('h2');
+    if (title) title.textContent = lang === 'tr' ? 'Bize Ulaşın' : 'Contact Us';
+    const desc = iletisimSection.querySelector('p');
+    if (desc) desc.textContent = lang === 'tr' ? 'Her türlü soru ve bilgi için bize ulaşabilirsiniz.' : 'You can contact us for any questions or information.';
+    const phoneLabel = iletisimSection.querySelector('span.text-gray-300');
+    if (phoneLabel) phoneLabel.textContent = lang === 'tr' ? 'Telefon:' : 'Phone:';
+    const adminBtn = document.getElementById('admin-login-btn-contact');
+    if (adminBtn) adminBtn.textContent = lang === 'tr' ? 'Admin Giriş' : 'Admin Login';
+  }
+}
+function setNavbarLangActive(lang) {
+  const trBtn = document.getElementById('navbar-tr');
+  const enBtn = document.getElementById('navbar-en');
+  if (trBtn) {
+    trBtn.style.background = lang==='tr' ? '#D4AF37' : 'transparent';
+    trBtn.style.color = lang==='tr' ? '#181818' : '#fff';
+  }
+  if (enBtn) {
+    enBtn.style.background = lang==='en' ? '#D4AF37' : 'transparent';
+    enBtn.style.color = lang==='en' ? '#181818' : '#fff';
+  }
+}
+window.setLanguage = function(lang) {
+  localStorage.setItem('site_lang', lang);
+  setNavbarLangActive(lang);
+  updateLanguage(lang);
+};
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('site_lang') || 'en';
+  setNavbarLangActive(savedLang);
+  updateLanguage(savedLang);
+  if (document.getElementById('navbar-tr')) {
+  document.getElementById('navbar-tr').onclick = function() {
+    window.setLanguage('tr');
+  };
+  }
+  if (document.getElementById('navbar-en')) {
+  document.getElementById('navbar-en').onclick = function() {
+    window.setLanguage('en');
+  };
+  }
+});
+</script>
+<!-- AOS Animate On Scroll JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({ once: true, duration: 900, offset: 80 });</script>
+<!-- Admin Giriş Butonu ve Modal -->
+<button id="admin-login-btn" style="position:fixed; bottom:32px; right:32px; z-index:1000; background:linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%); color:#181818; font-weight:700; border-radius:12px; font-size:1.08rem; box-shadow:0 2px 12px #D4AF3722; letter-spacing:0.5px; padding:14px 32px; border:none; cursor:pointer;">Admin Giriş</button>
+<div id="admin-login-modal" style="display:none; position:fixed; z-index:2000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:18px; max-width:96vw; width:360px; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#222; display:flex; flex-direction:column; align-items:center;">
+    <button id="close-admin-modal" style="position:absolute; right:1.2rem; top:1.2rem; background:none; border:none; font-size:2rem; color:#D4AF37; cursor:pointer;">&times;</button>
+    <h3 style="font-size:1.3rem; color:#D4AF37; font-family:'Playfair Display',serif; font-weight:700; margin-bottom:18px; text-align:center;">Admin Girişi</h3>
+    <input id="admin-password" type="password" placeholder="Şifre" style="width:100%; padding:12px; border-radius:8px; border:1.5px solid #D4AF37; margin-bottom:18px; font-size:1.08rem;">
+    <button id="admin-login-submit" style="background:linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%); color:#181818; font-weight:700; border-radius:10px; font-size:1.08rem; box-shadow:0 2px 12px #D4AF3722; letter-spacing:0.5px; padding:12px 24px; border:none; cursor:pointer; width:100%;">Giriş Yap</button>
+    <div id="admin-login-error" style="color:#e74c3c; margin-top:12px; display:none; font-size:0.98rem; text-align:center;"></div>
+  </div>
+</div>
+<script>
+document.getElementById('admin-login-btn').onclick = function() {
+  document.getElementById('admin-login-modal').style.display = 'flex';
+  document.getElementById('admin-password').value = '';
+  document.getElementById('admin-login-error').style.display = 'none';
+};
+document.getElementById('close-admin-modal').onclick = function() {
+  document.getElementById('admin-login-modal').style.display = 'none';
+};
+document.getElementById('admin-login-submit').onclick = function() {
+  const pw = document.getElementById('admin-password').value;
+  if (pw === 'LxN!2024$VIP@Trnsf3r') {
+    window.location.href = '/admin.html';
+  } else {
+    document.getElementById('admin-login-error').textContent = 'Hatalı şifre!';
+    document.getElementById('admin-login-error').style.display = 'block';
+  }
+};
+document.getElementById('admin-password').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('admin-login-submit').click();
+});
+</script>
+<script>
+document.getElementById('admin-login-btn-footer').onclick = function() {
+  document.getElementById('admin-login-modal').style.display = 'flex';
+  document.getElementById('admin-password').value = '';
+  document.getElementById('admin-login-error').style.display = 'none';
+};
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var footerSocial = document.querySelector('footer .flex.gap-4');
+  if (footerSocial && !document.getElementById('admin-login-btn-footer')) {
+    var btn = document.createElement('button');
+    btn.id = 'admin-login-btn-footer';
+    btn.textContent = 'Admin Giriş';
+    btn.onclick = function() {
+      document.getElementById('admin-login-modal').style.display = 'flex';
+      document.getElementById('admin-password').value = '';
+      document.getElementById('admin-login-error').style.display = 'none';
+    };
+    // Sosyal medya ikonlarının altına ekle
+    footerSocial.parentElement.appendChild(btn);
+  }
+  // Sağ alttaki eski butonu kaldır
+  var oldBtn = document.getElementById('admin-login-btn');
+  if (oldBtn) oldBtn.remove();
+});
+</script>
+<script>
+// Sekme geçişi ve rezervasyon tipi inputunu güncelle
+const tabButtons = document.querySelectorAll('.reservation-vzn-tab');
+const rezTipInput = document.getElementById('rezervasyonTipi');
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', function() {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    // Sadece rezervasyon tipi inputunu güncelle, formu değiştirme
+    if (rezTipInput) {
+      if (this.dataset.tab === 'transfer') rezTipInput.value = 'TRANSFER';
+      else if (this.dataset.tab === 'chauffeur') rezTipInput.value = 'ŞOFÖRLÜ ARAÇ KİRALAMA';
+      else if (this.dataset.tab === 'intercity') rezTipInput.value = 'ŞEHİRLER ARASI TRANSFER';
+    }
+  });
+});
+// ... existing code ...
+</script>
+<!-- Bize Ulaşın Bölümü (form ve sosyal medya olmadan, sadece telefon) -->
+<section id="iletisim" class="py-20 bg-gray-900 text-white" data-aos="fade-up">
+  <div class="container mx-auto px-4">
+    <div class="text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6" style="color:#D4AF37;">Bize Ulaşın</h2>
+      <p class="text-gray-200 mb-6" style="font-size:1.15rem;">Her türlü soru ve bilgi için bize ulaşabilirsiniz.</p>
+      <div class="flex flex-col items-center justify-center gap-2">
+        <span class="text-gray-300 text-lg">Telefon:</span>
+        <a href="tel:+905433518943" class="text-2xl font-bold text-white bg-gradient-to-r from-primary to-yellow-200 px-6 py-3 rounded-lg shadow-lg hover:from-yellow-200 hover:to-primary hover:text-black transition-all duration-300" style="display:inline-block; letter-spacing:1px;">+90 543 351 89 43</a>
+      </div>
+      <button id="admin-login-btn-contact" class="mt-8 px-8 py-3 rounded-lg font-semibold bg-gradient-to-r from-primary to-yellow-200 text-black shadow-lg hover:from-yellow-200 hover:to-primary hover:text-white transition-all duration-300" style="font-size:1.08rem; letter-spacing:0.5px;">Admin Giriş</button>
+    </div>
+  </div>
+</section>
+<!-- Admin Login Modal (unchanged) -->
+<div id="admin-login-modal" style="display:none; position:fixed; z-index:2000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:18px; max-width:96vw; width:360px; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#222; display:flex; flex-direction:column; align-items:center;">
+    <button id="close-admin-modal" style="position:absolute; right:1.2rem; top:1.2rem; background:none; border:none; font-size:2rem; color:#D4AF37; cursor:pointer;">&times;</button>
+    <h3 style="font-size:1.3rem; color:#D4AF37; font-family:'Playfair Display',serif; font-weight:700; margin-bottom:18px; text-align:center;">Admin Girişi</h3>
+    <input id="admin-password" type="password" placeholder="Şifre" style="width:100%; padding:12px; border-radius:8px; border:1.5px solid #D4AF37; margin-bottom:18px; font-size:1.08rem;">
+    <button id="admin-login-submit" style="background:linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%); color:#181818; font-weight:700; border-radius:10px; font-size:1.08rem; box-shadow:0 2px 12px #D4AF3722; letter-spacing:0.5px; padding:12px 24px; border:none; cursor:pointer; width:100%;">Giriş Yap</button>
+    <div id="admin-login-error" style="color:#e74c3c; margin-top:12px; display:none; font-size:0.98rem; text-align:center;"></div>
+  </div>
+</div>
+<script>
+// Remove floating and footer admin buttons if present
+const oldBtn = document.getElementById('admin-login-btn');
+if (oldBtn) oldBtn.remove();
+const footerBtn = document.getElementById('admin-login-btn-footer');
+if (footerBtn) footerBtn.remove();
+// Contact section admin button logic
+const contactBtn = document.getElementById('admin-login-btn-contact');
+if (contactBtn) {
+  contactBtn.onclick = function() {
+    document.getElementById('admin-login-modal').style.display = 'flex';
+    document.getElementById('admin-password').value = '';
+    document.getElementById('admin-login-error').style.display = 'none';
+  };
+}
+document.getElementById('close-admin-modal').onclick = function() {
+  document.getElementById('admin-login-modal').style.display = 'none';
+};
+document.getElementById('admin-login-submit').onclick = function() {
+  const pw = document.getElementById('admin-password').value;
+  if (pw === 'LxN!2024$VIP@Trnsf3r') {
+    window.location.href = '/admin.html';
+  } else {
+    document.getElementById('admin-login-error').textContent = 'Hatalı şifre!';
+    document.getElementById('admin-login-error').style.display = 'block';
+  }
+};
+document.getElementById('admin-password').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('admin-login-submit').click();
+});
+</script>
+<script>
+document.getElementById('yolcu-input').addEventListener('input', function() {
+  if (parseInt(this.value, 10) >= 8) {
+    document.getElementById('yolcu-uyari').style.display = 'block';
+  } else {
+    document.getElementById('yolcu-uyari').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

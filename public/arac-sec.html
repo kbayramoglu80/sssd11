@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Araç Seçimi - Luxen Group</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <style>
+    body {
+      background: #fff !important;
+      min-height: 100vh;
+      color: #222;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px #0001, 0 2px 8px #D4AF3722;
+      padding: 32px 18px;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+    .vehicle-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .vehicle-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #D4AF3722, 0 2px 8px #0001;
+      padding: 28px 22px 22px 22px;
+      transition: box-shadow .25s, transform .18s;
+      cursor: pointer;
+      border: 2px solid #f3f3f3;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 420px;
+    }
+    .vehicle-card.selected {
+      border-color: #D4AF37;
+      box-shadow: 0 12px 36px #D4AF3740, 0 2px 8px #0001;
+      transform: scale(1.03);
+    }
+    .vehicle-card:hover {
+      box-shadow: 0 16px 48px #D4AF3750, 0 2px 8px #0001;
+      transform: translateY(-6px) scale(1.04);
+    }
+    .vehicle-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px #0001;
+    }
+    .vehicle-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #222;
+      letter-spacing: 0.5px;
+      font-family: 'Playfair Display',serif;
+      text-align: center;
+    }
+    .vehicle-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+      justify-content: center;
+    }
+    .vehicle-feature {
+      background: #f8f8f8;
+      border-radius: 8px;
+      padding: 5px 14px;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #222;
+      border: 1px solid #eee;
+      box-shadow: 0 1px 4px #0001;
+    }
+    .vehicle-price {
+      font-size: 1.2rem;
+      color: #D4AF37;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .select-btn {
+      background: linear-gradient(90deg, #D4AF37 60%, #F5E7A3 100%);
+      color: #222;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      font-weight: bold;
+      font-size: 1.08rem;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background .2s, color .2s, box-shadow .2s;
+      box-shadow: 0 2px 12px #D4AF3722;
+      letter-spacing: 0.5px;
+      width: 100%;
+    }
+    .select-btn:hover {
+      background: #B8860B;
+      color: #fff;
+      box-shadow: 0 4px 18px #D4AF3740;
+    }
+    @media (max-width: 900px) {
+      .vehicle-list { grid-template-columns: 1fr; }
+      .container { padding: 10px; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 10px; }
+      .vehicle-card { padding: 16px 6px 16px 6px; min-height: 420px; }
+      .vehicle-title { font-size: 1.1rem; }
+      .vehicle-price { font-size: 1rem; }
+      .vehicle-slider, .vehicle-slider img { height: 120px; }
+    }
+    .reservation-summary {
+      margin-top: 32px;
+      background: linear-gradient(120deg, #fff 80%, #F5E7A3 100%);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #D4AF3722, 0 2px 8px #0001;
+      padding: 32px 24px 24px 24px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 2.5px solid #D4AF37;
+      position: relative;
+      font-family: 'Poppins',sans-serif;
+      color: #222;
+      animation: summaryFadeIn 0.7s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes summaryFadeIn {
+      0% { opacity: 0; transform: translateY(40px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .reservation-summary h3 {
+      font-size: 1.5rem;
+      color: #D4AF37;
+      font-family: 'Playfair Display',serif;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      text-align: center;
+      text-shadow: 0 2px 12px #D4AF3722;
+    }
+    .summary-label {
+      color: #B8860B;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .summary-row {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .summary-images {
+      margin: 18px 0 10px 0;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+    .summary-images img {
+      width: 110px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #D4AF3722;
+      border: 2px solid #fff;
+      transition: border 0.2s;
+    }
+    .summary-images img.selected {
+      border: 2px solid #D4AF37;
+    }
+    .summary-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 18px 0;
+      justify-content: center;
+    }
+    .summary-feature {
+      background: #fff;
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 0.98em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #222;
+      border: 1px solid #eee;
+      box-shadow: 0 1px 4px #0001;
+    }
+    .summary-price {
+      background: #D4AF37;
+      color: #181818 !important;
+      font-weight: 700;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      padding: 8px 22px;
+      margin: 12px auto 0 auto;
+      display: block;
+      text-align: center;
+      box-shadow: 0 2px 12px #D4AF3722;
+      letter-spacing: 0.5px;
+      border: 2px solid #fff;
+    }
+    .summary-complete-btn {
+      background: linear-gradient(90deg, #D4AF37 60%, #F5E7A3 100%);
+      color: #222;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 32px;
+      font-weight: bold;
+      font-size: 1.08rem;
+      cursor: pointer;
+      margin: 18px auto 0 auto;
+      transition: background .2s, color .2s, box-shadow .2s;
+      box-shadow: 0 2px 12px #D4AF3722;
+      letter-spacing: 0.5px;
+      display: block;
+    }
+    .summary-complete-btn:hover {
+      background: #B8860B;
+      color: #fff;
+      box-shadow: 0 4px 18px #D4AF3740;
+    }
+    @media (max-width: 600px) {
+      .reservation-summary { padding: 14px 4px 14px 4px; }
+      .summary-images img { width: 70px; height: 44px; }
+      .summary-price { font-size: 1rem; padding: 7px 10px; }
+      .summary-complete-btn { padding: 10px 10px; font-size: 1rem; }
+    }
+    .vehicle-card, .reservation-summary {
+      background: #232323;
+      color: #fff;
+      border-color: #D4AF37;
+    }
+    .vehicle-title, .vehicle-price, .summary-label, .summary-price {
+      color: #D4AF37 !important;
+    }
+    .select-btn, .summary-complete-btn {
+      background: linear-gradient(90deg, #D4AF37 60%, #F5E7A3 100%);
+      color: #181818;
+    }
+    .select-btn:hover, .summary-complete-btn:hover {
+      background: #B8860B;
+      color: #fff;
+    }
+    .vehicle-feature, .summary-feature {
+      background: #181818;
+      color: #fff;
+      border: 1px solid #D4AF37;
+    }
+    .slider-dot {
+      background: #181818;
+      border: 2px solid #D4AF37;
+    }
+    .slider-dot.active {
+      background: #D4AF37;
+      border-color: #fff;
+    }
+    .summary-images img {
+      border: 2px solid #232323;
+    }
+    .summary-images img.selected {
+      border: 2px solid #D4AF37;
+    }
+    .summary-price {
+      color: #fff !important;
+    }
+    .vehicle-card img, .modal-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      object-position: center;
+      background: #111;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 12px #0001;
+    }
+  </style>
+</head>
+<body style="background: linear-gradient(135deg, #181818 60%, #D4AF37 100%); min-height:100vh;">
+  <a href="index.html" style="display:inline-block; margin:28px 0 0 28px; padding:10px 28px; background:linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%); color:#181818; font-weight:700; border-radius:12px; font-size:1.08rem; box-shadow:0 2px 12px #D4AF3722; letter-spacing:0.5px; text-decoration:none; transition:background .2s, color .2s;">← Ana Sayfaya Dön</a>
+  <div class="container">
+    <h2 style="text-align:center; font-size:2.2rem; margin-bottom:32px; font-family:'Playfair Display',serif; letter-spacing:1px; color:#D4AF37; text-shadow:0 2px 16px #D4AF3722;">VIP Araç Seçimi</h2>
+    <div class="reservation-summary" id="reservation-summary" style="display:none; margin-top:32px;"></div>
+    <div class="vehicle-list" id="vehicle-list" style="gap:40px;"></div>
+  </div>
+  <div id="vehicle-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+    <div id="vehicle-modal-content" style="background:#181818; border-radius:18px; max-width:96vw; width:520px; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#fff; display:flex; flex-direction:column; align-items:center;">
+      <button id="close-vehicle-modal" style="position:absolute; right:1.2rem; top:1.2rem; background:none; border:none; font-size:2rem; color:#D4AF37; cursor:pointer;">&times;</button>
+      <div id="modal-slider" style="width:100%; max-width:520px; height:340px; position:relative; margin-bottom:18px; display:flex; align-items:center; justify-content:center;">
+        <!-- Slider images and dots buraya JS ile gelecek -->
+      </div>
+      <div id="modal-title" style="font-size:1.5rem; color:#D4AF37; font-family:'Playfair Display',serif; font-weight:700; margin-bottom:10px; text-align:center;"></div>
+      <div id="modal-price" style="font-size:1.15rem; color:#F5E7A3; font-weight:600; margin-bottom:10px; text-align:center;"></div>
+      <div id="modal-features" style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; justify-content:center;"></div>
+      <div id="modal-desc" style="font-size:1.02rem; color:#eee; text-align:center; margin-bottom:10px;"></div>
+    </div>
+  </div>
+  <script>
+const translations = {
+  en: {
+    selectVehicle: "Select Vehicle",
+    price: "Price",
+    features: {
+      vip: "VIP Equipment",
+      leather: "Leather Seat",
+      wifi: "Wi-Fi",
+      ac: "Air Conditioning",
+      refreshment: "Refreshment",
+      comfort: "Comfort Seat",
+    },
+    summary: {
+      from: "From",
+      to: "To",
+      distance: "Distance",
+      vehicle: "Vehicle",
+      total: "Total Price",
+      complete: "Complete Reservation"
+    },
+    placeholders: {
+      from: "Enter starting address...",
+      to: "Enter destination address..."
+    },
+    reservationTitle: "VIP Vehicle Selection",
+    reservationSuccess: "Your reservation has been received!",
+    reservationError: "An error occurred, please try again."
+  },
+  tr: {
+    selectVehicle: "Araç Seç",
+    price: "Fiyat",
+    features: {
+      vip: "VIP Donanım",
+      leather: "Deri Koltuk",
+      wifi: "Wi-Fi",
+      ac: "Klima",
+      refreshment: "İkram",
+      comfort: "Konforlu Koltuk",
+    },
+    summary: {
+      from: "Nereden",
+      to: "Nereye",
+      distance: "Mesafe",
+      vehicle: "Araç",
+      total: "Toplam Fiyat",
+      complete: "Rezervasyonu Tamamla"
+    },
+    placeholders: {
+      from: "Başlangıç adresinizi yazın...",
+      to: "Varış adresinizi yazın..."
+    },
+    reservationTitle: "VIP Araç Seçimi",
+    reservationSuccess: "Rezervasyonunuz başarıyla alındı!",
+    reservationError: "Bir hata oluştu, lütfen tekrar deneyin."
+  }
+};
+
+// Standart Sprinter görsellerini güncelle
+const vehicles = [
+  {
+    id: 'lux-vito',
+    name_translations: { en: 'Lux Vito', tr: 'Lux Vito' },
+    price: 45,
+    images: [
+      'mercedesvipvito/image.png',
+      'mercedesvipvito/kapakvipvito.jpg',
+      'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.45_4ce52f0e.jpg',
+      'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.44_dcfffcda.jpg',
+      'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.45_822829ab.jpg',
+      'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.45_73195a5b.jpg'
+    ],
+    features: [ 'vip', 'leather', 'wifi', 'ac', 'refreshment' ]
+  },
+  {
+    id: 'vito-standart',
+    name_translations: { en: 'Standard Vito', tr: 'Standart Vito' },
+    price: 40,
+    images: [
+      'vito/mercedes-benz-v-class-xl-black-1-600x400.webp',
+      'vito/IMG-20250716-WA0017.jpg',
+      'vito/IMG-20250716-WA0016.jpg',
+      'vito/IMG-20250716-WA0015.jpg',
+      'vito/IMG-20250716-WA0014.jpg'
+    ],
+    features: [ 'comfort', 'wifi', 'ac' ]
+  },
+  {
+    id: 'sprinter-lux',
+    name_translations: { en: 'Lux Sprinter', tr: 'Lux Sprinter' },
+    price: 65,
+    images: [
+      'vipsprinter/Ekran görüntüsü 2025-07-17 135950.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140049.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140044.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140040.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140034.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140028.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140022.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140017.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 140003.png',
+      'vipsprinter/Ekran görüntüsü 2025-07-17 135957.png'
+    ],
+    features: [ 'vip', 'leather', 'wifi', 'ac', 'refreshment' ]
+  },
+  {
+    id: 'sprinter-standart',
+    name_translations: { en: 'Standard Sprinter', tr: 'Standart Sprinter' },
+    price: 57,
+    images: [
+      'standartsprinter/IMG-20250701-WA0016.jpg',
+      'standartsprinter/IMG-20250701-WA0018.jpg',
+      'standartsprinter/IMG-20250701-WA0019.jpg',
+      'standartsprinter/IMG-20250701-WA0020.jpg',
+      'standartsprinter/IMG-20250701-WA0022.jpg',
+      'standartsprinter/IMG-20250701-WA0025.jpg',
+      'standartsprinter/IMG-20250701-WA0027.jpg',
+      'standartsprinter/IMG-20250701-WA0029.jpg',
+      'standartsprinter/IMG-20250701-WA0031.jpg',
+      'standartsprinter/IMG-20250701-WA0032.jpg'
+    ],
+    features: [ 'comfort', 'wifi', 'ac' ]
+  }
+];
+
+// --- YENİ: URL parametrelerinden rezervasyon bilgilerini oku ---
+function getReservationParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    isim: params.get('isim') || '',
+    soyad: params.get('soyad') || '',
+    email: params.get('email') || '',
+    telefon: params.get('telefon') || '',
+    tarih: params.get('tarih') || '',
+    saat: params.get('saat') || '',
+    from: params.get('from') || '',
+    to: params.get('to') || '',
+    distance: parseFloat(params.get('distance') || '0'),
+    rezervasyonTipi: params.get('rezervasyonTipi') || '',
+    yolcu: params.get('yolcu') || '' // Yolcu sayısı parametresini ekledik
+  };
+}
+
+function renderVehicles(lang) {
+  const list = document.getElementById('vehicle-list');
+  list.innerHTML = '';
+  const { distance, yolcu } = getReservationParams();
+  let filteredVehicles = vehicles; // Artık filtreleme yok, tüm araçlar gösterilecek
+  // Araçları kişi sayısına göre sıralama: önce seçilebilenler, sonra karartılanlar
+  let yolcuSayisi = parseInt(yolcu, 10);
+  filteredVehicles = vehicles.slice().sort((a, b) => {
+    const aVito = a.id.includes('vito');
+    const bVito = b.id.includes('vito');
+    const aDisabled = (yolcuSayisi >= 8 && aVito);
+    const bDisabled = (yolcuSayisi >= 8 && bVito);
+    if (aDisabled === bDisabled) return 0;
+    if (aDisabled) return 1;
+    return -1;
+  });
+  // Araç görselleri üstte kaydırılabilir olarak göster
+  const scrollList = document.querySelector('.vehicle-list-scroll');
+  if (scrollList) {
+    scrollList.innerHTML = filteredVehicles.map((vehicle, idx) => `<img src="${vehicle.images[0]}" alt="${vehicle.name_translations[lang]}" class="vehicle-scroll-img" data-idx="${idx}" style="width:110px; height:70px; object-fit:cover; border-radius:8px; box-shadow:0 2px 8px #D4AF3722; border:2px solid #fff; cursor:pointer; transition:border 0.2s;">`).join('');
+    // Seçili aracı vurgula
+    scrollList.querySelectorAll('img').forEach((img, idx) => {
+      img.onclick = () => {
+        document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+        const cards = Array.from(document.querySelectorAll('.vehicle-card'));
+        if (cards[idx]) {
+          cards[idx].classList.add('selected');
+          cards[idx].scrollIntoView({behavior:'smooth', block:'center'});
+        }
+      };
+    });
+  }
+  filteredVehicles.forEach((vehicle, vIdx) => {
+    if (!vehicle || !vehicle.features) {
+      hasError = true;
+      return;
+    }
+    // Yolcu sayısı kontrolü
+    let yolcuSayisi = parseInt(yolcu, 10);
+    let isVito = vehicle.id.includes('vito');
+    let vitoDisabled = (yolcuSayisi >= 8 && isVito);
+    const card = document.createElement('div');
+    card.className = 'vehicle-card' + (vitoDisabled ? ' vito-disabled' : '');
+    card.style = vitoDisabled ? 'opacity:0.5; filter: grayscale(0.8); pointer-events:none; position:relative;' : '';
+    card.innerHTML = `
+      <img src="${vehicle.images && vehicle.images[0] ? vehicle.images[0] : ''}" alt="${vehicle.name_translations ? vehicle.name_translations[lang] : ''}" style="width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:18px; box-shadow:0 2px 12px #0001;">
+      <div class="vehicle-title">${vehicle.name_translations ? vehicle.name_translations[lang] : ''}</div>
+      <div class="vehicle-features">${(vehicle.features || []).map(f => `<span class='vehicle-feature'>${translations[lang].features[f] || f}</span>`).join('')}</div>
+      <div class="vehicle-price">${distance > 0 ? `${translations[lang].price}: ${Math.round(vehicle.price * distance)} TL` : `${translations[lang].price}: -`}</div>
+      <button class="select-btn" ${vitoDisabled ? 'disabled style="background:#888; color:#fff; cursor:not-allowed;"' : ''}>${translations[lang].selectVehicle}</button>
+      <button class="detail-btn" style="margin-top:10px; background:#fff; color:#D4AF37; border:1.5px solid #D4AF37; border-radius:10px; padding:10px 24px; font-weight:600; font-size:1rem; cursor:pointer;">Detaylı Bilgi</button>
+      ${vitoDisabled ? '<div style="color:#c00; font-weight:700; margin-top:10px; font-size:1em;">8 ve üzeri yolcularda Vito araçlar desteklenmemektedir</div>' : ''}
+    `;
+    const selectBtn = card.querySelector('.select-btn');
+    const detailBtn = card.querySelector('.detail-btn');
+    if (!vitoDisabled && selectBtn) {
+      selectBtn.onclick = function() {
+        if (distance <= 0) {
+          alert('Lütfen ana sayfadaki rezervasyon formunu doldurun ve adresleri tam girin. Mesafe hesaplanamadı!');
+          return;
+        }
+        document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        showReservationSummary(vehicle, lang, distance);
+      };
+    }
+    if (detailBtn) {
+      detailBtn.onclick = function() {
+        showVehicleModalCustom(vehicle, lang);
+      };
+    }
+    list.appendChild(card);
+  });
+  if (hasError) {
+    const err = document.createElement('div');
+    err.style = 'color:red; font-weight:bold; margin:20px;';
+    err.textContent = 'Araç verilerinde hata var. Lütfen yöneticinize başvurun.';
+    list.appendChild(err);
+  }
+}
+
+function showReservationSummary(vehicle, lang, distance) {
+  const summary = document.getElementById('reservation-summary');
+  summary.style.display = 'block';
+  const params = getReservationParams();
+  // Slider için benzersiz id
+  const sliderId = 'summary-slider';
+  summary.innerHTML = `
+    <div style="display:flex; flex-direction:column; align-items:center; gap:18px;">
+      <h3 style="text-align:center; color:#D4AF37; font-family:'Playfair Display',serif; font-size:2rem; margin-bottom:0; letter-spacing:1px; text-shadow:0 2px 16px #D4AF3722;">${translations[lang].reservationTitle}</h3>
+      <div class="summary-slider-wrapper" style="position:relative; width:100%; max-width:520px; height:220px; margin-bottom:18px;">
+        <button id="summary-slider-prev" style="position:absolute; left:0; top:50%; transform:translateY(-50%); background:#fff; border:none; border-radius:50%; width:40px; height:40px; color:#D4AF37; font-size:1.6rem; z-index:2; box-shadow:0 2px 8px #D4AF3722;">&#8592;</button>
+        <img id="summary-slider-img" src="${vehicle.images[0]}" style="width:100%; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 2px 12px #D4AF3722; border:2px solid #D4AF37; display:block; margin:0 auto; transition:all .3s;">
+        <button id="summary-slider-next" style="position:absolute; right:0; top:50%; transform:translateY(-50%); background:#fff; border:none; border-radius:50%; width:40px; height:40px; color:#D4AF37; font-size:1.6rem; z-index:2; box-shadow:0 2px 8px #D4AF3722;">&#8594;</button>
+        <div id="summary-slider-dots" style="display:flex; justify-content:center; gap:8px; margin-top:10px;"></div>
+      </div>
+      <div style="width:100%; max-width:340px; background:#181818; border-radius:14px; box-shadow:0 2px 12px #D4AF3722; padding:18px 18px 10px 18px; border:1.5px solid #D4AF37;">
+        <div class="summary-row"><span class="summary-label">Rezervasyon Tipi:</span> ${params.rezervasyonTipi}</div>
+        <div class="summary-row"><span class="summary-label">${translations[lang].summary.from}:</span> ${params.from}</div>
+        <div class="summary-row"><span class="summary-label">${translations[lang].summary.to}:</span> ${params.to}</div>
+    <div class="summary-row"><span class="summary-label">${translations[lang].summary.distance}:</span> ${distance} km</div>
+    <div class="summary-row"><span class="summary-label">${translations[lang].summary.vehicle}:</span> ${vehicle.name_translations[lang]}</div>
+        <div class="summary-row"><span class="summary-label">${translations[lang].price}:</span> <span class="summary-price">${Math.round(vehicle.price * distance)} TL</span></div>
+        <div class="summary-row"><span class="summary-label">Yolcu Sayısı:</span> ${params.yolcu}</div>
+        <div class="summary-row"><span class="summary-label">İsim:</span> ${params.isim}</div>
+        <div class="summary-row"><span class="summary-label">Soyad:</span> ${params.soyad}</div>
+        <div class="summary-row"><span class="summary-label">Telefon:</span> ${params.telefon}</div>
+        <div class="summary-row"><span class="summary-label">Tarih:</span> ${params.tarih}</div>
+        <div class="summary-row"><span class="summary-label">Saat:</span> ${params.saat}</div>
+      </div>
+      <button class="summary-complete-btn" id="complete-res-btn" style="margin-top:18px;">${translations[lang].summary.complete}</button>
+    </div>
+  `;
+  // Slider fonksiyonu
+  let current = 0;
+  const imgEl = document.getElementById(`${sliderId}-img`);
+  const prevBtn = document.getElementById(`${sliderId}-prev`);
+  const nextBtn = document.getElementById(`${sliderId}-next`);
+  const dotsEl = document.getElementById(`${sliderId}-dots`);
+  function updateSlider() {
+    imgEl.src = vehicle.images[current];
+    Array.from(dotsEl.children).forEach((dot, i) => {
+      dot.style.background = i === current ? '#D4AF37' : '#fff';
+      dot.style.border = i === current ? '2px solid #D4AF37' : '2px solid #ccc';
+    });
+  }
+  dotsEl.innerHTML = vehicle.images.map((img, i) => `<span style="width:12px; height:12px; border-radius:50%; background:${i===0?'#D4AF37':'#fff'}; border:2px solid ${i===0?'#D4AF37':'#ccc'}; display:inline-block; cursor:pointer;"></span>`).join('');
+  Array.from(dotsEl.children).forEach((dot, i) => {
+    dot.onclick = () => { current = i; updateSlider(); };
+  });
+  prevBtn.onclick = () => { current = (current - 1 + vehicle.images.length) % vehicle.images.length; updateSlider(); };
+  nextBtn.onclick = () => { current = (current + 1) % vehicle.images.length; updateSlider(); };
+  // Mobil swipe desteği
+  let startX = null;
+  imgEl.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+  imgEl.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (dx > 40) prevBtn.click();
+    else if (dx < -40) nextBtn.click();
+    startX = null;
+  });
+  updateSlider();
+  summary.scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('complete-res-btn').onclick = async function() {
+    const reservation = {
+      isim: params.isim,
+      soyad: params.soyad,
+      email: params.email,
+      telefon: params.telefon,
+      tarih: params.tarih,
+      saat: params.saat,
+      from: params.from,
+      to: params.to,
+      distance: params.distance,
+      rezervasyonTipi: params.rezervasyonTipi,
+      yolcu: params.yolcu,
+      vehicleId: vehicle.id,
+      vehicleName: vehicle.name_translations[lang],
+      price: Math.round(vehicle.price * distance),
+      date: new Date().toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US'),
+      lang: lang
+    };
+    try {
+      const res = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reservation)
+      });
+      if (res.ok) {
+        localStorage.setItem('lastReservation', JSON.stringify(reservation));
+        window.location.href = 'tesekkurler.html';
+      } else {
+        alert(translations[lang].reservationError);
+      }
+    } catch (e) {
+      alert(translations[lang].reservationError);
+    }
+  };
+}
+
+function updateLanguage(lang) {
+  document.querySelector('h2').textContent = translations[lang].reservationTitle;
+  // Input placeholderları
+  const fromInput = document.getElementById('from-location') || document.getElementById('start-location');
+  const toInput = document.getElementById('to-location') || document.getElementById('end-location');
+  if (fromInput) fromInput.placeholder = translations[lang].placeholders.from;
+  if (toInput) toInput.placeholder = translations[lang].placeholders.to;
+  renderVehicles(lang);
+}
+
+// Sayfa yüklenince ve dil değişince çalışacak şekilde window.setLanguage ile entegre et
+const savedLang = localStorage.getItem('site_lang') || 'tr';
+window.setLanguage = function(lang) {
+  localStorage.setItem('site_lang', lang);
+  updateLanguage(lang);
+};
+document.addEventListener('DOMContentLoaded', function() {
+  updateLanguage(savedLang);
+});
+
+    // Tüm dosyada kullanılacak global mesafe değişkeni
+    var distance = 0;
+
+    // Modal fonksiyonu
+    document.body.addEventListener('click', function(e){
+      if(e.target.id==='close-vehicle-modal' || e.target.id==='vehicle-modal'){
+        document.getElementById('vehicle-modal').style.display='none';
+      }
+    });
+    function showVehicleModalCustom(vehicle, lang) {
+      let modal = document.getElementById('vehicle-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'vehicle-modal';
+        modal.style = 'display:flex; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;';
+        document.body.appendChild(modal);
+      }
+      modal.innerHTML = `
+        <div style="background:#fff; border-radius:24px; max-width:900px; width:90vw; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#222; display:flex; flex-direction:column; align-items:center;">
+          <button id="close-vehicle-modal" style="position:absolute; right:1.2rem; top:1.2rem; background:none; border:none; font-size:2rem; color:#D4AF37; cursor:pointer;">&times;</button>
+          <div style='width:100%; max-width:820px; height:50vh; min-height:320px; background:#f7f7f7; border-radius:20px; box-shadow:0 4px 32px #0002; position:relative; margin-bottom:18px; display:flex; align-items:center; justify-content:center;'>
+            ${vehicle.images.map((img, i) => `<img src='${img}' style='width:100%; height:100%; object-fit:cover; border-radius:20px; position:absolute; left:0; top:0; opacity:${i===0?1:0}; transition:opacity 0.4s;' class='modal-img${i===0?' active':''}' data-idx='${i}'>`).join('')}
+            <button id='modal-slider-prev' style='position:absolute; left:18px; top:50%; transform:translateY(-50%); background:#fff; border:none; border-radius:50%; width:48px; height:48px; color:#222; font-size:2rem; z-index:20; cursor:pointer; box-shadow:0 2px 8px #0002; display:flex; align-items:center; justify-content:center;'>&#8592;</button>
+            <button id='modal-slider-next' style='position:absolute; right:18px; top:50%; transform:translateY(-50%); background:#fff; border:none; border-radius:50%; width:48px; height:48px; color:#222; font-size:2rem; z-index:20; cursor:pointer; box-shadow:0 2px 8px #0002; display:flex; align-items:center; justify-content:center;'>&#8594;</button>
+            <div class='slider-dots' style='position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:10; display:flex; gap:10px;'>
+              ${vehicle.images.map((img, i) => `<span class='slider-dot${i===0?' active':''}' data-idx='${i}' style='width:16px; height:16px; border-radius:50%; background:${i===0?'#D4AF37':'#fff'}; border:2px solid #D4AF37; opacity:0.9; cursor:pointer; margin:0 3px; display:inline-block; transition:background 0.2s;'></span>`).join('')}
+            </div>
+          </div>
+          <div style='font-size:1.3rem; color:#D4AF37; font-family:"Playfair Display",serif; font-weight:700; margin-bottom:10px; text-align:center;'>${vehicle.name_translations[lang]}</div>
+          <div style='display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; justify-content:center;'>${vehicle.features.map(f => `<span class='vehicle-feature' style='background:#f8f8f8; border-radius:8px; padding:5px 14px; font-size:1em; color:#222; border:1px solid #eee; box-shadow:0 1px 4px #0001;'>${translations[lang].features[f]}</span>`).join('')}</div>
+        </div>`;
+      modal.style.display = 'flex';
+      // Slider fonksiyonu
+      setTimeout(()=>{
+        let current = 0;
+        const imgs = modal.querySelectorAll('.modal-img');
+        const dots = modal.querySelectorAll('.slider-dot');
+        function show(idx) {
+          imgs.forEach((im, i) => { im.style.opacity = (i===idx?1:0); im.classList.toggle('active', i===idx); });
+          dots.forEach((d, i) => d.classList.toggle('active', i===idx));
+          dots.forEach((d, i) => d.style.background = (i===idx?'#D4AF37':'#fff'));
+          current = idx;
+        }
+        modal.querySelector('#modal-slider-prev').onclick = e => { e.stopPropagation(); show((current-1+imgs.length)%imgs.length); };
+        modal.querySelector('#modal-slider-next').onclick = e => { e.stopPropagation(); show((current+1)%imgs.length); };
+        dots.forEach(dot => { dot.onclick = e => { show(+dot.dataset.idx); }; });
+        modal.querySelector('#close-vehicle-modal').onclick = () => { modal.style.display = 'none'; };
+      }, 10);
+    }
+
+    // Tam ekran görsel modalı
+    if(!document.getElementById('img-full-modal')){
+      const imgModal = document.createElement('div');
+      imgModal.id = 'img-full-modal';
+      imgModal.style = 'display:none; position:fixed; z-index:10000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.95); align-items:center; justify-content:center;';
+      imgModal.innerHTML = `<img id='img-full-modal-img' src='' style='max-width:96vw; max-height:90vh; border-radius:18px; box-shadow:0 8px 32px #000a;'><button onclick="document.getElementById('img-full-modal').style.display='none'" style='position:absolute; right:2vw; top:2vw; background:none; border:none; font-size:2.5rem; color:#fff; cursor:pointer;'>&times;</button>`;
+      document.body.appendChild(imgModal);
+    }
+    function showImageFullscreen(src){
+      document.getElementById('img-full-modal-img').src = src;
+      document.getElementById('img-full-modal').style.display = 'flex';
+    }
+
+    function initAutocomplete() {
+      const fromInput = document.getElementById('start-location') || document.getElementById('from-location');
+      const toInput = document.getElementById('end-location') || document.getElementById('to-location');
+      if (fromInput) {
+        new google.maps.places.Autocomplete(fromInput, { types: ['geocode'], componentRestrictions: { country: 'tr' } });
+      }
+      if (toInput) {
+        new google.maps.places.Autocomplete(toInput, { types: ['geocode'], componentRestrictions: { country: 'tr' } });
+      }
+    }
+    if (window.google && window.google.maps) {
+      initAutocomplete();
+    } else {
+      window.addEventListener('load', function() {
+        if (window.google && window.google.maps) {
+          initAutocomplete();
+        }
+      });
+    }
+
+    // Adresleri ve mesafeyi göster
+    let startAddress = localStorage.getItem('reservation_start_address') || localStorage.getItem('reservation_from') || '';
+    let endAddress = localStorage.getItem('reservation_end_address') || localStorage.getItem('reservation_to') || '';
+
+    function showAddressesAndDistance() {
+      const summary = document.getElementById('reservation-summary');
+      if (summary) {
+        summary.style.display = 'block';
+        summary.innerHTML = `
+          <h3>Rezervasyon Özeti</h3>
+          <div class="summary-row"><span class="summary-label">Başlangıç:</span> ${startAddress}</div>
+          <div class="summary-row"><span class="summary-label">Varış:</span> ${endAddress}</div>
+          <div class="summary-row"><span class="summary-label">Mesafe:</span> <span id="distance-km">Hesaplanıyor...</span></div>
+        `;
+      }
+    }
+
+    function calculateDistanceAndUpdatePrices() {
+      if (!startAddress || !endAddress) return;
+      const service = new google.maps.DirectionsService();
+      service.route({
+        origin: startAddress,
+        destination: endAddress,
+        travelMode: 'DRIVING'
+      }, function(result, status) {
+        if (status === 'OK') {
+          distance = result.routes[0].legs[0].distance.value / 1000; // km
+          document.getElementById('distance-km').textContent = distance.toFixed(2) + ' km';
+          // Fiyatları güncelle
+          updateVehiclePrices();
+        } else {
+          document.getElementById('distance-km').textContent = 'Hesaplanamadı';
+        }
+      });
+    }
+
+    function updateVehiclePrices() {
+      vehicles.forEach((vehicle, idx) => {
+        const priceEl = document.getElementById(`vehicle-price-${idx}`);
+        if (priceEl) {
+          priceEl.textContent = 'Fiyat: ' + Math.round(vehicle.price * distance) + ' TL';
+        }
+      });
+    }
+
+    function selectVehicleByButton(idx) {
+      document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+      const cards = Array.from(document.querySelectorAll('.vehicle-card'));
+      if (cards[idx]) cards[idx].classList.add('selected');
+    }
+    window.selectVehicleByButton = selectVehicleByButton;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      showAddressesAndDistance();
+      setTimeout(calculateDistanceAndUpdatePrices, 800); // Google API yüklenmesi için kısa gecikme
+    });
+
+    // Sayfa yüklendiğinde araçları render et
+    document.addEventListener('DOMContentLoaded', function() {
+      updateLanguage(savedLang);
+    });
+  </script>
+  <style>
+    @media (max-width: 700px) {
+      #vehicle-modal-content { width:98vw !important; padding:0.7rem 0.2rem 0.2rem 0.2rem !important; }
+      #modal-slider { max-width:98vw !important; height:220px !important; }
+      #modal-slider img { height:220px !important; border-radius:10px !important; }
+    }
+  </style>
+  <!-- Sosyal medya ve admin giriş butonunu kaldır -->
+</body>
+</html> 

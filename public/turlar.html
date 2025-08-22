@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tüm Turlar | Luxen Group</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #181818; color: #fff; font-family: 'Montserrat', Arial, sans-serif; margin: 0; }
+    .tours-container { max-width: 1100px; margin: 0 auto; padding: 40px 16px; }
+    .tours-title { font-size: 2.6rem; color: #D4AF37; font-family: 'Trajan Pro', serif; margin-bottom: 32px; text-align: center; }
+    .tour-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+    .tour-card { background: #232323; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 24px #0003; transition: transform 0.2s; }
+    .tour-card:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 8px 32px #D4AF3722; }
+    .tour-img { width: 100%; height: 220px; object-fit: cover; }
+    .tour-content { padding: 22px 18px 18px 18px; }
+    .tour-title { font-size: 1.5rem; color: #D4AF37; margin-bottom: 10px; font-family: 'Trajan Pro', serif; }
+    .tour-desc { color: #eee; font-size: 1.08rem; margin-bottom: 0; }
+    @media (max-width: 600px) { .tour-img { height: 140px; } }
+    @media (max-width: 640px) {
+      body { background: #1c1c25 !important; }
+      .tour-card { background: #232323 !important; }
+    }
+    .back-home-btn {
+      display: block;
+      margin: 28px auto 18px auto;
+      padding: 10px 28px;
+      background: linear-gradient(90deg,#D4AF37 60%,#F5E7A3 100%);
+      color: #181818;
+      font-weight: 700;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 12px #D4AF3722;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .back-home-btn:hover, .back-home-btn:focus {
+      background: #B8860B;
+      color: #fff;
+    }
+    @media (max-width: 640px) {
+      .back-home-btn {
+        width: 100%;
+        font-size: 1.18rem;
+        padding: 16px 0;
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="tours-container">
+    <a href="index.html" class="back-home-btn">← Ana Sayfaya Dön</a>
+    <h1 class="tours-title">Tüm Turlar</h1>
+    <div class="tour-list">
+      <div class="tour-card" data-tour="istanbul">
+        <img src="şehirresim/3-days-in-istanbul-tourist-guide-with-must-see-attractions.webp" class="tour-img" alt="İstanbul Turu">
+        <div class="tour-content">
+          <div class="tour-title">İstanbul Turu</div>
+          <div class="tour-desc">Tarihi yarımada, Boğaz turu, lüks alışveriş, Ayasofya, Topkapı Sarayı, Kapalıçarşı ve eşsiz gastronomi deneyimiyle İstanbul’un büyüsünü keşfedin. Profesyonel rehber eşliğinde, VIP araçlarla konforlu bir şehir turu.</div>
+          <button class="tour-detail-btn" onclick="window.location.href='istanbul-turu.html'">Detayları Gör</button>
+        </div>
+      </div>
+      <div class="tour-card" data-tour="bodrum">
+        <img src="şehirresim/bodrum1.jpg" class="tour-img" alt="Bodrum Turu">
+        <div class="tour-content">
+          <div class="tour-title">Bodrum Turu</div>
+          <div class="tour-desc">Ege’nin incisi Bodrum’da deniz, güneş, tarihi mekanlar, lüks beach club’lar, Bodrum Kalesi, antik tiyatro ve gece hayatı ile unutulmaz bir tatil sizi bekliyor. Kişiye özel transfer ve rehberlik hizmetiyle.</div>
+          <button class="tour-detail-btn" onclick="window.location.href='bodrum-turu.html'">Detayları Gör</button>
+        </div>
+      </div>
+      <div class="tour-card" data-tour="kapadokya">
+        <img src="şehirresim/kapadokya2.jpg" class="tour-img" alt="Kapadokya Turu">
+        <div class="tour-content">
+          <div class="tour-title">Kapadokya Turu</div>
+          <div class="tour-desc">Peri bacaları, sıcak hava balonları, yer altı şehirleri ve mistik atmosferiyle Kapadokya’nın büyüsünü yaşayın. VIP transfer, balon turu ve bölgeye özel aktivitelerle eşsiz bir deneyim.</div>
+          <button class="tour-detail-btn" onclick="window.location.href='kapadokya-turu.html'">Detayları Gör</button>
+        </div>
+      </div>
+      <div class="tour-card" data-tour="trabzon">
+        <img src="şehirresim/trabzon1.webp" class="tour-img" alt="Trabzon Turu">
+        <div class="tour-content">
+          <div class="tour-title">Trabzon Turu</div>
+          <div class="tour-desc">Karadeniz’in yemyeşil doğası, Sümela Manastırı, Uzungöl, yaylalar ve yöresel lezzetlerle Trabzon’u keşfedin. Doğa yürüyüşleri, fotoğraf molaları ve VIP ulaşım ile konforlu bir Karadeniz turu.</div>
+          <button class="tour-detail-btn" onclick="window.location.href='trabzon-turu.html'">Detayları Gör</button>
+        </div>
+      </div>
+      <!-- Daha fazla tur eklenebilir -->
+    </div>
+    <!-- Modal -->
+    <div id="tour-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); align-items:center; justify-content:center;">
+      <div id="tour-modal-content" style="background:#232323; border-radius:18px; max-width:98vw; width:420px; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#fff; display:flex; flex-direction:column; align-items:center;">
+        <button onclick="closeTourModal()" style="position:absolute; right:1rem; top:1rem; background:none; border:none; font-size:1.5rem; color:#fff; cursor:pointer;">&times;</button>
+        <img id="tour-modal-img" src="" alt="" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:18px; box-shadow:0 2px 12px #D4AF3722; border:2px solid #D4AF37;">
+        <h2 id="tour-modal-title" style="color:#D4AF37; font-family:'Trajan Pro', serif; font-size:1.5rem; margin-bottom:10px;"></h2>
+        <p id="tour-modal-desc" style="color:#eee; font-size:1.08rem; text-align:center;"></p>
+      </div>
+    </div>
+    <script>
+      const tourDetails = {
+        istanbul: {
+          title: 'İstanbul Turu',
+          desc: 'Tarihi yarımada, Boğaz turu, lüks alışveriş, Ayasofya, Topkapı Sarayı, Kapalıçarşı ve eşsiz gastronomi deneyimiyle İstanbul’un büyüsünü keşfedin. Profesyonel rehber eşliğinde, VIP araçlarla konforlu bir şehir turu.',
+          img: 'https://readdy.ai/api/search-image?query=istanbul%20luxury%20tour%20night%20cityscape&width=600&height=400'
+        },
+        bodrum: {
+          title: 'Bodrum Turu',
+          desc: 'Ege’nin incisi Bodrum’da deniz, güneş, tarihi mekanlar, lüks beach club’lar, Bodrum Kalesi, antik tiyatro ve gece hayatı ile unutulmaz bir tatil sizi bekliyor. Kişiye özel transfer ve rehberlik hizmetiyle.',
+          img: 'https://readdy.ai/api/search-image?query=bodrum%20luxury%20tour%20marina%20sea&width=600&height=400'
+        },
+        kapadokya: {
+          title: 'Kapadokya Turu',
+          desc: 'Peri bacaları, sıcak hava balonları, yer altı şehirleri ve mistik atmosferiyle Kapadokya’nın büyüsünü yaşayın. VIP transfer, balon turu ve bölgeye özel aktivitelerle eşsiz bir deneyim.',
+          img: 'https://readdy.ai/api/search-image?query=cappadocia%20luxury%20tour%20hot%20air%20balloon&width=600&height=400'
+        },
+        trabzon: {
+          title: 'Trabzon Turu',
+          desc: 'Karadeniz’in yemyeşil doğası, Sümela Manastırı, Uzungöl, yaylalar ve yöresel lezzetlerle Trabzon’u keşfedin. Doğa yürüyüşleri, fotoğraf molaları ve VIP ulaşım ile konforlu bir Karadeniz turu.',
+          img: 'https://readdy.ai/api/search-image?query=trabzon%20luxury%20tour%20nature%20sumela&width=600&height=400'
+        }
+      };
+      function showTourDetail(key) {
+        const modal = document.getElementById('tour-modal');
+        const content = tourDetails[key];
+        if (!content) return;
+        document.getElementById('tour-modal-img').src = content.img;
+        document.getElementById('tour-modal-title').textContent = content.title;
+        document.getElementById('tour-modal-desc').textContent = content.desc;
+        modal.style.display = 'flex';
+      }
+      function closeTourModal() {
+        document.getElementById('tour-modal').style.display = 'none';
+      }
+      // Modal dışına tıklayınca kapansın
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('tour-modal').addEventListener('click', function(e) {
+          if (e.target === this) closeTourModal();
+        });
+      });
+    </script>
+  </div>
+</body>
+</html> 

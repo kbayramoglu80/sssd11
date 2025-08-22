@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Rezervasyonlar</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background: #181818; color: #fff; font-family: 'Poppins', sans-serif; }
+    .table-container { max-width: 1200px; margin: 40px auto; background: #232323; border-radius: 16px; box-shadow: 0 4px 24px #000a; padding: 32px 18px; }
+    th { background: #D4AF37; color: #181818; font-weight: 700; }
+    td, th { padding: 10px 8px; text-align: left; }
+    tr:nth-child(even) { background: #222; }
+    tr:nth-child(odd) { background: #191919; }
+    .header { font-size: 2rem; font-weight: 700; color: #D4AF37; letter-spacing: 1px; }
+    .no-data { text-align: center; color: #ccc; margin: 32px 0; font-size: 1.2rem; }
+    .search-bar { margin: 18px 0 12px 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .search-bar input, .search-bar select { color: #181818; background: #fff; border-radius: 8px; border: none; padding: 8px 14px; font-size: 1rem; }
+    .search-bar label { color: #D4AF37; font-weight: 600; margin-right: 4px; }
+    .btn-delete { background: #e74c3c; color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .btn-delete:hover { background: #c0392b; }
+    .btn-home { background:#D4AF37; color:#181818; font-weight:600; border-radius:8px; font-size:1rem; box-shadow:0 2px 8px #D4AF3722; letter-spacing:0.5px; padding:8px 18px; }
+  </style>
+</head>
+<body>
+  <div class="table-container">
+    <div class="flex items-center justify-between mb-2">
+      <span class="header">Tüm Rezervasyonlar</span>
+      <a href="/index.html" class="btn-home">Ana Sayfaya Dön</a>
+    </div>
+    <div class="search-bar">
+      <label for="search">Arama:</label>
+      <input type="text" id="search" placeholder="İsim, soyad, kişi sayısı, telefon...">
+      <label for="type-filter">Tip:</label>
+      <select id="type-filter">
+        <option value="">Tümü</option>
+        <option value="TRANSFER">TRANSFER</option>
+        <option value="ŞOFÖRLÜ ARAÇ KİRALAMA">ŞOFÖRLÜ ARAÇ KİRALAMA</option>
+        <option value="ŞEHİRLER ARASI TRANSFER">ŞEHİRLER ARASI TRANSFER</option>
+      </select>
+    </div>
+    <table class="w-full text-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>İsim</th>
+          <th>Soyad</th>
+          <th>Kişi Sayısı</th>
+          <th>Telefon</th>
+          <th>Tarih</th>
+          <th>Saat</th>
+          <th>Başlangıç</th>
+          <th>Varış</th>
+          <th>Mesafe (km)</th>
+          <th>Tip</th>
+          <th>Oluşturma</th>
+          <th>Sil</th>
+        </tr>
+      </thead>
+      <tbody id="reservations-body">
+        <tr><td colspan="13" class="no-data">Yükleniyor...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    let allReservations = [];
+    async function fetchReservations() {
+      try {
+        const res = await fetch('/api/reservations');
+        const data = await res.json();
+        allReservations = data.reverse();
+        renderTable();
+      } catch (err) {
+        document.getElementById('reservations-body').innerHTML = '<tr><td colspan="13" class="no-data">Veri alınamadı.</td></tr>';
+      }
+    }
+    function renderTable() {
+      const tbody = document.getElementById('reservations-body');
+      const search = document.getElementById('search').value.toLowerCase();
+      const type = document.getElementById('type-filter').value;
+      let filtered = allReservations.filter(r => {
+        let match = true;
+        if (search) {
+          match = (
+            (r.isim || '').toLowerCase().includes(search) ||
+            (r.soyad || '').toLowerCase().includes(search) ||
+            (String(r.yolcu || '')).toLowerCase().includes(search) ||
+            (r.telefon || '').toLowerCase().includes(search) ||
+            (r.from || '').toLowerCase().includes(search) ||
+            (r.to || '').toLowerCase().includes(search)
+          );
+        }
+        if (type && r.rezervasyonTipi !== type) match = false;
+        return match;
+      });
+      tbody.innerHTML = '';
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="13" class="no-data">Kayıt bulunamadı.</td></tr>';
+        return;
+      }
+      filtered.forEach((r, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${i+1}</td>
+          <td>${r.isim || ''}</td>
+          <td>${r.soyad || ''}</td>
+          <td>${r.yolcu || ''}</td>
+          <td>${r.telefon || ''}</td>
+          <td>${r.tarih || ''}</td>
+          <td>${r.saat || ''}</td>
+          <td>${r.from || ''}</td>
+          <td>${r.to || ''}</td>
+          <td>${r.distance ? Number(r.distance).toFixed(2) : ''}</td>
+          <td>${r.rezervasyonTipi || ''}</td>
+          <td>${r.createdAt ? new Date(r.createdAt).toLocaleString('tr-TR') : ''}</td>
+          <td><button class="btn-delete" onclick="deleteReservation('${r.id}')">Sil</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    async function deleteReservation(id) {
+      if (!confirm('Bu rezervasyonu silmek istediğinize emin misiniz?')) return;
+      try {
+        const res = await fetch(`/api/reservations/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+        if (result.success) {
+          allReservations = allReservations.filter(r => r.id != id);
+          renderTable();
+        } else {
+          alert('Silme işlemi başarısız!');
+        }
+      } catch {
+        alert('Silme işlemi sırasında hata oluştu!');
+      }
+    }
+    document.getElementById('search').addEventListener('input', renderTable);
+    document.getElementById('type-filter').addEventListener('change', renderTable);
+    fetchReservations();
+  </script>
+</body>
+</html> 

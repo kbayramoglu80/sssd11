@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teşekkürler - Rezervasyon Tamamlandı</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #181818; font-family: 'Segoe UI', sans-serif; }
+    .thanks-container { max-width: 520px; margin: 60px auto; background: #232323; border-radius: 18px; box-shadow: 0 4px 24px #0005; padding: 36px 24px; text-align: center; border: 2px solid #D4AF37; }
+    .thanks-title { color: #D4AF37; font-size: 2.1rem; font-weight: 700; margin-bottom: 16px; font-family: 'Playfair Display', serif; letter-spacing: 1px; border-radius: 8px; padding: 10px 0; text-shadow: none; }
+    .thanks-summary { margin: 24px 0; text-align: left; background: #181818; border-radius: 12px; padding: 18px 18px 10px 18px; border: 1.5px solid #D4AF37; color: #fff; box-shadow: none; }
+    .summary-row { margin-bottom: 8px; font-size: 1.08rem; }
+    .summary-label { font-weight: 600; color: #D4AF37; margin-right: 8px; font-size: 1em; }
+    .thanks-btn { margin-top: 24px; background: #D4AF37; color: #181818; border: none; border-radius: 8px; padding: 12px 32px; font-size: 1.08rem; font-weight: 600; cursor: pointer; transition: background 0.2s; box-shadow: none; }
+    .thanks-btn:hover { background: #FFD700; color: #000; }
+    .thanks-container > div:not(.thanks-title):not(.thanks-summary) { color: #fff; font-size: 1.08rem; }
+  </style>
+</head>
+<body>
+  <div class="thanks-container">
+    <div class="thanks-title">Teşekkürler!</div>
+    <div>Rezervasyonunuz başarıyla alınmıştır.</div>
+    <div class="thanks-summary" id="reservation-summary"></div>
+    <button class="thanks-btn" onclick="window.location.href='index.html'">Ana Sayfaya Dön</button>
+  </div>
+  <!-- WhatsApp Live Support Button -->
+  <a href="https://wa.me/905555555555" class="whatsapp-button" target="_blank" aria-label="WhatsApp Canlı Destek">
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="28" cy="28" r="28" fill="#25D366"/>
+      <path d="M40.7 34.6c-.6-.3-3.6-1.8-4.2-2-0.6-.2-1-.3-1.4.3-.4.6-1.6 2-2 2.4-.4.4-.7.5-1.3.2-3.6-1.8-6-3.2-8.4-7.2-.6-1 .6-.9 1.7-3 .2-.4.1-.7 0-1-0.2-.3-1.4-3.3-1.9-4.5-.5-1.2-1-1-1.4-1-0.4 0-.7 0-1.1 0-.4 0-1 .1-1.5.7-0.5.6-2 2-2 4.8 0 2.8 2 5.5 2.3 5.9.3.4 4.1 6.3 10.1 8.5 1.4.5 2.5.8 3.3 1 .7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.1-1.4-.1-.1-.5-.2-1.1-.5z" fill="#fff"/>
+    </svg>
+  </a>
+  <style>
+    .whatsapp-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      background: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .whatsapp-button:hover {
+      box-shadow: 0 8px 32px rgba(37,211,102,0.25);
+      transform: scale(1.08);
+    }
+    @media (max-width: 600px) {
+      .whatsapp-button {
+        bottom: 18px;
+        right: 18px;
+        width: 48px;
+        height: 48px;
+      }
+      .whatsapp-button svg {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  </style>
+  <script>
+    const summaryDiv = document.getElementById('reservation-summary');
+    const reservation = JSON.parse(localStorage.getItem('lastReservation') || '{}');
+    const lang = reservation.lang || 'tr';
+    const labels = {
+      tr: {
+        thanks: 'Teşekkürler!',
+        success: 'Rezervasyonunuz başarıyla alınmıştır.',
+        name: 'İsim:',
+        surname: 'Soyad:',
+        passenger: 'Yolcu Sayısı:',
+        phone: 'Telefon:',
+        date: 'Tarih:',
+        time: 'Saat:',
+        from: 'Nereden:',
+        to: 'Nereye:',
+        vehicle: 'Araç:',
+        price: 'Fiyat:',
+        home: 'Ana Sayfaya Dön',
+        notfound: 'Rezervasyon özeti bulunamadı.'
+      },
+      en: {
+        thanks: 'Thank You!',
+        success: 'Your reservation has been received.',
+        name: 'Name:',
+        surname: 'Surname:',
+        passenger: 'Passenger Count:',
+        phone: 'Phone:',
+        date: 'Date:',
+        time: 'Time:',
+        from: 'From:',
+        to: 'To:',
+        vehicle: 'Vehicle:',
+        price: 'Price:',
+        home: 'Back to Home',
+        notfound: 'Reservation summary not found.'
+      }
+    };
+    document.querySelector('.thanks-title').textContent = labels[lang].thanks;
+    document.querySelector('.thanks-container > div:nth-child(2)').textContent = labels[lang].success;
+    document.querySelector('.thanks-btn').textContent = labels[lang].home;
+    if (reservation && reservation.isim) {
+      summaryDiv.innerHTML = `
+        <div class="summary-row"><span class="summary-label">${labels[lang].name}</span> ${reservation.isim}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].surname}</span> ${reservation.soyad}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].passenger}</span> ${reservation.yolcu}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].phone}</span> ${reservation.telefon}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].date}</span> ${reservation.tarih}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].time}</span> ${reservation.saat}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].from}</span> ${reservation.from}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].to}</span> ${reservation.to}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].vehicle}</span> ${reservation.vehicleName || ''}</div>
+        <div class="summary-row"><span class="summary-label">${labels[lang].price}</span> ${reservation.price || ''} TL</div>
+      `;
+    } else {
+      summaryDiv.innerHTML = `<div>${labels[lang].notfound}</div>`;
+    }
+    // Temizlik: localStorage'dan silmek isterseniz aşağıdaki satırı açabilirsiniz
+    // localStorage.removeItem('lastReservation');
+  </script>
+</body>
+</html> 

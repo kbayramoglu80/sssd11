@@ -1,0 +1,30 @@
+{
+  "name": "luxen-web",
+  "version": "1.0.0",
+  "description": "Luxen Group VIP Transfer and Reservation System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "vip-transfer",
+    "luxury-transport",
+    "turkey-tourism",
+    "reservation-system"
+  ],
+  "author": "Luxen Group",
+  "license": "MIT"
+}
