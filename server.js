@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -129,6 +130,7 @@ app.post('/admin/login', authLimiter, async (req, res) => {
     const { username, password } = req.body || {};
     const expectedUsername = process.env.ADMIN_USERNAME || 'admin';
     const passwordHash = process.env.ADMIN_PASSWORD_HASH || '';
+    const plainPassword = process.env.ADMIN_PASSWORD || '';
 
     if (!username || !password) {
       return res.status(400).json({ error: 'Kullanıcı adı ve şifre gerekli' });
@@ -136,13 +138,18 @@ app.post('/admin/login', authLimiter, async (req, res) => {
     if (username !== expectedUsername) {
       return res.status(401).json({ error: 'Geçersiz bilgiler' });
     }
-    if (!passwordHash) {
+    let ok = false;
+    if (passwordHash) {
+      ok = await bcrypt.compare(password, passwordHash);
+    } else if (plainPassword) {
+      // Timing-safe karşılaştırma
+      const a = Buffer.from(password);
+      const b = Buffer.from(plainPassword);
+      ok = a.length === b.length && crypto.timingSafeEqual(a, b);
+    } else {
       return res.status(500).json({ error: 'Admin şifre yapılandırılmamış' });
     }
-    const ok = await bcrypt.compare(password, passwordHash);
-    if (!ok) {
-      return res.status(401).json({ error: 'Geçersiz bilgiler' });
-    }
+    if (!ok) return res.status(401).json({ error: 'Geçersiz bilgiler' });
     req.session.isAdmin = true;
     res.json({ success: true });
   } catch (e) {
