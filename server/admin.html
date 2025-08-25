@@ -3,45 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Rezervasyonlar</title>
+  <title>Luxen Admin Panel</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body { background: #181818; color: #fff; font-family: 'Poppins', sans-serif; }
-    .table-container { max-width: 1200px; margin: 40px auto; background: #232323; border-radius: 16px; box-shadow: 0 4px 24px #000a; padding: 32px 18px; }
-    th { background: #D4AF37; color: #181818; font-weight: 700; }
+    body { background: radial-gradient(1400px 700px at -10% -10%, #1e293b33, transparent 60%), radial-gradient(1000px 500px at 110% 110%, #1f293733, transparent 60%), linear-gradient(180deg, #0a0e19 0%, #0a0f1c 100%); color: #e5e7eb; font-family: 'Poppins', sans-serif; }
+    .table-container { max-width: 1200px; margin: 40px auto; background: #0f172a; border: 1px solid #1f2a44; border-radius: 16px; box-shadow: 0 20px 60px #0007; padding: 24px 16px; }
+    .header { font-size: 2rem; font-weight: 800; background: linear-gradient(90deg,#D4AF37,#fef3c7,#D4AF37); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing: 1px; }
+    th { background: #D4AF37; color: #111827; font-weight: 800; position: sticky; top: 0; z-index: 1; }
     td, th { padding: 10px 8px; text-align: left; }
-    tr:nth-child(even) { background: #222; }
-    tr:nth-child(odd) { background: #191919; }
-    .header { font-size: 2rem; font-weight: 700; color: #D4AF37; letter-spacing: 1px; }
-    .no-data { text-align: center; color: #ccc; margin: 32px 0; font-size: 1.2rem; }
-    .search-bar { margin: 18px 0 12px 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-    .search-bar input, .search-bar select { color: #181818; background: #fff; border-radius: 8px; border: none; padding: 8px 14px; font-size: 1rem; }
+    tr { background:#0b1324; border-bottom: 1px solid #1f2a44; }
+    tr:nth-child(even) { background:#0d152a; }
+    .no-data { text-align: center; color: #94a3b8; margin: 24px 0; font-size: 1rem; }
+    .search-bar { margin: 18px 0 12px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: center; }
+    .search-bar input, .search-bar select { color: #e5e7eb; background: #0b1220; border:1px solid #243244; border-radius: 8px; padding: 10px 12px; font-size: 0.95rem; }
+    .search-bar input:focus, .search-bar select:focus { border-color:#D4AF37; outline:none; box-shadow:0 0 0 3px rgba(212,175,55,.15) }
     .search-bar label { color: #D4AF37; font-weight: 600; margin-right: 4px; }
-    .btn-delete { background: #e74c3c; color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-    .btn-delete:hover { background: #c0392b; }
-    .btn-home { background:#D4AF37; color:#181818; font-weight:600; border-radius:8px; font-size:1rem; box-shadow:0 2px 8px #D4AF3722; letter-spacing:0.5px; padding:8px 18px; }
-    .btn-logout { background:#e2e8f0; color:#111827; font-weight:600; border-radius:8px; font-size:0.95rem; padding:8px 14px; }
+    .btn-delete { background: #D4AF37; color: #111827; border: none; border-radius: 8px; padding: 6px 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .btn-delete:hover { filter: brightness(1.05); }
+    .btn-home { background:#0b1220; color:#e5e7eb; border:1px solid #1f2a44; font-weight:600; border-radius:8px; font-size:0.95rem; padding:8px 14px; }
+    .btn-logout { background:#D4AF37; color:#111827; font-weight:700; border-radius:8px; font-size:0.95rem; padding:8px 14px; }
   </style>
 </head>
 <body>
   <div class="table-container">
     <div class="flex items-center justify-between mb-2">
-      <span class="header">Tüm Rezervasyonlar</span>
+      <span class="header">Luxen Admin • Rezervasyonlar</span>
       <div class="flex gap-2">
         <a href="/index.html" class="btn-home">Ana Sayfaya Dön</a>
         <button id="logoutBtn" class="btn-logout">Çıkış Yap</button>
       </div>
     </div>
     <div class="search-bar">
-      <label for="search">Arama:</label>
-      <input type="text" id="search" placeholder="İsim, soyad, kişi sayısı, telefon...">
-      <label for="type-filter">Tip:</label>
-      <select id="type-filter">
-        <option value="">Tümü</option>
-        <option value="TRANSFER">TRANSFER</option>
-        <option value="ŞOFÖRLÜ ARAÇ KİRALAMA">ŞOFÖRLÜ ARAÇ KİRALAMA</option>
-        <option value="ŞEHİRLER ARASI TRANSFER">ŞEHİRLER ARASI TRANSFER</option>
-      </select>
+      <div class="flex items-center gap-2">
+        <label for="search">Arama:</label>
+        <input type="text" id="search" placeholder="İsim, soyad, kişi sayısı, telefon...">
+      </div>
+      <div class="flex items-center gap-2">
+        <label for="type-filter">Tip:</label>
+        <select id="type-filter">
+          <option value="">Tümü</option>
+          <option value="TRANSFER">TRANSFER</option>
+          <option value="ŞOFÖRLÜ ARAÇ KİRALAMA">ŞOFÖRLÜ ARAÇ KİRALAMA</option>
+          <option value="ŞEHİRLER ARASI TRANSFER">ŞEHİRLER ARASI TRANSFER</option>
+        </select>
+      </div>
     </div>
     <table class="w-full text-sm">
       <thead>

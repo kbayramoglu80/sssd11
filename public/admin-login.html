@@ -6,28 +6,50 @@
   <title>Admin Giriş</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body { background:#0f172a; color:#e2e8f0; font-family:'Poppins',sans-serif; }
-    .card { background:#111827; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
-    .btn { background:#D4AF37; color:#111827; font-weight:700; border-radius:10px; }
-    .btn:hover { filter:brightness(1.05); }
-    .input { background:#0b1220; border:1px solid #243244; color:#e2e8f0; }
+    :root { --gold:#D4AF37; --ink:#0b1220; --bg:#0a0f1c; }
+    body { margin:0; font-family:'Poppins',sans-serif; color:#e5e7eb; background: radial-gradient(1200px 600px at 10% -10%, #1e293b33, transparent 60%), radial-gradient(1000px 500px at 110% 110%, #1f293733, transparent 60%), linear-gradient(180deg, #0a0e19 0%, #0a0f1c 100%); }
+    .grid-bg { position:fixed; inset:0; pointer-events:none; background-image: radial-gradient(#ffffff0d 1px, transparent 1px); background-size: 18px 18px; opacity:.35; }
+    .aurora {
+      position: fixed; inset: -40vmax; filter: blur(60px); opacity:.45; z-index: -1;
+      background: conic-gradient(from 180deg at 50% 50%, #0ea5e955, #22c55e33, #eab30844, #ef444444, #0ea5e955);
+      animation: spin 18s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .card { background:#0f172a; border:1px solid #1f2a44; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); backdrop-filter: blur(6px); }
+    .title { background: linear-gradient(90deg, var(--gold), #fef3c7, var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow: 0 6px 24px #0008; letter-spacing:1px; }
+    .shimmer { position:relative; overflow:hidden; }
+    .shimmer::after { content:""; position:absolute; inset:0; transform: translateX(-120%); background: linear-gradient(120deg, transparent 0%, #ffffff22 50%, transparent 100%); animation: shine 2.2s ease-in-out infinite; }
+    @keyframes shine { 100% { transform: translateX(120%); } }
+    .input { background:#0b1220; border:1px solid #243244; color:#e2e8f0; transition: border-color .2s, box-shadow .2s; }
+    .input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); outline:none; }
+    .btn { background:linear-gradient(90deg, var(--gold) 60%, #f5e7a3 100%); color:#111827; font-weight:700; border-radius:10px; transition: transform .15s ease, filter .15s ease; }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .badge { color:#93c5fd; background:#0b1220; border:1px solid #1d2a44; border-radius:999px; padding:6px 12px; font-size:.8rem; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
-  <div class="card w-full max-w-md p-8">
-    <h1 class="text-2xl font-bold text-center mb-6" style="color:#D4AF37">Admin Panel Giriş</h1>
-    <form id="loginForm" class="space-y-4">
-      <div>
-        <label class="block mb-2">Kullanıcı Adı</label>
-        <input id="username" type="text" class="input w-full rounded-lg p-3" placeholder="admin" required>
+<body class="min-h-screen flex items-center justify-center p-6 relative">
+  <div class="aurora"></div>
+  <div class="grid-bg"></div>
+  <div class="w-full max-w-md">
+    <div class="card p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl md:text-3xl font-extrabold title shimmer">Luxen Admin</h1>
+        <span class="badge">Güvenli Giriş</span>
       </div>
-      <div>
-        <label class="block mb-2">Şifre</label>
-        <input id="password" type="password" class="input w-full rounded-lg p-3" placeholder="••••••••" required>
-      </div>
-      <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
-      <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
-    </form>
+      <form id="loginForm" class="space-y-5">
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">Kullanıcı Adı</label>
+          <input id="username" type="text" class="input w-full rounded-lg p-3" placeholder="admin" required>
+        </div>
+        <div>
+          <label class="block mb-2 text-sm text-gray-300">Şifre</label>
+          <input id="password" type="password" class="input w-full rounded-lg p-3" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
+        <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
+      </form>
+      <div class="mt-6 text-xs text-gray-400 text-center">Oturum açarak kullanım koşullarını kabul etmiş olursunuz.</div>
+    </div>
   </div>
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
