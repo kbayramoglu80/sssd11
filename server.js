@@ -79,6 +79,17 @@ app.get('/api/reservations', requireAdmin, apiLimiter, (req, res) => {
 // Yeni rezervasyon oluşturma (public)
 app.post('/api/reservations', apiLimiter, (req, res) => {
   const filePath = path.join(__dirname, 'reservations.json');
+  // Basic bot controls: honeypot and explicit client check
+  try {
+    const honeypot = (req.body && (req.body.hp || req.body.honeypot || ''));
+    const botOk = (req.body && (req.body.botOk === true || req.body.botOk === 'true'));
+    if (honeypot && String(honeypot).trim() !== '') {
+      return res.status(400).json({ error: 'Invalid submission' });
+    }
+    if (!botOk) {
+      return res.status(400).json({ error: 'Bot verification required' });
+    }
+  } catch {}
   let reservations = [];
   if (fs.existsSync(filePath)) {
     reservations = JSON.parse(fs.readFileSync(filePath, 'utf8'));

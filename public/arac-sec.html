@@ -300,6 +300,14 @@
     <h2 style="text-align:center; font-size:2.2rem; margin-bottom:32px; font-family:'Playfair Display',serif; letter-spacing:1px; color:#D4AF37; text-shadow:0 2px 16px #D4AF3722;">VIP Araç Seçimi</h2>
     <div class="reservation-summary" id="reservation-summary" style="display:none; margin-top:32px;"></div>
     <div class="vehicle-list" id="vehicle-list" style="gap:40px;"></div>
+    <!-- Bot control (honeypot + explicit confirmation) -->
+    <form id="bot-protect" style="display:none">
+      <input type="text" name="hp" id="hp" value="" autocomplete="off">
+    </form>
+    <div style="max-width:520px; margin:18px auto 0 auto; display:flex; align-items:center; gap:10px;">
+      <input type="checkbox" id="botOk" style="width:18px; height:18px;">
+      <label for="botOk" style="color:#ccc;">Robot değilim ve bilgilerim gerçek.</label>
+    </div>
   </div>
   <div id="vehicle-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
     <div id="vehicle-modal-content" style="background:#181818; border-radius:18px; max-width:96vw; width:520px; padding:2.2rem 1.2rem 1.2rem 1.2rem; position:relative; box-shadow:0 8px 32px #000a; color:#fff; display:flex; flex-direction:column; align-items:center;">
@@ -601,6 +609,12 @@ function showReservationSummary(vehicle, lang, distance) {
   updateSlider();
   summary.scrollIntoView({ behavior: 'smooth' });
   document.getElementById('complete-res-btn').onclick = async function() {
+    // Bot kontrolü
+    const botOkBox = document.getElementById('botOk');
+    if (!botOkBox || !botOkBox.checked) {
+      alert('Lütfen robot olmadığınızı onaylayın.');
+      return;
+    }
     const reservation = {
       isim: params.isim,
       soyad: params.soyad,
@@ -617,7 +631,9 @@ function showReservationSummary(vehicle, lang, distance) {
       vehicleName: vehicle.name_translations[lang],
       price: Math.round(vehicle.price * distance),
       date: new Date().toLocaleString(lang === 'tr' ? 'tr-TR' : 'en-US'),
-      lang: lang
+      lang: lang,
+      botOk: true,
+      hp: document.getElementById('hp')?.value || ''
     };
     try {
       const res = await fetch('/api/reservations', {

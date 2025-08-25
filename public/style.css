@@ -1118,11 +1118,43 @@ z-index: 100;
 
 @media (max-width: 480px) {
   .hero-slider, .hero-slide { min-height: 65svh; }
-  .hero-slide { background-size: contain; background-position: center center; background-color: #000; }
-  .slide-title { font-size: 1.5rem !important; line-height: 1.9rem !important; letter-spacing: 0 !important; text-shadow: none !important; }
-  .slide-description { font-size: 0.95rem !important; margin-bottom: 0.75rem; text-shadow: none !important; }
-  .slide-content { padding: 0 1rem; }
-  .slide-btn { font-size: 0.95rem; padding: 0.65rem 0; }
+  .hero-slide { background-size: cover; background-position: center center; background-color: #000; }
+  .slide-title { font-size: 1.25rem !important; line-height: 1.6rem !important; letter-spacing: 0 !important; text-shadow: none !important; }
+  .slide-description { font-size: 0.85rem !important; margin-bottom: 0.5rem; text-shadow: none !important; }
+  .slide-content { padding: 0 0.75rem; }
+  .slide-btn { font-size: 0.9rem; padding: 0.55rem 0; min-width: auto; }
+}
+
+/* Extra fine-tuning for common devices */
+@media (max-width: 414px) {
+  .slide-title { font-size: 1.2rem !important; line-height: 1.5rem !important; }
+  .slide-description { font-size: 0.82rem !important; }
+  .custom-dots { bottom: 22px; gap: 10px; }
+  .custom-dots .dot { width: 18px; height: 18px; }
+}
+@media (max-width: 393px) {
+  .slide-title { font-size: 1.15rem !important; line-height: 1.45rem !important; }
+  .slide-description { font-size: 0.8rem !important; }
+}
+@media (max-width: 375px) {
+  .slide-title { font-size: 1.1rem !important; line-height: 1.4rem !important; }
+  .slide-description { font-size: 0.78rem !important; }
+  .slide-buttons { gap: 6px; }
+  .slide-btn { font-size: 0.85rem; padding: 0.5rem 0; }
+  .custom-dots .dot { width: 16px; height: 16px; }
+}
+@media (max-width: 360px) {
+  .slide-title { font-size: 1.05rem !important; line-height: 1.35rem !important; }
+  .slide-description { font-size: 0.76rem !important; }
+  header img { height: 48px !important; }
+}
+
+@media (max-width: 480px) {
+  .destination-card { min-height: 260px; }
+}
+
+@media (max-width: 640px) {
+  .arac-option img { height: 160px; }
 }
 
 .slider-arrow {

@@ -73,7 +73,6 @@
   <a href="#hakkimizda" class="text-white hover:text-primary transition-colors font-medium">Hakkımızda</a>
   <a href="#hizmetler" class="text-white hover:text-primary transition-colors font-medium">Hizmetler</a>
   <a href="#rotalar" class="text-white hover:text-primary transition-colors font-medium">Rotalar</a>
-  <a href="#saglik-turizmi" class="text-white hover:text-primary transition-colors font-medium">Sağlık Turizmi</a>
   <a href="#rezervasyon" class="text-white hover:text-primary transition-colors font-medium">Rezervasyon</a>
   <a href="#iletisim" class="text-white hover:text-primary transition-colors font-medium">İletişim</a>
 </nav>
@@ -105,7 +104,6 @@
     <a href="#hakkimizda" class="text-white hover:text-primary py-2 border-b border-gray-800">Hakkımızda</a>
     <a href="#hizmetler" class="text-white hover:text-primary py-2 border-b border-gray-800">Hizmetler</a>
     <a href="#rotalar" class="text-white hover:text-primary py-2 border-b border-gray-800">Rotalar</a>
-    <a href="#saglik-turizmi" class="text-white hover:text-primary py-2 border-b border-gray-800">Sağlık Turizmi</a>
     <a href="#rezervasyon" class="text-white hover:text-primary py-2 border-b border-gray-800">Rezervasyon</a>
     <a href="#iletisim" class="text-white hover:text-primary py-2">İletişim</a>
   </nav>
@@ -457,63 +455,7 @@ Explore Tours
 </div>
 </div>
 </section>
-<!-- Health Tourism Section -->
-<section id="saglik-turizmi" class="py-20 bg-white" data-aos="fade-up">
-<div class="container mx-auto px-4">
-<div class="flex flex-col md:flex-row items-center gap-12">
-<div class="md:w-1/2">
-<h2 class="text-3xl md:text-4xl font-bold mb-6">
-<span class="text-black">Specialized </span>
-<span class="gold-gradient">Health Tourism Services</span>
-</h2>
-<p class="text-gray-700 mb-6">
-Turkey has become a global leader in health tourism, offering world-class medical procedures at competitive prices. At Luxen Group, we provide specialized transportation and support services for medical tourists seeking various treatments, including hair transplantation and other cosmetic procedures.
-</p>
-<p class="text-gray-700 mb-8">
-Our comprehensive health tourism packages include:
-</p>
-<ul class="space-y-4 mb-8">
-<li class="flex items-start gap-3">
-<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
-<i class="ri-check-line text-primary text-sm"></i>
-</div>
-<span class="text-gray-700">Airport pickup and drop-off in luxury vehicles</span>
-</li>
-<li class="flex items-start gap-3">
-<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
-<i class="ri-check-line text-primary text-sm"></i>
-</div>
-<span class="text-gray-700">Transportation to and from medical facilities</span>
-</li>
-<li class="flex items-start gap-3">
-<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
-<i class="ri-check-line text-primary text-sm"></i>
-</div>
-<span class="text-gray-700">Accommodation arrangements at premium hotels</span>
-</li>
-<li class="flex items-start gap-3">
-<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
-<i class="ri-check-line text-primary text-sm"></i>
-</div>
-<span class="text-gray-700">Multilingual assistance throughout your stay</span>
-</li>
-<li class="flex items-start gap-3">
-<div class="w-6 h-6 rounded-full bg-primary bg-opacity-10 flex items-center justify-center flex-shrink-0 mt-1">
-<i class="ri-check-line text-primary text-sm"></i>
-</div>
-<span class="text-gray-700">Post-procedure sightseeing and relaxation tours</span>
-</li>
-</ul>
-<a href="#iletisim" class="bg-primary text-black px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition-all inline-block whitespace-nowrap">
-İletişim İçin Bize Ulaşın
-</a>
-</div>
-<div class="md:w-1/2">
-<img src="https://readdy.ai/api/search-image?query=modern%20luxury%20medical%20clinic%20interior%20in%20Turkey%2C%20state-of-the-art%20equipment%2C%20clean%20and%20professional%20environment%2C%20health%20tourism%2C%20professional%20photography&width=600&height=400&seq=9&orientation=landscape" alt="Health Tourism Facilities" class="rounded-lg shadow-xl w-full">
-</div>
-</div>
-</div>
-</section>
+<!-- Health Tourism Section removed by request -->
 <!-- Testimonials Section -->
 <section class="py-20 bg-gray-50" data-aos="fade-up" style="background:#fff;">
 <div class="container mx-auto px-4">
@@ -764,6 +706,31 @@ document.addEventListener('DOMContentLoaded', function() {
   const langToggle = document.getElementById('lang-toggle');
   const langDropdown = document.getElementById('lang-dropdown');
   const currentLang = document.getElementById('current-lang');
+  // Varsayılan min tarih/saat ayarla (geçmişi kapat)
+  const dateInput = document.querySelector('input[name="tarih"]');
+  const timeInput = document.querySelector('input[name="saat"]');
+  try {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth()+1).padStart(2,'0');
+    const dd = String(now.getDate()).padStart(2,'0');
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mi = String(now.getMinutes()).padStart(2,'0');
+    if (dateInput) dateInput.min = `${yyyy}-${mm}-${dd}`;
+    if (timeInput) timeInput.min = `${hh}:${mi}`;
+    // Tarih değişirse, bugün seçildiğinde saat min değerini güncelle
+    if (dateInput && timeInput) {
+      dateInput.addEventListener('change', function(){
+        const picked = new Date(this.value + 'T00:00:00');
+        const today = new Date(yyyy, now.getMonth(), now.getDate());
+        if (picked.getTime() === today.getTime()) {
+          timeInput.min = `${String(new Date().getHours()).padStart(2,'0')}:${String(new Date().getMinutes()).padStart(2,'0')}`;
+        } else {
+          timeInput.min = '';
+        }
+      });
+    }
+  } catch {}
   langToggle.addEventListener('click', function(e) {
     e.stopPropagation();
     langDropdown.classList.toggle('hidden');
@@ -865,6 +832,23 @@ const rezervasyonTipi = document.getElementById('rezervasyonTipi')?.value || 'TR
 if (!isim || !soyad || !yolcu || !telefon || !tarih || !saat || !from || !to) {
   alert('Lütfen tüm alanları doldurun!');
   return;
+}
+// Tarih-saat kısıtları: geçmiş tarih/saat seçilemez, bugün ise geçmiş saat seçilmez
+const now = new Date();
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+const pickedDate = new Date(tarih + 'T00:00:00');
+if (pickedDate < today) {
+  alert('Geçmiş tarih seçilemez.');
+  return;
+}
+if (pickedDate.getTime() === today.getTime()) {
+  const [h, m] = (saat || '00:00').split(':').map(Number);
+  const picked = new Date(today);
+  picked.setHours(h || 0, m || 0, 0, 0);
+  if (picked < now) {
+    alert('Bugün için geçmiş saat seçilemez.');
+    return;
+  }
 }
 if (isNaN(parseInt(yolcu)) || parseInt(yolcu) < 1 || parseInt(yolcu) > 20) {
   alert('Yolcu sayısı 1 ile 20 arasında olmalıdır!');
