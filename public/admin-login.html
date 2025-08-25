@@ -15,14 +15,14 @@
       animation: spin 18s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .card { background:#0f172a; border:1px solid #1f2a44; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45); backdrop-filter: blur(6px); }
-    .title { background: linear-gradient(90deg, var(--gold), #fef3c7, var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow: 0 6px 24px #0008; letter-spacing:1px; }
+    .card { background:#0f172a; border:1px solid #1f2a44; border-radius:18px; box-shadow:0 24px 80px rgba(0,0,0,.55); backdrop-filter: blur(8px); }
+    .title { background: linear-gradient(90deg, var(--gold), #fef3c7, var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:1px; }
     .shimmer { position:relative; overflow:hidden; }
-    .shimmer::after { content:""; position:absolute; inset:0; transform: translateX(-120%); background: linear-gradient(120deg, transparent 0%, #ffffff22 50%, transparent 100%); animation: shine 2.2s ease-in-out infinite; }
+    .shimmer::after { content:""; position:absolute; inset:0; transform: translateX(-120%); background: linear-gradient(120deg, transparent 0%, #ffffff1a 50%, transparent 100%); animation: shine 2.2s ease-in-out infinite; }
     @keyframes shine { 100% { transform: translateX(120%); } }
-    .input { background:#0b1220; border:1px solid #243244; color:#e2e8f0; transition: border-color .2s, box-shadow .2s; }
+    .input { background:#0b1220; border:1px solid #243244; color:#e2e8f0; transition: border-color .2s, box-shadow .2s; border-radius:12px; }
     .input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); outline:none; }
-    .btn { background:linear-gradient(90deg, var(--gold) 60%, #f5e7a3 100%); color:#111827; font-weight:700; border-radius:10px; transition: transform .15s ease, filter .15s ease; }
+    .btn { background:linear-gradient(90deg, var(--gold) 60%, #f5e7a3 100%); color:#111827; font-weight:700; border-radius:12px; transition: transform .15s ease, filter .15s ease; box-shadow:0 8px 24px rgba(212,175,55,.25); }
     .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
     .badge { color:#93c5fd; background:#0b1220; border:1px solid #1d2a44; border-radius:999px; padding:6px 12px; font-size:.8rem; }
     .page { display:grid; place-items:center; min-height:100svh; padding:24px; }
@@ -30,6 +30,9 @@
     .illustration { display:flex; align-items:center; justify-content:center; padding:12px; }
     .illustration svg { width: 100%; height: auto; max-width: 520px; }
     .form-col { width:100%; max-width:480px; margin: 0 auto; }
+    .helper { display:flex; justify-content: space-between; align-items:center; margin-top:10px; }
+    .helper a { color:#60a5fa; font-size:.85rem; text-decoration: none; }
+    .helper a:hover { text-decoration: underline; }
     @media (max-width: 900px) {
       .login-grid { grid-template-columns: 1fr; }
       .illustration { order: 2; }
@@ -88,7 +91,11 @@
             <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
             <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
           </form>
-          <div class="mt-6 text-xs text-gray-400 text-center">Oturum açarak kullanım koşullarını kabul etmiş olursunuz.</div>
+          <div class="helper">
+            <a href="#" onclick="event.preventDefault(); alert('Lütfen yönetici ile iletişime geçin.');">Şifremi unuttum</a>
+            <a href="/index.html">Ana sayfa</a>
+          </div>
+          <div class="mt-4 text-xs text-gray-400 text-center">Oturum açarak kullanım koşullarını kabul etmiş olursunuz.</div>
         </div>
       </div>
     </div>
@@ -108,7 +115,9 @@
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Giriş başarısız');
-        window.location.href = '/admin';
+        // Bazı barındırıcılar secure cookie nedeniyle ilk yönlendirmede oturumu geçmeyebilir.
+        // Kısa gecikme ile yeniden yönlendir.
+        setTimeout(() => { window.location.assign('/admin'); }, 100);
       } catch (err) {
         error.textContent = err.message || 'Giriş başarısız';
         error.style.display = 'block';

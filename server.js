@@ -24,6 +24,7 @@ if (process.env.TRUST_PROXY === '1') {
 }
 
 // Sessions for admin auth
+const secureCookie = String(process.env.SESSION_COOKIE_SECURE || '0') === '1';
 app.use(session({
   name: 'sid',
   secret: process.env.SESSION_SECRET || 'change-me-in-env',
@@ -32,7 +33,7 @@ app.use(session({
   cookie: {
     httpOnly: true,
     sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    secure: secureCookie,
     maxAge: 1000 * 60 * 60 * 4
   }
 }));
