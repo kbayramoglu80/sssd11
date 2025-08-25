@@ -954,20 +954,8 @@ return emailRegex.test(email);
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<!-- Google Maps JS injected dynamically to avoid hardcoding key -->
-<script>
-  (async function loadMaps(){
-    try {
-      const res = await fetch('/config/maps-key');
-      const data = await res.json();
-      if (data.browserKey) {
-        const s = document.createElement('script');
-        s.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(data.browserKey) + '&libraries=places';
-        document.head.appendChild(s);
-      }
-    } catch {}
-  })();
-</script>
+<!-- Google Maps JS (reverted to direct include for compatibility) -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkJ3vKDMhGztkTtTIvkynaMu-xEnZKw4g&libraries=places"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Google Places Autocomplete başlat

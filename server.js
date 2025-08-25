@@ -92,10 +92,7 @@ app.post('/api/reservations', apiLimiter, (req, res) => {
 // Google Directions API ile mesafe hesaplama endpointi
 app.get('/api/directions', apiLimiter, async (req, res) => {
   const { origin, destination } = req.query;
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-  if (!apiKey) {
-    return res.status(500).json({ error: 'Missing Google Maps API key' });
-  }
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY || 'AIzaSyBkJ3vKDMhGztkTtTIvkynaMu-xEnZKw4g';
   try {
     const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&key=${apiKey}`;
     const response = await axios.get(url);
