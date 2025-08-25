@@ -4,103 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Giriş</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
   <style>
-    :root { --gold:#D4AF37; --ink:#0b1220; --bg:#0a0f1c; }
-    body { margin:0; font-family:'Poppins',sans-serif; color:#e5e7eb; background: radial-gradient(1200px 600px at 10% -10%, #1e293b33, transparent 60%), radial-gradient(1000px 500px at 110% 110%, #1f293733, transparent 60%), linear-gradient(180deg, #0a0e19 0%, #0a0f1c 100%); min-height:100svh; }
-    .grid-bg { position:fixed; inset:0; pointer-events:none; background-image: radial-gradient(#ffffff0d 1px, transparent 1px); background-size: 18px 18px; opacity:.35; }
-    .aurora {
-      position: fixed; inset: -40vmax; filter: blur(60px); opacity:.45; z-index: -1;
-      background: conic-gradient(from 180deg at 50% 50%, #0ea5e955, #22c55e33, #eab30844, #ef444444, #0ea5e955);
-      animation: spin 18s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .card { background:#0f172a; border:1px solid #1f2a44; border-radius:18px; box-shadow:0 24px 80px rgba(0,0,0,.55); backdrop-filter: blur(8px); }
-    .title { background: linear-gradient(90deg, var(--gold), #fef3c7, var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:1px; }
-    .shimmer { position:relative; overflow:hidden; }
-    .shimmer::after { content:""; position:absolute; inset:0; transform: translateX(-120%); background: linear-gradient(120deg, transparent 0%, #ffffff1a 50%, transparent 100%); animation: shine 2.2s ease-in-out infinite; }
-    @keyframes shine { 100% { transform: translateX(120%); } }
-    .input { background:#0b1220; border:1px solid #243244; color:#e2e8f0; transition: border-color .2s, box-shadow .2s; border-radius:12px; }
-    .input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); outline:none; }
-    .btn { background:linear-gradient(90deg, var(--gold) 60%, #f5e7a3 100%); color:#111827; font-weight:700; border-radius:12px; transition: transform .15s ease, filter .15s ease; box-shadow:0 8px 24px rgba(212,175,55,.25); }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
-    .badge { color:#93c5fd; background:#0b1220; border:1px solid #1d2a44; border-radius:999px; padding:6px 12px; font-size:.8rem; }
-    .page { display:grid; place-items:center; min-height:100svh; padding:24px; }
-    .login-grid { display:grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; max-width: 1100px; width: 100%; }
-    .illustration { display:flex; align-items:center; justify-content:center; padding:12px; }
-    .illustration svg { width: 100%; height: auto; max-width: 520px; }
-    .form-col { width:100%; max-width:480px; margin: 0 auto; }
-    .helper { display:flex; justify-content: space-between; align-items:center; margin-top:10px; }
-    .helper a { color:#60a5fa; font-size:.85rem; text-decoration: none; }
-    .helper a:hover { text-decoration: underline; }
-    @media (max-width: 900px) {
-      .login-grid { grid-template-columns: 1fr; }
-      .illustration { order: 2; }
-      .form-col { order: 1; }
-    }
+    :root { --gold:#D4AF37; --gold2:#f5e7a3; --ink:#0b1220; --bg:#0a0f1c; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:'Poppins',sans-serif; color:#e5e7eb; background:#0a0f1c; min-height:100svh; }
+    .aurora { position:fixed; inset:-40vmax; background:conic-gradient(from 180deg at 50% 50%, #0ea5e955, #22c55e33, #eab30844, #ef444444, #0ea5e955); filter:blur(60px); opacity:.45; z-index:-1; animation:spin 22s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .grid { position:fixed; inset:0; background-image: radial-gradient(#ffffff12 1px, transparent 1px); background-size:18px 18px; opacity:.25; pointer-events:none; }
+    .lang { position:fixed; top:18px; right:22px; font-weight:600; letter-spacing:.06em; color:#cbd5e1; font-size:.9rem; }
+    .lang a { color:#cbd5e1; text-decoration:none; margin-left:6px; }
+    .lang a.active { color:#fff; }
+    .wrap { display:grid; place-items:center; min-height:100svh; padding:24px; }
+    .panel { width:100%; max-width:520px; text-align:center; animation:fadeUp .6s ease-out both; }
+    @keyframes fadeUp { from{ opacity:0; transform:translateY(20px);} to{ opacity:1; transform:translateY(0);} }
+    .logo { width:160px; height:auto; margin:0 auto 10px auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,.45)); animation:float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-6px);} }
+    .brand { margin:0 0 22px 0; font-weight:800; font-size:2.2rem; background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:.06em; }
+    .title { margin:18px 0 18px 0; font-size:2rem; font-weight:800; color:#e5e7eb; letter-spacing:.08em; }
+    .form { margin-top:12px; text-align:left; background:#0f172a; border:1px solid #1f2a44; border-radius:18px; padding:22px; box-shadow:0 24px 80px rgba(0,0,0,.55); backdrop-filter:blur(8px); }
+    label { display:block; margin:10px 6px 8px 6px; font-size:.92rem; color:#cbd5e1; }
+    .input { width:100%; padding:14px 16px; background:#0b1220; border:1px solid #243244; color:#e2e8f0; border-radius:14px; outline:none; transition:border-color .2s, box-shadow .2s; font-size:1rem; }
+    .input:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.15); }
+    .row { margin-top:10px; }
+    .helper { display:flex; justify-content:space-between; align-items:center; margin:10px 6px 0 6px; }
+    .helper a { color:#93c5fd; text-decoration:none; font-size:.9rem; }
+    .helper a:hover { text-decoration:underline; }
+    .btn { margin-top:14px; width:100%; padding:14px 18px; background:linear-gradient(90deg,var(--gold) 60%, var(--gold2) 100%); color:#111827; border:none; border-radius:14px; font-weight:800; font-size:1.15rem; cursor:pointer; box-shadow:0 10px 28px rgba(212,175,55,.28); transition:transform .15s, filter .15s; }
+    .btn:hover { transform:translateY(-1px); filter:brightness(1.05); }
+    .error { color:#fca5a5; text-align:center; margin-top:10px; display:none; }
+    .footer { margin-top:24px; color:#cbd5e1; font-size:.9rem; }
+    .social { margin-top:14px; display:flex; justify-content:center; gap:18px; }
+    .social a { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#0b1220; background:linear-gradient(90deg,var(--gold),var(--gold2)); box-shadow:0 6px 18px rgba(212,175,55,.25); text-decoration:none; transition:transform .15s; }
+    .social a:hover { transform:translateY(-2px); }
   </style>
 </head>
-<body class="relative">
+<body>
   <div class="aurora"></div>
-  <div class="grid-bg"></div>
-  <div class="page">
-    <div class="login-grid">
-      <div class="illustration">
-        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#fef3c7"/>
-            </linearGradient>
-            <linearGradient id="g2" x1="0" x2="1" y1="1" y2="0">
-              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.20"/>
-              <stop offset="100%" stop-color="#22c55e" stop-opacity="0.20"/>
-            </linearGradient>
-          </defs>
-          <rect x="0" y="0" width="600" height="400" rx="24" fill="#0b1220"/>
-          <circle cx="120" cy="90" r="36" fill="url(#g2)"></circle>
-          <circle cx="520" cy="320" r="28" fill="url(#g2)"></circle>
-          <g transform="translate(120,80)">
-            <rect x="0" y="40" width="360" height="220" rx="16" fill="#0f172a" stroke="#1f2a44"/>
-            <rect x="24" y="78" width="180" height="12" rx="6" fill="#243244"/>
-            <rect x="24" y="110" width="220" height="12" rx="6" fill="#243244"/>
-            <rect x="24" y="142" width="140" height="12" rx="6" fill="#243244"/>
-            <g transform="translate(260,120)">
-              <path d="M40 0c22 0 40 18 40 40v24c0 4-3 7-7 7H7c-4 0-7-3-7-7V40C0 18 18 0 40 0z" fill="url(#g1)"/>
-              <circle cx="40" cy="34" r="12" fill="#111827"/>
-              <rect x="34" y="44" width="12" height="14" rx="2" fill="#111827"/>
-            </g>
-          </g>
-        </svg>
-      </div>
-      <div class="form-col">
-        <div class="card p-8">
-          <div class="flex items-center justify-between mb-6">
-            <h1 class="text-2xl md:text-3xl font-extrabold title shimmer">Luxen Admin</h1>
-            <span class="badge">Güvenli Giriş</span>
-          </div>
-          <form id="loginForm" class="space-y-5">
-            <div>
-              <label class="block mb-2 text-sm text-gray-300">Kullanıcı Adı</label>
-              <input id="username" type="text" class="input w-full rounded-lg p-3" placeholder="admin" required>
-            </div>
-            <div>
-              <label class="block mb-2 text-sm text-gray-300">Şifre</label>
-              <input id="password" type="password" class="input w-full rounded-lg p-3" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
-            <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
-          </form>
-          <div class="helper">
-            <a href="#" onclick="event.preventDefault(); alert('Lütfen yönetici ile iletişime geçin.');">Şifremi unuttum</a>
-            <a href="/index.html">Ana sayfa</a>
-          </div>
-          <div class="mt-4 text-xs text-gray-400 text-center">Oturum açarak kullanım koşullarını kabul etmiş olursunuz.</div>
+  <div class="grid"></div>
+  <div class="lang"><span id="lang-tr" class="active" style="cursor:pointer">TR</span> / <span id="lang-en" style="cursor:pointer">EN</span></div>
+  <div class="wrap">
+    <div class="panel">
+      <img class="logo" src="/resimler/81feb1cc127c3e9f24d9528cd47cac76-removebg-preview.png" alt="Logo">
+      <h1 class="brand">LUXEN GROUP</h1>
+      <div class="title" id="login-title">ADMIN LOGIN</div>
+      <form id="loginForm" class="form">
+        <div class="row">
+          <label id="label-username">Kullanıcı Adı</label>
+          <input id="username" type="text" class="input" placeholder="admin" required>
+        </div>
+        <div class="row">
+          <label id="label-password">Şifre</label>
+          <input id="password" type="password" class="input" placeholder="••••••••" required>
+        </div>
+        <div class="helper">
+          <a href="#" onclick="event.preventDefault(); alert(currentLang==='tr'?'Lütfen yönetici ile iletişime geçin.':'Please contact the administrator.');" id="forgot-link">Şifremi Unuttum?</a>
+        </div>
+        <button type="submit" class="btn" id="btn-login">Giriş Yap</button>
+        <div id="error" class="error"></div>
+      </form>
+      <div class="footer">
+        <div>© <span id="year"></span> Luxen Group. Tüm hakları saklıdır.</div>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
+          <a href="#" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
         </div>
       </div>
     </div>
   </div>
   <script>
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Language toggle
+    let currentLang = 'tr';
+    const t = {
+      tr: { title:'ADMIN LOGIN', user:'Kullanıcı Adı', pass:'Şifre', forgot:'Şifremi Unuttum?', btn:'Giriş Yap', err:'Giriş başarısız' },
+      en: { title:'ADMIN LOGIN', user:'Username', pass:'Password', forgot:'Forgot password?', btn:'Log In', err:'Login failed' }
+    };
+    function setLang(lang){
+      currentLang = lang;
+      document.getElementById('login-title').textContent = t[lang].title;
+      document.getElementById('label-username').textContent = t[lang].user;
+      document.getElementById('label-password').textContent = t[lang].pass;
+      document.getElementById('forgot-link').textContent = t[lang].forgot;
+      document.getElementById('btn-login').textContent = t[lang].btn;
+      document.getElementById('lang-tr').classList.toggle('active', lang==='tr');
+      document.getElementById('lang-en').classList.toggle('active', lang!=='tr');
+    }
+    document.getElementById('lang-tr').onclick = ()=>setLang('tr');
+    document.getElementById('lang-en').onclick = ()=>setLang('en');
+    setLang('tr');
+
+    // Login submit
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       const username = document.getElementById('username').value.trim();
@@ -114,12 +110,10 @@
           body: JSON.stringify({ username, password })
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Giriş başarısız');
-        // Bazı barındırıcılar secure cookie nedeniyle ilk yönlendirmede oturumu geçmeyebilir.
-        // Kısa gecikme ile yeniden yönlendir.
-        setTimeout(() => { window.location.assign('/admin'); }, 100);
+        if (!res.ok) throw new Error(data.error || t[currentLang].err);
+        setTimeout(() => { window.location.assign('/admin'); }, 120);
       } catch (err) {
-        error.textContent = err.message || 'Giriş başarısız';
+        error.textContent = err.message || t[currentLang].err;
         error.style.display = 'block';
       }
     });
