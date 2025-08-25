@@ -923,16 +923,17 @@ z-index: 100;
 }
 
 .slide-btn.secondary {
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
+  background: #D4AF37;
+  color: #000;
+  border: 2px solid #D4AF37;
 }
 
 .slide-btn.secondary:hover {
-  background: #fff;
+  background: #B8860B;
   color: #000;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+  border-color: #B8860B;
 }
 
 /* Navigation Arrows */
@@ -1046,27 +1047,28 @@ z-index: 100;
     border-radius: 0 0 24px 24px;
   }
   .slide-content {
-    padding: 2rem 1rem 1.5rem 1rem;
+    padding: 1.5rem 0.75rem 1rem 0.75rem;
     text-align: center;
   }
   .slide-title {
-    font-size: 1.75rem !important;
-    line-height: 2.2rem !important;
+    font-size: 1.35rem !important;
+    line-height: 1.8rem !important;
     letter-spacing: 0.5px !important;
   }
   .slide-description {
-    font-size: 0.98rem !important;
-    margin-bottom: 1rem;
+    font-size: 0.9rem !important;
+    margin-bottom: 0.75rem;
   }
   .slide-buttons {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
   .slide-btn {
-    width: 100%;
-    font-size: 0.98rem;
-    padding: 0.7rem 0;
-    border-radius: 12px;
+    width: auto;
+    font-size: 0.9rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 10px;
+    min-width: auto;
   }
   .slider-arrow {
     top: 45%;
@@ -1119,33 +1121,34 @@ z-index: 100;
 @media (max-width: 480px) {
   .hero-slider, .hero-slide { min-height: 65svh; }
   .hero-slide { background-size: cover; background-position: center center; background-color: #000; }
-  .slide-title { font-size: 1.25rem !important; line-height: 1.6rem !important; letter-spacing: 0 !important; text-shadow: none !important; }
-  .slide-description { font-size: 0.85rem !important; margin-bottom: 0.5rem; text-shadow: none !important; }
-  .slide-content { padding: 0 0.75rem; }
-  .slide-btn { font-size: 0.9rem; padding: 0.55rem 0; min-width: auto; }
+  .slide-title { font-size: 1.1rem !important; line-height: 1.45rem !important; letter-spacing: 0 !important; text-shadow: 0 2px 6px rgba(0,0,0,0.5) !important; }
+  .slide-description { font-size: 0.8rem !important; margin-bottom: 0.45rem; text-shadow: 0 1px 3px rgba(0,0,0,0.45) !important; }
+  .slide-content { padding: 0 0.65rem; }
+  .slide-text { background: rgba(0,0,0,0.22); border-radius: 10px; padding: 8px 10px; display: inline-block; }
+  .slide-btn { font-size: 0.8rem; padding: 0.42rem 0.75rem; min-width: auto; }
 }
 
 /* Extra fine-tuning for common devices */
 @media (max-width: 414px) {
-  .slide-title { font-size: 1.2rem !important; line-height: 1.5rem !important; }
-  .slide-description { font-size: 0.82rem !important; }
+  .slide-title { font-size: 1.02rem !important; line-height: 1.35rem !important; }
+  .slide-description { font-size: 0.76rem !important; }
   .custom-dots { bottom: 22px; gap: 10px; }
   .custom-dots .dot { width: 18px; height: 18px; }
 }
 @media (max-width: 393px) {
-  .slide-title { font-size: 1.15rem !important; line-height: 1.45rem !important; }
-  .slide-description { font-size: 0.8rem !important; }
+  .slide-title { font-size: 0.98rem !important; line-height: 1.28rem !important; }
+  .slide-description { font-size: 0.74rem !important; }
 }
 @media (max-width: 375px) {
-  .slide-title { font-size: 1.1rem !important; line-height: 1.4rem !important; }
-  .slide-description { font-size: 0.78rem !important; }
+  .slide-title { font-size: 0.95rem !important; line-height: 1.2rem !important; }
+  .slide-description { font-size: 0.72rem !important; }
   .slide-buttons { gap: 6px; }
-  .slide-btn { font-size: 0.85rem; padding: 0.5rem 0; }
+  .slide-btn { font-size: 0.78rem; padding: 0.38rem 0.7rem; }
   .custom-dots .dot { width: 16px; height: 16px; }
 }
 @media (max-width: 360px) {
-  .slide-title { font-size: 1.05rem !important; line-height: 1.35rem !important; }
-  .slide-description { font-size: 0.76rem !important; }
+  .slide-title { font-size: 0.92rem !important; line-height: 1.18rem !important; }
+  .slide-description { font-size: 0.7rem !important; }
   header img { height: 48px !important; }
 }
 
