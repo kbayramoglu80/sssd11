@@ -1,14 +1,46 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
+const helmet = require('helmet');
+const session = require('express-session');
+const rateLimit = require('express-rate-limit');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Statik dosyaları sun
-app.use(express.static(path.join(__dirname, 'public')));
+// Security headers
+app.disable('x-powered-by');
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
+
+// Trust proxy if behind one (needed for secure cookies on some hosts)
+if (process.env.TRUST_PROXY === '1') {
+  app.set('trust proxy', 1);
+}
+
+// Sessions for admin auth
+app.use(session({
+  name: 'sid',
+  secret: process.env.SESSION_SECRET || 'change-me-in-env',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 1000 * 60 * 60 * 4
+  }
+}));
+
+// Parsers
 app.use(express.json());
+
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Basit bir API örneği (gerekirse)
 app.get('/api/hello', (req, res) => {
@@ -16,7 +48,18 @@ app.get('/api/hello', (req, res) => {
 });
 
 // Örnek rezervasyon endpointleri (gerekirse)
-app.get('/api/reservations', (req, res) => {
+// Auth middleware for admin-only endpoints
+function requireAdmin(req, res, next) {
+  if (req.session && req.session.isAdmin) return next();
+  return res.status(401).json({ error: 'Unauthorized' });
+}
+
+// Rate limiters
+const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 20 });
+const apiLimiter = rateLimit({ windowMs: 1 * 60 * 1000, max: 120 });
+
+// Rezervasyonları listele (admin)
+app.get('/api/reservations', requireAdmin, apiLimiter, (req, res) => {
   const filePath = path.join(__dirname, 'reservations.json');
   if (fs.existsSync(filePath)) {
     const data = fs.readFileSync(filePath, 'utf8');
@@ -26,7 +69,8 @@ app.get('/api/reservations', (req, res) => {
   }
 });
 
-app.post('/api/reservations', (req, res) => {
+// Yeni rezervasyon oluşturma (public)
+app.post('/api/reservations', apiLimiter, (req, res) => {
   const filePath = path.join(__dirname, 'reservations.json');
   let reservations = [];
   if (fs.existsSync(filePath)) {
@@ -39,9 +83,12 @@ app.post('/api/reservations', (req, res) => {
 });
 
 // Google Directions API ile mesafe hesaplama endpointi
-app.get('/api/directions', async (req, res) => {
+app.get('/api/directions', apiLimiter, async (req, res) => {
   const { origin, destination } = req.query;
-  const apiKey = 'AIzaSyBkJ3vKDMhGztkTtTIvkynaMu-xEnZKw4g';
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({ error: 'Missing Google Maps API key' });
+  }
   try {
     const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&key=${apiKey}`;
     const response = await axios.get(url);
@@ -53,7 +100,8 @@ app.get('/api/directions', async (req, res) => {
   }
 });
 
-app.delete('/api/reservations/:id', (req, res) => {
+// Rezervasyon silme (admin)
+app.delete('/api/reservations/:id', requireAdmin, apiLimiter, (req, res) => {
   const filePath = path.join(__dirname, 'reservations.json');
   if (!fs.existsSync(filePath)) {
     return res.status(404).json({ error: 'Reservations file not found' });
@@ -63,6 +111,59 @@ app.delete('/api/reservations/:id', (req, res) => {
   reservations = reservations.filter(r => String(r.id) !== String(req.params.id));
   fs.writeFileSync(filePath, JSON.stringify(reservations, null, 2));
   res.json({ success: reservations.length < before });
+});
+
+// --- Admin Authentication ---
+// GET: Admin login page (served as static file under public)
+app.get('/admin/login', (req, res) => {
+  // If already authenticated, redirect to admin panel
+  if (req.session && req.session.isAdmin) {
+    return res.redirect('/admin');
+  }
+  res.sendFile(path.join(__dirname, 'public', 'admin-login.html'));
+});
+
+// POST: Admin login
+app.post('/admin/login', authLimiter, async (req, res) => {
+  try {
+    const { username, password } = req.body || {};
+    const expectedUsername = process.env.ADMIN_USERNAME || 'admin';
+    const passwordHash = process.env.ADMIN_PASSWORD_HASH || '';
+
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Kullanıcı adı ve şifre gerekli' });
+    }
+    if (username !== expectedUsername) {
+      return res.status(401).json({ error: 'Geçersiz bilgiler' });
+    }
+    if (!passwordHash) {
+      return res.status(500).json({ error: 'Admin şifre yapılandırılmamış' });
+    }
+    const ok = await bcrypt.compare(password, passwordHash);
+    if (!ok) {
+      return res.status(401).json({ error: 'Geçersiz bilgiler' });
+    }
+    req.session.isAdmin = true;
+    res.json({ success: true });
+  } catch (e) {
+    res.status(500).json({ error: 'Giriş başarısız' });
+  }
+});
+
+// POST: Admin logout
+app.post('/admin/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('sid');
+    res.json({ success: true });
+  });
+});
+
+// GET: Admin panel (protected)
+app.get('/admin', (req, res) => {
+  if (!(req.session && req.session.isAdmin)) {
+    return res.redirect('/admin/login');
+  }
+  res.sendFile(path.join(__dirname, 'server', 'admin.html'));
 });
 
 // SPA ise, diğer tüm isteklerde index.html döndür

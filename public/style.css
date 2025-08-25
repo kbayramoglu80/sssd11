@@ -865,17 +865,18 @@ z-index: 100;
 }
 
 .slide-title {
-  font-size: 3.5rem;
+  font-size: clamp(1.75rem, 5vw, 3.2rem);
+  line-height: 1.1;
   font-weight: 700;
   color: #fff;
   margin-bottom: 1.5rem;
   text-shadow: 2px 2px 8px rgba(212, 175, 55, 0.5), 0 0 40px #D4AF37;
   animation: slideInDown 1s ease-out;
-  letter-spacing: 2px;
+  letter-spacing: 0.5px;
 }
 
 .slide-description {
-  font-size: 1.25rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
   color: #fff;
   margin-bottom: 2rem;
   line-height: 1.6;
@@ -1030,13 +1031,13 @@ z-index: 100;
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero-slider {
-    min-height: 350px;
+    min-height: 360px;
     border-radius: 0 0 24px 24px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     overflow: hidden;
   }
   .hero-slide {
-    min-height: 350px;
+    min-height: 360px;
     background-size: cover;
     background-position: center;
     border-radius: 0 0 24px 24px;
@@ -1046,11 +1047,12 @@ z-index: 100;
     text-align: center;
   }
   .slide-title {
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-size: 2rem !important;
+    line-height: 2.5rem !important;
+    letter-spacing: 1px !important;
   }
   .slide-description {
-    font-size: 1rem;
+    font-size: 1rem !important;
     margin-bottom: 1rem;
   }
   .slide-buttons {
@@ -1089,6 +1091,26 @@ z-index: 100;
   .destination-card {
     min-height: 220px;
   }
+}
+
+/* Modern viewport units for mobile browsers (account for URL bar) */
+@supports (height: 100svh) {
+  .hero-slider, .hero-slide { height: 100svh; }
+}
+@media (max-width: 768px) {
+  @supports (height: 100svh) {
+    .hero-slider, .hero-slide { height: 75svh !important; }
+  }
+}
+
+/* Mobile navbar/logo sizing */
+@media (max-width: 640px) {
+  header img { height: 56px !important; }
+}
+
+/* WhatsApp button sizing on mobile */
+@media (max-width: 640px) {
+  .whatsapp-button { width: 52px !important; height: 52px !important; right: 16px; bottom: 16px; }
 }
 
 @media (max-width: 480px) {

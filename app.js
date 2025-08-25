@@ -24,9 +24,7 @@ app.get('/arac-sec', (req, res) => {
     res.sendFile(path.join(__dirname, 'arac-sec.html'));
 });
 
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'server/admin.html'));
-});
+// Admin panel is protected by sessions in server.js at /admin
 
 // API Routes
 app.get('/api/reservations', (req, res) => {

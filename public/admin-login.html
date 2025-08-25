@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Giriş</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background:#0f172a; color:#e2e8f0; font-family:'Poppins',sans-serif; }
+    .card { background:#111827; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+    .btn { background:#D4AF37; color:#111827; font-weight:700; border-radius:10px; }
+    .btn:hover { filter:brightness(1.05); }
+    .input { background:#0b1220; border:1px solid #243244; color:#e2e8f0; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+  <div class="card w-full max-w-md p-8">
+    <h1 class="text-2xl font-bold text-center mb-6" style="color:#D4AF37">Admin Panel Giriş</h1>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label class="block mb-2">Kullanıcı Adı</label>
+        <input id="username" type="text" class="input w-full rounded-lg p-3" placeholder="admin" required>
+      </div>
+      <div>
+        <label class="block mb-2">Şifre</label>
+        <input id="password" type="password" class="input w-full rounded-lg p-3" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
+      <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
+    </form>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const error = document.getElementById('error');
+      error.style.display = 'none';
+      try {
+        const res = await fetch('/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Giriş başarısız');
+        window.location.href = '/admin';
+      } catch (err) {
+        error.textContent = err.message || 'Giriş başarısız';
+        error.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
+
+

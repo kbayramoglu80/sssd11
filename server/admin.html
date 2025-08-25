@@ -20,13 +20,17 @@
     .btn-delete { background: #e74c3c; color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
     .btn-delete:hover { background: #c0392b; }
     .btn-home { background:#D4AF37; color:#181818; font-weight:600; border-radius:8px; font-size:1rem; box-shadow:0 2px 8px #D4AF3722; letter-spacing:0.5px; padding:8px 18px; }
+    .btn-logout { background:#e2e8f0; color:#111827; font-weight:600; border-radius:8px; font-size:0.95rem; padding:8px 14px; }
   </style>
 </head>
 <body>
   <div class="table-container">
     <div class="flex items-center justify-between mb-2">
       <span class="header">Tüm Rezervasyonlar</span>
-      <a href="/index.html" class="btn-home">Ana Sayfaya Dön</a>
+      <div class="flex gap-2">
+        <a href="/index.html" class="btn-home">Ana Sayfaya Dön</a>
+        <button id="logoutBtn" class="btn-logout">Çıkış Yap</button>
+      </div>
     </div>
     <div class="search-bar">
       <label for="search">Arama:</label>
@@ -63,10 +67,22 @@
     </table>
   </div>
   <script>
+    document.getElementById('logoutBtn').addEventListener('click', async function() {
+      try {
+        await fetch('/admin/logout', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+      } finally {
+        window.location.href = '/admin/login';
+      }
+    });
+
     let allReservations = [];
     async function fetchReservations() {
       try {
         const res = await fetch('/api/reservations');
+        if (res.status === 401) {
+          window.location.href = '/admin/login';
+          return;
+        }
         const data = await res.json();
         allReservations = data.reverse();
         renderTable();
@@ -122,6 +138,10 @@
       if (!confirm('Bu rezervasyonu silmek istediğinize emin misiniz?')) return;
       try {
         const res = await fetch(`/api/reservations/${id}`, { method: 'DELETE' });
+        if (res.status === 401) {
+          window.location.href = '/admin/login';
+          return;
+        }
         const result = await res.json();
         if (result.success) {
           allReservations = allReservations.filter(r => r.id != id);
@@ -138,4 +158,6 @@
     fetchReservations();
   </script>
 </body>
-</html> 
+</html>
+
+
