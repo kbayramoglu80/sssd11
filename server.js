@@ -49,6 +49,11 @@ app.get('/api/hello', (req, res) => {
   res.json({ message: 'Hello from API!' });
 });
 
+// Public config for frontend (safe values only)
+app.get('/config/maps-key', (req, res) => {
+  res.json({ browserKey: process.env.GOOGLE_MAPS_BROWSER_KEY || '' });
+});
+
 // Örnek rezervasyon endpointleri (gerekirse)
 // Auth middleware for admin-only endpoints
 function requireAdmin(req, res, next) {
