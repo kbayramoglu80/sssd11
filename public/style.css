@@ -1047,12 +1047,12 @@ z-index: 100;
     text-align: center;
   }
   .slide-title {
-    font-size: 2rem !important;
-    line-height: 2.5rem !important;
-    letter-spacing: 1px !important;
+    font-size: 1.75rem !important;
+    line-height: 2.2rem !important;
+    letter-spacing: 0.5px !important;
   }
   .slide-description {
-    font-size: 1rem !important;
+    font-size: 0.98rem !important;
     margin-bottom: 1rem;
   }
   .slide-buttons {
@@ -1061,8 +1061,8 @@ z-index: 100;
   }
   .slide-btn {
     width: 100%;
-    font-size: 1rem;
-    padding: 0.75rem 0;
+    font-size: 0.98rem;
+    padding: 0.7rem 0;
     border-radius: 12px;
   }
   .slider-arrow {
@@ -1114,17 +1114,12 @@ z-index: 100;
 }
 
 @media (max-width: 480px) {
-  .slide-title {
-    font-size: 2rem;
-  }
-  
-  .slide-description {
-    font-size: 0.9rem;
-  }
-  
-  .slide-content {
-    padding: 0 1rem;
-  }
+  .hero-slider, .hero-slide { min-height: 65svh; }
+  .hero-slide { background-size: contain; background-position: center center; background-color: #000; }
+  .slide-title { font-size: 1.5rem !important; line-height: 1.9rem !important; letter-spacing: 0 !important; text-shadow: none !important; }
+  .slide-description { font-size: 0.95rem !important; margin-bottom: 0.75rem; text-shadow: none !important; }
+  .slide-content { padding: 0 1rem; }
+  .slide-btn { font-size: 0.95rem; padding: 0.65rem 0; }
 }
 
 .slider-arrow {

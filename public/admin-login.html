@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
   <style>
     :root { --gold:#D4AF37; --ink:#0b1220; --bg:#0a0f1c; }
-    body { margin:0; font-family:'Poppins',sans-serif; color:#e5e7eb; background: radial-gradient(1200px 600px at 10% -10%, #1e293b33, transparent 60%), radial-gradient(1000px 500px at 110% 110%, #1f293733, transparent 60%), linear-gradient(180deg, #0a0e19 0%, #0a0f1c 100%); }
+    body { margin:0; font-family:'Poppins',sans-serif; color:#e5e7eb; background: radial-gradient(1200px 600px at 10% -10%, #1e293b33, transparent 60%), radial-gradient(1000px 500px at 110% 110%, #1f293733, transparent 60%), linear-gradient(180deg, #0a0e19 0%, #0a0f1c 100%); min-height:100svh; }
     .grid-bg { position:fixed; inset:0; pointer-events:none; background-image: radial-gradient(#ffffff0d 1px, transparent 1px); background-size: 18px 18px; opacity:.35; }
     .aurora {
       position: fixed; inset: -40vmax; filter: blur(60px); opacity:.45; z-index: -1;
@@ -25,30 +25,72 @@
     .btn { background:linear-gradient(90deg, var(--gold) 60%, #f5e7a3 100%); color:#111827; font-weight:700; border-radius:10px; transition: transform .15s ease, filter .15s ease; }
     .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
     .badge { color:#93c5fd; background:#0b1220; border:1px solid #1d2a44; border-radius:999px; padding:6px 12px; font-size:.8rem; }
+    .page { display:grid; place-items:center; min-height:100svh; padding:24px; }
+    .login-grid { display:grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; max-width: 1100px; width: 100%; }
+    .illustration { display:flex; align-items:center; justify-content:center; padding:12px; }
+    .illustration svg { width: 100%; height: auto; max-width: 520px; }
+    .form-col { width:100%; max-width:480px; margin: 0 auto; }
+    @media (max-width: 900px) {
+      .login-grid { grid-template-columns: 1fr; }
+      .illustration { order: 2; }
+      .form-col { order: 1; }
+    }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6 relative">
+<body class="relative">
   <div class="aurora"></div>
   <div class="grid-bg"></div>
-  <div class="w-full max-w-md">
-    <div class="card p-8">
-      <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl md:text-3xl font-extrabold title shimmer">Luxen Admin</h1>
-        <span class="badge">Güvenli Giriş</span>
+  <div class="page">
+    <div class="login-grid">
+      <div class="illustration">
+        <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#fef3c7"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" x2="1" y1="1" y2="0">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.20"/>
+              <stop offset="100%" stop-color="#22c55e" stop-opacity="0.20"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="600" height="400" rx="24" fill="#0b1220"/>
+          <circle cx="120" cy="90" r="36" fill="url(#g2)"></circle>
+          <circle cx="520" cy="320" r="28" fill="url(#g2)"></circle>
+          <g transform="translate(120,80)">
+            <rect x="0" y="40" width="360" height="220" rx="16" fill="#0f172a" stroke="#1f2a44"/>
+            <rect x="24" y="78" width="180" height="12" rx="6" fill="#243244"/>
+            <rect x="24" y="110" width="220" height="12" rx="6" fill="#243244"/>
+            <rect x="24" y="142" width="140" height="12" rx="6" fill="#243244"/>
+            <g transform="translate(260,120)">
+              <path d="M40 0c22 0 40 18 40 40v24c0 4-3 7-7 7H7c-4 0-7-3-7-7V40C0 18 18 0 40 0z" fill="url(#g1)"/>
+              <circle cx="40" cy="34" r="12" fill="#111827"/>
+              <rect x="34" y="44" width="12" height="14" rx="2" fill="#111827"/>
+            </g>
+          </g>
+        </svg>
       </div>
-      <form id="loginForm" class="space-y-5">
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">Kullanıcı Adı</label>
-          <input id="username" type="text" class="input w-full rounded-lg p-3" placeholder="admin" required>
+      <div class="form-col">
+        <div class="card p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl md:text-3xl font-extrabold title shimmer">Luxen Admin</h1>
+            <span class="badge">Güvenli Giriş</span>
+          </div>
+          <form id="loginForm" class="space-y-5">
+            <div>
+              <label class="block mb-2 text-sm text-gray-300">Kullanıcı Adı</label>
+              <input id="username" type="text" class="input w-full rounded-lg p-3" placeholder="admin" required>
+            </div>
+            <div>
+              <label class="block mb-2 text-sm text-gray-300">Şifre</label>
+              <input id="password" type="password" class="input w-full rounded-lg p-3" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
+            <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
+          </form>
+          <div class="mt-6 text-xs text-gray-400 text-center">Oturum açarak kullanım koşullarını kabul etmiş olursunuz.</div>
         </div>
-        <div>
-          <label class="block mb-2 text-sm text-gray-300">Şifre</label>
-          <input id="password" type="password" class="input w-full rounded-lg p-3" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="btn w-full px-4 py-3 rounded-lg">Giriş Yap</button>
-        <p id="error" class="text-red-400 text-center mt-2" style="display:none"></p>
-      </form>
-      <div class="mt-6 text-xs text-gray-400 text-center">Oturum açarak kullanım koşullarını kabul etmiş olursunuz.</div>
+      </div>
     </div>
   </div>
   <script>
