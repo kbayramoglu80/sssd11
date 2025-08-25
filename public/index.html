@@ -1352,10 +1352,10 @@ function updateLanguage(lang) {
   heroSlides.forEach((slide, i) => {
     const title = slide.querySelector('.slide-title');
     const desc = slide.querySelector('.slide-description');
-    const btn = slide.querySelector('.slide-btn.primary');
+    const buttons = slide.querySelectorAll('.slide-btn');
     if (title && translations[lang].hero.title) title.textContent = translations[lang].hero.title;
     if (desc && translations[lang].hero.desc) desc.textContent = translations[lang].hero.desc;
-    if (btn && translations[lang].hero.btn) btn.textContent = translations[lang].hero.btn;
+    buttons.forEach(b => { if (translations[lang].hero.btn) b.textContent = translations[lang].hero.btn; });
   });
   // Rezervasyon
   const resTabs = document.querySelectorAll('.reservation-vzn-tab');
@@ -1493,6 +1493,11 @@ function updateLanguage(lang) {
   // Footer
   const footerAbout = document.querySelector('footer p.text-gray-400');
   if(footerAbout) footerAbout.textContent = translations[lang].footer.about;
+  // Footer headings (Quick Links / Services / Newsletter)
+  const footerHeadings = document.querySelectorAll('footer h3.text-xl.font-bold.mb-6');
+  if (footerHeadings[0]) footerHeadings[0].textContent = lang==='tr' ? 'Hızlı Bağlantılar' : 'Quick Links';
+  if (footerHeadings[1]) footerHeadings[1].textContent = lang==='tr' ? 'Hizmetler' : 'Services';
+  if (footerHeadings[2]) footerHeadings[2].textContent = lang==='tr' ? 'Bülten' : 'Newsletter';
   const quickLinks = document.querySelectorAll('footer ul.space-y-3 li a');
   translations[lang].footer.quick.forEach((text, i) => { if(quickLinks[i]) quickLinks[i].textContent = text; });
   const serviceLinks = document.querySelectorAll('footer ul.space-y-3:nth-of-type(2) li a');
