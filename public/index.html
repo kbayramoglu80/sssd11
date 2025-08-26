@@ -1498,9 +1498,13 @@ function updateLanguage(lang) {
   if (footerHeadings[0]) footerHeadings[0].textContent = lang==='tr' ? 'Hızlı Bağlantılar' : 'Quick Links';
   if (footerHeadings[1]) footerHeadings[1].textContent = lang==='tr' ? 'Hizmetler' : 'Services';
   if (footerHeadings[2]) footerHeadings[2].textContent = lang==='tr' ? 'Bülten' : 'Newsletter';
-  const quickLinks = document.querySelectorAll('footer ul.space-y-3 li a');
+  // Footer link lists: target columns explicitly to avoid cross-selection
+  const footerCols = document.querySelectorAll('footer .grid > div');
+  const quickCol = footerCols[1];
+  const servicesCol = footerCols[2];
+  const quickLinks = quickCol ? quickCol.querySelectorAll('ul.space-y-3 li a') : [];
   translations[lang].footer.quick.forEach((text, i) => { if(quickLinks[i]) quickLinks[i].textContent = text; });
-  const serviceLinks = document.querySelectorAll('footer ul.space-y-3:nth-of-type(2) li a');
+  const serviceLinks = servicesCol ? servicesCol.querySelectorAll('ul.space-y-3 li a') : [];
   translations[lang].footer.services.forEach((text, i) => { if(serviceLinks[i]) serviceLinks[i].textContent = text; });
   const newsletterTitle = document.querySelector('footer h3.text-xl.font-bold.mb-6 + p');
   if(newsletterTitle) newsletterTitle.textContent = translations[lang].footer.newsletter.desc;
