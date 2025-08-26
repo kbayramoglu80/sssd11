@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Araç Detayları</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+  <style>
+    body { background:#0f0f0f; color:#fff; }
+    .container { max-width:1100px; margin:24px auto; padding:0 16px; }
+    .title { font-family:'Playfair Display',serif; font-weight:800; font-size:2rem; color:#D4AF37; margin:12px 0 18px; }
+    .gallery { position:relative; border:2px solid #D4AF37; border-radius:18px; overflow:hidden; background:#111; box-shadow:0 12px 36px rgba(0,0,0,.35); }
+    .gallery-main { width:100%; height:56vh; min-height:320px; object-fit:cover; display:block; }
+    .thumbs { display:flex; gap:10px; overflow:auto; padding:10px; background:#0c0c0c; border-top:1px solid rgba(212,175,55,.35); }
+    .thumbs img { width:160px; height:100px; object-fit:cover; border-radius:10px; border:2px solid #D4AF37; cursor:pointer; background:#111; }
+    .features { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }
+    .feat { background:#181818; border:1px solid #D4AF37; color:#fff; border-radius:10px; padding:8px 12px; display:inline-flex; align-items:center; gap:6px; }
+    .actions { display:flex; gap:10px; margin:16px 0; }
+    .btn { background:linear-gradient(90deg,#D4AF37 60%, #F5E7A3 100%); color:#181818; font-weight:700; border:none; border-radius:12px; padding:12px 22px; box-shadow:0 2px 12px rgba(212,175,55,.25); text-decoration:none; }
+    .back { color:#D4AF37; text-decoration:none; display:inline-flex; align-items:center; gap:6px; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="index.html#fleet"><i class="ri-arrow-left-line"></i>Ana Sayfa</a>
+    <div class="title" id="vTitle">Araç Detayları</div>
+    <div class="gallery">
+      <img id="vMain" class="gallery-main" src="" alt="vehicle" />
+      <div class="thumbs" id="vThumbs"></div>
+    </div>
+    <div class="features" id="vFeatures"></div>
+    <p id="vDesc" style="color:#ddd; line-height:1.7; margin-top:6px;"></p>
+    <div class="actions">
+      <a class="btn" href="#rezervasyon">Rezervasyon Yap</a>
+      <a class="btn" href="tel:+905433518943">Hemen Ara</a>
+    </div>
+  </div>
+  <script>
+    const VEHICLES = {
+      'lux-vito': {
+        title: 'Lux Vito',
+        images: [
+          'mercedesvipvito/kapakvipvito.jpg',
+          'mercedesvipvito/IMG-20250705-WA0009.jpg',
+          'mercedesvipvito/IMG-20250705-WA0008.jpg',
+          'mercedesvipvito/IMG-20250705-WA0007.jpg'
+        ],
+        features: ['VIP Donanım','Deri Koltuk','Wi‑Fi','Klima','İkram'],
+        desc: 'Lüks detaylarla tasarlanmış VIP Vito; geniş iç hacim, deri koltuklar ve ikram ile ayrıcalıklı yolculuk deneyimi.'
+      },
+      'vito-standart': {
+        title: 'Standart Vito',
+        images: [
+          'vito/mercedes-benz-v-class-xl-black-1-600x400.webp',
+          'vito/IMG-20250716-WA0017.jpg',
+          'vito/IMG-20250716-WA0016.jpg'
+        ],
+        features: ['Konforlu Koltuk','Wi‑Fi','Klima'],
+        desc: 'Şehir içi ve şehirler arası yolculuklar için konfor ve işlevselliği bir araya getirir.'
+      },
+      'sprinter-lux': {
+        title: 'Lux Sprinter',
+        images: [
+          'vipsprinter/Ekran görüntüsü 2025-07-17 135950.png',
+          'vipsprinter/Ekran görüntüsü 2025-07-17 140044.png',
+          'vipsprinter/Ekran görüntüsü 2025-07-17 140022.png'
+        ],
+        features: ['VIP Donanım','Deri Koltuk','Wi‑Fi','Klima','İkram'],
+        desc: 'Kalabalık gruplar için VIP düzeyinde ferahlık ve lüks donanımlar.'
+      },
+      'sprinter-standart': {
+        title: 'Standart Sprinter',
+        images: [
+          'standartsprinter/IMG-20250701-WA0016.jpg',
+          'standartsprinter/IMG-20250701-WA0025.jpg',
+          'standartsprinter/IMG-20250701-WA0032.jpg'
+        ],
+        features: ['Konforlu Koltuk','Wi‑Fi','Klima'],
+        desc: 'Geniş iç hacim ve pratik kullanım sunan güvenilir seçenek.'
+      }
+    };
+    function getVid(){ const p=new URLSearchParams(location.search); return p.get('vid')||'lux-vito'; }
+    function render(){
+      const v = VEHICLES[getVid()] || VEHICLES['lux-vito'];
+      document.getElementById('vTitle').textContent = v.title;
+      const main = document.getElementById('vMain');
+      const thumbs = document.getElementById('vThumbs');
+      const feats = document.getElementById('vFeatures');
+      const desc = document.getElementById('vDesc');
+      main.src = v.images[0];
+      thumbs.innerHTML = v.images.map((src,i)=>`<img src="${src}" data-i="${i}">`).join('');
+      thumbs.querySelectorAll('img').forEach(img=> img.onclick = ()=>{ main.src = img.src; });
+      feats.innerHTML = v.features.map(f=>`<span class='feat'><i class="ri-star-line"></i>${f}</span>`).join('');
+      desc.textContent = v.desc;
+    }
+    render();
+  </script>
+</body>
+</html>

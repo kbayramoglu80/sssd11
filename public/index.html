@@ -118,7 +118,7 @@
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="slide-text">
-            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; text-shadow:none;">Luxen Group - VIP Transfer Hizmetleri</h1>
+            <h1 class="slide-title brand-gold">Luxen Group - VIP Transfer Hizmetleri</h1>
             <p class="slide-description">Mercedes Vito filomuz ile konfor, prestij ve güveni bir arada yaşayın. Şehir içi ve şehirler arası transferde ayrıcalıklı hizmet.</p>
             <div class="slide-buttons">
               <a href="#rezervasyon" class="slide-btn primary">Hemen Rezervasyon Yap</a>
@@ -132,7 +132,7 @@
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="slide-text">
-            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; text-shadow:none;">VIP Mercedes Vito Konforu</h1>
+            <h1 class="slide-title brand-gold">VIP Mercedes Vito Konforu</h1>
             <p class="slide-description">Geniş iç hacim ve lüks detaylarla yolculuğunuz ayrıcalıklı geçsin.</p>
             <div class="slide-buttons">
               <a href="#rezervasyon" class="slide-btn secondary">Hemen Rezervasyon Yap</a>
@@ -146,7 +146,7 @@
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="slide-text">
-            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; text-shadow:none;">Lüks Detaylar</h1>
+            <h1 class="slide-title brand-gold">Lüks Detaylar</h1>
             <p class="slide-description">Her ayrıntıda kalite ve konforu hissedin.</p>
             <div class="slide-buttons">
               <a href="#rezervasyon" class="slide-btn primary">Hemen Rezervasyon Yap</a>
@@ -160,7 +160,7 @@
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="slide-text">
-            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; text-shadow:none;">Modern ve Şık Tasarım</h1>
+            <h1 class="slide-title brand-gold">Modern ve Şık Tasarım</h1>
             <p class="slide-description">Mercedes Vito ile yolculuklarınızda fark yaratın.</p>
             <div class="slide-buttons">
               <a href="#rezervasyon" class="slide-btn primary">Hemen Rezervasyon Yap</a>
@@ -174,7 +174,7 @@
       <div class="slide-content">
         <div class="container mx-auto px-4">
           <div class="slide-text">
-            <h1 class="slide-title" style="font-family:'Trajan Pro', 'Trajan', serif; color:#D4AF37; font-weight:800; text-shadow:none;">Şoförlü VIP Transfer</h1>
+            <h1 class="slide-title brand-gold">Şoförlü VIP Transfer</h1>
             <p class="slide-description">Profesyonel şoförlerimizle güvenli ve konforlu ulaşım.</p>
             <div class="slide-buttons">
               <a href="#rezervasyon" class="slide-btn primary">Book Now</a>
@@ -347,42 +347,173 @@ window.renderServices = renderServices;
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-bold mb-4 gold-gradient" id="fleet-title">
         Lüks Araç Filomuz
-</h2>
+      </h2>
       <p class="text-gray-300 max-w-2xl mx-auto" id="fleet-desc">
         Premium araç filomuzla konforun ve şıklığın zirvesini yaşayın
-</p>
-</div>
+      </p>
+    </div>
     <div class="flex flex-col md:flex-row items-center justify-center gap-12">
       <div class="md:w-1/2 flex justify-center">
-        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-primary bg-black/60 w-full">
-          <img src="mercedesvipvito/IMG-20250705-WA0009.jpg" alt="Mercedes-Benz Vito VIP" class="w-full h-[32rem] md:h-[36rem] object-cover object-center" />
-</div>
-</div>
+        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-primary bg-black w-full relative" style="z-index:2;">
+          <div class="fleet-img-slider" id="fleetImgSlider">
+            <button class="fleet-img-nav prev" aria-label="Prev">&#8592;</button>
+            <button class="fleet-img-nav next" aria-label="Next">&#8594;</button>
+            <img id="fleetImgSlide" src="mercedesvipvito/IMG-20250705-WA0009.jpg" alt="Mercedes-Benz Vito VIP" />
+            <div class="fleet-img-dots" id="fleetImgDots"></div>
+            <button id="fleetOverlayDetails" class="fleet-overlay-btn">Detaylar</button>
+          </div>
+        </div>
+      </div>
       <div class="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left mt-0">
         <h3 class="text-2xl font-bold mb-4 text-white" id="fleet-vehicle-name">Mercedes-Benz Vito VIP</h3>
         <p class="text-gray-300 mb-6" id="fleet-vehicle-desc">
           Amiral gemimiz Mercedes-Benz Vito araçlarımız, en üst düzey VIP deneyimi için özel olarak tasarlanmıştır. Geniş iç hacim, lüks deri koltuklar, iklim kontrolü ve ambiyans aydınlatması ile her yolculuk lüks bir deneyime dönüşür.
         </p>
-        <a href="#contact" id="fleet-vehicle-btn" class="inline-block px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-primary to-yellow-200 text-black shadow-lg hover:from-yellow-200 hover:to-primary hover:text-white transition-all duration-300">
+        <a href="#contact" id="fleet-vehicle-btn" class="inline-block px-8 py-3 rounded-full font-semibold bg-gradient-to-r from-primary to-yellow-200 text-black shadow-lg hover:from-yellow-200 hover:to-primary hover:text-white transition-all duration-300" style="position:relative; z-index:1;">
           Premium Transfer Rezervasyonu Yap
-</a>
-</div>
-</div>
+        </a>
+      </div>
+    </div>
+    
 </div>
 </section>
 <script>
 function updateFleetSection(lang) {
   const t = translations[lang].fleetSection;
-  document.getElementById('fleet-title').textContent = t.title;
-  document.getElementById('fleet-desc').textContent = t.desc;
-  document.getElementById('fleet-vehicle-name').textContent = t.vehicle.name;
-  document.getElementById('fleet-vehicle-desc').textContent = t.vehicle.desc;
-  document.getElementById('fleet-vehicle-btn').textContent = t.vehicle.btn;
+  const ft = document.getElementById('fleet-title'); if(ft) ft.textContent = t.title;
+  const fd = document.getElementById('fleet-desc'); if(fd) fd.textContent = t.desc;
 }
 document.addEventListener('DOMContentLoaded', function() {
   const lang = localStorage.getItem('site_lang') || 'tr';
   updateFleetSection(lang);
+  // Fleet image slider inside the image area (4 vehicles)
+  const fleetVehicles = [
+    {
+      id: 'lux-vito',
+      title: 'Lux Vito',
+      cover: 'mercedesvipvito/image.png',
+      images: [
+        'mercedesvipvito/image.png',
+        'mercedesvipvito/kapakvipvito.jpg',
+        'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.45_4ce52f0e.jpg',
+        'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.44_dcfffcda.jpg',
+        'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.45_822829ab.jpg',
+        'mercedesvipvito/WhatsApp Görsel 2025-07-16 saat 20.56.45_73195a5b.jpg'
+      ]
+    },
+    {
+      id: 'vito-standart',
+      title: 'Standart Vito',
+      cover: 'vito/mercedes-benz-v-class-xl-black-1-600x400.webp',
+      images: [
+        'vito/mercedes-benz-v-class-xl-black-1-600x400.webp',
+        'vito/IMG-20250716-WA0017.jpg',
+        'vito/IMG-20250716-WA0016.jpg',
+        'vito/IMG-20250716-WA0015.jpg',
+        'vito/IMG-20250716-WA0014.jpg'
+      ]
+    },
+    {
+      id: 'sprinter-lux',
+      title: 'Lux Sprinter',
+      cover: 'vipsprinter/Ekran görüntüsü 2025-07-17 135950.png',
+      images: [
+        'vipsprinter/Ekran görüntüsü 2025-07-17 135950.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140049.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140044.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140040.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140034.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140028.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140022.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140017.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 140003.png',
+        'vipsprinter/Ekran görüntüsü 2025-07-17 135957.png'
+      ]
+    },
+    {
+      id: 'sprinter-standart',
+      title: 'Standart Sprinter',
+      cover: 'standartsprinter/IMG-20250701-WA0016.jpg',
+      images: [
+        'standartsprinter/IMG-20250701-WA0016.jpg',
+        'standartsprinter/IMG-20250701-WA0018.jpg',
+        'standartsprinter/IMG-20250701-WA0019.jpg',
+        'standartsprinter/IMG-20250701-WA0020.jpg',
+        'standartsprinter/IMG-20250701-WA0022.jpg',
+        'standartsprinter/IMG-20250701-WA0025.jpg',
+        'standartsprinter/IMG-20250701-WA0027.jpg',
+        'standartsprinter/IMG-20250701-WA0029.jpg',
+        'standartsprinter/IMG-20250701-WA0031.jpg',
+        'standartsprinter/IMG-20250701-WA0032.jpg'
+      ]
+    }
+  ];
+  const imgEl = document.getElementById('fleetImgSlide');
+  const dots = document.getElementById('fleetImgDots');
+  const prevBtn = document.querySelector('#fleetImgSlider .fleet-img-nav.prev');
+  const nextBtn = document.querySelector('#fleetImgSlider .fleet-img-nav.next');
+  const overlayBtn = document.getElementById('fleetOverlayDetails');
+  if (imgEl && dots && prevBtn && nextBtn && overlayBtn) {
+    let index = 0;
+    function renderDots() {
+      dots.innerHTML = fleetVehicles.map((_, i) => `<span class="fleet-img-dot${i===index?' active':''}"></span>`).join('');
+      Array.from(dots.children).forEach((d, i) => d.onclick = () => { index = i; update(); });
+    }
+    function update() {
+      const v = fleetVehicles[index];
+      const sliderEl = document.getElementById('fleetImgSlider');
+      imgEl.classList.toggle('fit-contain', v.id === 'vito-standart');
+      if (sliderEl) {
+        sliderEl.classList.toggle('square-ratio', v.id === 'vito-standart');
+        if (v.id !== 'vito-standart') sliderEl.style.height = '';
+      }
+      imgEl.src = v.cover;
+      Array.from(dots.children).forEach((d, i) => d.classList.toggle('active', i===index));
+      const nameEl = document.getElementById('fleet-vehicle-name');
+      if (nameEl) nameEl.textContent = v.title;
+    }
+    prevBtn.onclick = () => { index = (index - 1 + fleetVehicles.length) % fleetVehicles.length; update(); };
+    nextBtn.onclick = () => { index = (index + 1) % fleetVehicles.length; update(); };
+    overlayBtn.onclick = () => {
+      const v = fleetVehicles[index];
+      openFleetModal({ title: v.title, images: v.images });
+    };
+    renderDots(); update();
+  }
 });
+function openFleetModal(vehicle){
+  let modal = document.getElementById('fleetModal');
+  if(!modal){
+    modal = document.createElement('div');
+    modal.id = 'fleetModal';
+    modal.className = 'fleet-modal';
+    modal.innerHTML = `
+      <div class="fleet-modal-content">
+        <div class="fleet-modal-header">
+          <div class="fleet-modal-title" id="fmTitle"></div>
+          <button class="fleet-modal-close" id="fmClose">&times;</button>
+        </div>
+        <div class="fleet-modal-body">
+          <div class="fleet-modal-hero"><img id="fmMain" src="" alt="vehicle"></div>
+          <div class="fleet-modal-dots" id="fmDots"></div>
+          <div class="fleet-modal-features" id="fmFeatures"></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e)=>{ if(e.target.id==='fleetModal' || e.target.id==='fmClose'){ modal.classList.remove('open'); } });
+  }
+  const fmTitle = modal.querySelector('#fmTitle');
+  const fmMain = modal.querySelector('#fmMain');
+  const fmDots = modal.querySelector('#fmDots');
+  const fmFeatures = modal.querySelector('#fmFeatures');
+  const featureLabels = ['VIP Donanım','Deri Koltuk','Wi‑Fi','Klima','İkram'];
+  fmTitle.textContent = vehicle.title || 'Araç Detayları';
+  fmMain.src = vehicle.images && vehicle.images[0] ? vehicle.images[0] : '';
+  fmDots.innerHTML = (vehicle.images||[]).map((_,i)=>`<span class="fleet-modal-dot${i===0?' active':''}"></span>`).join('');
+  Array.from(fmDots.children).forEach((d,i)=> d.onclick=()=>{ fmMain.src = vehicle.images[i]; Array.from(fmDots.children).forEach((x,j)=> x.classList.toggle('active', j===i)); });
+  fmFeatures.innerHTML = featureLabels.map(l=>`<span class='fleet-modal-feature'><i class="ri-star-line"></i>${l}</span>`).join('');
+  modal.classList.add('open');
+}
 window.updateFleetSection = updateFleetSection;
 // updateLanguage fonksiyonunun sonuna ekle:
 // updateFleetSection(lang);
@@ -1517,9 +1648,9 @@ function updateLanguage(lang) {
   if(privacyLinks[1]) privacyLinks[1].textContent = translations[lang].footer.terms;
   if(privacyLinks[2]) privacyLinks[2].textContent = translations[lang].footer.cookies;
   // Araç Filosu (Fleet)
-  const fleetTitle = document.querySelector('section.bg-black h2');
-  if(fleetTitle) fleetTitle.innerHTML = `<span class="text-white">${translations[lang].fleet.title.split(' ')[0]} </span><span class="gold-gradient">${translations[lang].fleet.title.split(' ').slice(1).join(' ')}</span>`;
-  const fleetDesc = document.querySelector('section.bg-black p.text-gray-300');
+  const fleetTitle = document.getElementById('fleet-title');
+  if(fleetTitle) fleetTitle.textContent = translations[lang].fleet.title;
+  const fleetDesc = document.getElementById('fleet-desc');
   if(fleetDesc) fleetDesc.textContent = translations[lang].fleet.desc;
   // Yorumlar (Testimonials)
   const testiTitle = document.getElementById('testimonials-title');
@@ -1542,15 +1673,15 @@ function updateLanguage(lang) {
     }
   });
   // Fleet Section
-  const fleetSectionTitle = document.querySelector('#fleet h2');
+  const fleetSectionTitle = document.getElementById('fleet-title');
   if(fleetSectionTitle) fleetSectionTitle.textContent = translations[lang].fleetSection.title;
-  const fleetSectionDesc = document.querySelector('#fleet p.text-gray-300');
+  const fleetSectionDesc = document.getElementById('fleet-desc');
   if(fleetSectionDesc) fleetSectionDesc.textContent = translations[lang].fleetSection.desc;
-  const fleetVehicleName = document.querySelector('#fleet h3');
+  const fleetVehicleName = document.getElementById('fleet-vehicle-name');
   if(fleetVehicleName) fleetVehicleName.textContent = translations[lang].fleetSection.vehicle.name;
-  const fleetVehicleDesc = document.querySelector('#fleet p.text-gray-300');
+  const fleetVehicleDesc = document.getElementById('fleet-vehicle-desc');
   if(fleetVehicleDesc) fleetVehicleDesc.textContent = translations[lang].fleetSection.vehicle.desc;
-  const fleetVehicleBtn = document.querySelector('#fleet button');
+  const fleetVehicleBtn = document.getElementById('fleet-vehicle-btn');
   if(fleetVehicleBtn) fleetVehicleBtn.textContent = translations[lang].fleetSection.vehicle.btn;
   updateFleetSection(lang);
   // Slider başlık ve açıklama çevirileri
